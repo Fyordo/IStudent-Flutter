@@ -48,7 +48,7 @@ class _RootPageState extends State<RootPage> {
             context,
             MaterialPageRoute(
               builder: (BuildContext context) =>
-                  MyHomePage(1),
+                  MyHomePage(0),
             ),
             (route) => false,
           );
@@ -59,7 +59,7 @@ class _RootPageState extends State<RootPage> {
             context,
             MaterialPageRoute(
               builder: (BuildContext context) =>
-                  MyHomePage(1),
+                  MyHomePage(0),
             ),
             (route) => false,
           );
