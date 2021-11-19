@@ -50,7 +50,7 @@ class _CustomPassWithConfimState extends State<CustomPassWithConfim> {
           width: double.infinity,
           margin: EdgeInsets.symmetric(horizontal: 20),
           child: Form(
-            autovalidate: true,
+            autovalidateMode: AutovalidateMode.always,
             child: Row(
           children: [
             Container(

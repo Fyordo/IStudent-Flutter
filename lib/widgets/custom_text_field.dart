@@ -41,7 +41,7 @@ class _CustomTextFiledState extends State<CustomTextFiled> {
       //width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 20, ),
       child: Form(
-        autovalidate: true,
+        autovalidateMode: AutovalidateMode.always,
         child: Row(
           children: [
             Container(

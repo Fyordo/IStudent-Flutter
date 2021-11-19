@@ -1,5 +1,6 @@
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/constants.dart';
@@ -39,25 +40,25 @@ class _MyHomePageState extends State<MyHomePage> {
           children: widget.screens,
         ),
         bottomNavigationBar: BottomNavigationBar(
-          //` showSelectedLabels: false,
-          // showUnselectedLabels: false,
+           showSelectedLabels: false,
+           showUnselectedLabels: false,
           currentIndex: widget._currentIndex,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
               icon: Constants.svgHomeIcon,
               activeIcon: Constants.svgHomeIconActive,
-              title: Padding(padding: EdgeInsets.all(0)),
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: Constants.svgCameraIcon,
               activeIcon: Constants.svgCameraIconActive,
-              title: Padding(padding: EdgeInsets.all(0)),
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: Constants.svgProfileIcon,
               activeIcon: Constants.svgProfileIconActive,
-              title: Padding(padding: EdgeInsets.all(0)),
+              label: '',
             ),
           ],
           onTap: (index) => setState(() {

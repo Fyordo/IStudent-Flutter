@@ -37,7 +37,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
           horizontal: 20,
         ),
         child: Form(
-            autovalidate: true,
+            autovalidateMode: AutovalidateMode.always,
             child: Row(children: [
               Container(
                   margin: EdgeInsets.only(top: 15, right: 10),
