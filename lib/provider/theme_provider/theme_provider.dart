@@ -26,5 +26,7 @@ class MyThemes {
       colorScheme: ColorScheme.light(),
       primaryColor: Constants.hexToColor("#6B3286"),
       bottomAppBarColor: Constants.hexToColor("#6B3286", alphaChannel: 'F1'),
+      hintColor: Colors.black, 
+      highlightColor: Colors.black54
       );
 }
