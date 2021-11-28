@@ -69,6 +69,78 @@ class _UserHomePageState extends State<UserHomePage> {
                                   )
                               ),
                        ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border.symmetric(vertical: BorderSide(width: 0.3)),
+                        ),
+                        child: Material(
+                          child: ListTile(
+                            title: Text("Фамилия", style: TextStyle(color: Colors.black26, fontSize: 15)),
+                            subtitle: Text("Смирнова", style: TextStyle(color: Colors.black, fontSize: 17)),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.symmetric(vertical: BorderSide(width: 0.3)),
+                        ),
+                        child: Material(
+                          child: ListTile(
+                            title: Text("Имя", style: TextStyle(color: Colors.black26, fontSize: 15)),
+                            subtitle: Text("Екатерина", style: TextStyle(color: Colors.black, fontSize: 17)),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.symmetric(vertical: BorderSide(width: 0.3)),
+                        ),
+                        child: Material(
+                          child: ListTile(
+                            title: Text("Отчество", style: TextStyle(color: Colors.black26, fontSize: 15)),
+                            subtitle: Text("Петровна", style: TextStyle(color: Colors.black, fontSize: 17)),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.symmetric(vertical: BorderSide(width: 0.3)),
+                        ),
+                        child: Material(
+                          child: ListTile(
+                            title: Text("Пол", style: TextStyle(color: Colors.black26, fontSize: 15)),
+                            subtitle: Text("Женский", style: TextStyle(color: Colors.black, fontSize: 17)),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.symmetric(vertical: BorderSide(width: 0.3)),
+                        ),
+                        child: Material(
+                          child: ListTile(
+                            title: Text("e-mail", style: TextStyle(color: Colors.black26, fontSize: 15)),
+                            subtitle: Text("familia_i@sfedu.ru", style: TextStyle(color: Colors.black, fontSize: 17)),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.symmetric(vertical: BorderSide(width: 0.3)),
+                        ),
+                        child: Material(
+                          child: ListTile(
+                            title: Text("Группа", style: TextStyle(color: Colors.black26, fontSize: 15)),
+                            subtitle: Text("1.2", style: TextStyle(color: Colors.black, fontSize: 17)),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 );
