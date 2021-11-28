@@ -9,6 +9,9 @@ import 'bloc/home_page_bloc/home_page_bloc.dart';
 import 'bloc/user_bloc/user_bloc.dart';
 import 'bottom bar/home/home_page.dart';
 
+import 'bloc/user_page_bloc/user_page_bloc.dart';
+import 'bottom bar/user/user_page.dart';
+
 class MyHomePage extends StatefulWidget {
   List<Widget> screens = [];
   int _currentIndex;
@@ -20,7 +23,11 @@ class MyHomePage extends StatefulWidget {
               //search
               HomePage()),
       Scaffold(body: Text('ddd2')),
-      Scaffold(body: Text('ddd2')),
+      BlocProvider(
+          create: (context) => UserPageBloc()..add(new UserPageLoadEvent()),
+          child:
+          //search
+          UserPage()),
     ];
   }
   @override
