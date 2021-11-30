@@ -1,6 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-
-
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class UserHomePage extends StatefulWidget {
   const UserHomePage({ Key? key }) : super(key: key);
@@ -9,7 +11,18 @@ class UserHomePage extends StatefulWidget {
   _UserHomePageState createState() => _UserHomePageState();
 }
 
+
+
 class _UserHomePageState extends State<UserHomePage> {
+  ImagePicker _picker = ImagePicker();
+  XFile? userAvatar = null;
+  pickImageFromGallery(ImageSource source) async {
+    XFile? _imageFile = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      userAvatar = _imageFile;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -47,8 +60,7 @@ class _UserHomePageState extends State<UserHomePage> {
                               ),
                               child: InkWell(
                                   onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(content: Text('Открывается галерея')));
+                                    pickImageFromGallery(ImageSource.gallery);
                                   },
                                   child: Card(
                                       shape: RoundedRectangleBorder(
@@ -59,7 +71,8 @@ class _UserHomePageState extends State<UserHomePage> {
                                           ClipRRect(
                                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                             clipper: UserAvatarClipper(),
-                                            child: Image.asset('assets/images/user_placeholder.png'),
+                                            child: Image.network('https://picsum.photos/250?image=9')
+                                            ,
                                           ),
                                           Center(
                                               child: Text("Нажмите, чтобы изменить аватарку")
