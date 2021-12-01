@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 
-import 'head_lessons.dart';
+
+import 'lesson_table_list.dart';
 import 'user_header.dart';
 
 class HeaderHomePage extends StatefulWidget {
@@ -15,13 +16,14 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
   @override
   Widget build(BuildContext context) {
     return  Container(
-                  color: Theme.of(context).bottomAppBarColor,
+                  color: Theme.of(context).primaryColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HeaderHomeScreen(''),
-                      HeadLessons(),
+                      UserHeader(''),
+                      LessonsTableList(),
+                      
                     ],
                   ),
                 );

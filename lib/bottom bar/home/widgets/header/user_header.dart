@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class HeaderHomeScreen extends StatelessWidget {
+class UserHeader extends StatelessWidget {
   
   String avatar;
-  HeaderHomeScreen(this.avatar);
+  UserHeader(this.avatar);
   @override
   Widget build(BuildContext context) {
     return Container(

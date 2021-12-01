@@ -24,7 +24,8 @@ class MyThemes {
   static final lightTheme = ThemeData(
       scaffoldBackgroundColor: Colors.white, 
       colorScheme: ColorScheme.light(),
-      primaryColor: Constants.hexToColor("#6B3286"),
+      primaryColor: Constants.hexToColor("#9370D8"),
+      secondaryHeaderColor: Constants.hexToColor("#9966CC"),
       bottomAppBarColor: Constants.hexToColor("#6B3286", alphaChannel: 'F1'),
       hintColor: Colors.black, 
       highlightColor: Colors.black54

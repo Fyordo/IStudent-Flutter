@@ -2,16 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/bloc/home_page_bloc/home_page_bloc.dart';
+import 'package:i_student/bottom%20bar/home/widgets/lectures_widget.dart';
+import 'package:i_student/bottom%20bar/home/widgets/news/news.dart';
 
-import 'widgets/head_lessons.dart';
-import 'widgets/header.dart';
-import 'widgets/user_header.dart';
+
+
+import 'widgets/header/header.dart';
+import 'widgets/header/user_header.dart';
+import 'widgets/tutors/tutors.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
-  String avatar = '';
+ 
   @override
   _HomePageState createState() => _HomePageState();
+  List<Tab> d = [];
+  // ignore: non_constant_identifier_names
+  List<String> categories = [
+    "algem",
+    "nepra",
+    "matlogika",
+    "vichmat",
+    "fizra",
+    "economica",
+    "pravo",
+    "h"
+  ];
 }
 
 class _HomePageState extends State<HomePage> {
@@ -50,7 +65,10 @@ class _HomePageState extends State<HomePage> {
           return SingleChildScrollView(
             child: Column(
               children: [
-               HeaderHomePage()
+                HeaderHomePage(),
+                LecturesWidget(),
+                Tutors(),
+                News()
               ],
             ),
           );
