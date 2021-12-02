@@ -11,7 +11,8 @@ import 'bloc/user_bloc/user_bloc.dart';
 import 'bottom bar/home/home_page.dart';
 
 import 'bloc/user_page_bloc/user_page_bloc.dart';
-import 'bottom bar/user/user_page.dart';
+import 'bottom bar/home/user/user_page.dart';
+
 
 class MyHomePage extends StatefulWidget {
   List<Widget> screens = [];
@@ -59,8 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Constants.svgCameraIcon,
-              activeIcon: Constants.svgCameraIconActive,
+              icon: Constants.svgChatIcon,
+              activeIcon: Constants.svgChatIconActive,
               label: '',
             ),
             BottomNavigationBarItem(

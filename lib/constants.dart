@@ -14,7 +14,7 @@ class Constants {
   static String myassetFeedName = 'assets/icons/news_feed.svg';
   static String myassetProfileName = 'assets/icons/profile_icon.svg';
   static String myassetHomeName = 'assets/icons/home_icon.svg';
-  static String myassetCameraName = 'assets/icons/camera_icon.svg';
+  static String myassetCameraName = 'assets/icons/chat_icon.svg';
   static String myassetIconAddPhotoName = 'assets/icons/photo_add_icon.svg';
   static String myassetIconAddName = 'assets/icons/add_icon.svg';
 
@@ -26,23 +26,23 @@ class Constants {
   static final Widget svgAddIcon =
       SvgPicture.asset(myassetIconAddName, color: Colors.grey[600]);
 
-  static final Widget svgCameraIcon =
-      SvgPicture.asset(myassetCameraName, color: Colors.grey[200]);
+  static final Widget svgChatIcon =
+       Icon(Icons.chat, color: Colors.grey[600]);
 
-  static final Widget svgCameraIconActive =
-      SvgPicture.asset(myassetCameraName, color: Colors.pink);
+  static final Widget svgChatIconActive =
+       Icon(Icons.chat, color: Constants.hexToColor("#9370D8"));
 
   static final Widget svgProfileIcon =
-      SvgPicture.asset(myassetProfileName, color: Colors.grey[200]);
+      SvgPicture.asset(myassetProfileName, color: Colors.grey[600]);
 
   static final Widget svgProfileIconActive =
-      SvgPicture.asset(myassetProfileName, color: Colors.pink);
+      SvgPicture.asset(myassetProfileName, color: Constants.hexToColor("#9370D8"));
 
   static final Widget svgHomeIcon =
-      SvgPicture.asset(myassetHomeName, color: Colors.grey[200]);
+      SvgPicture.asset(myassetHomeName, color: Colors.grey[600]);
 
   static final Widget svgHomeIconActive =
-      SvgPicture.asset(myassetHomeName, color: Colors.pink);
+      SvgPicture.asset(myassetHomeName, color: Constants.hexToColor("#9370D8"));
 
   static final Widget svgFeedIcon =
       SvgPicture.asset(myassetFeedName, color: Colors.grey[600]);
