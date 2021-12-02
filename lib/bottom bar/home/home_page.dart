@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/bloc/home_page_bloc/home_page_bloc.dart';
-import 'package:i_student/bottom%20bar/home/widgets/lectures_widget.dart';
+import 'package:i_student/bottom%20bar/home/widgets/lectures/lectures_widget.dart';
+
 import 'package:i_student/bottom%20bar/home/widgets/news/news.dart';
 
 
