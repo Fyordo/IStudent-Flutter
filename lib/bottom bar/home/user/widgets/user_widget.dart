@@ -5,17 +5,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';//
 import 'dart:io';
 
-class UserHomePage extends StatefulWidget {
-  const UserHomePage({ Key? key }) : super(key: key);
+class UserInfo extends StatefulWidget {
+  const UserInfo({ Key? key }) : super(key: key);
 
   @override
-  _UserHomePageState createState() => _UserHomePageState();
+  _UserInfoState createState() => _UserInfoState();
 }
 
 
 
-class _UserHomePageState extends State<UserHomePage> {
-  ImagePicker _picker = ImagePicker();
+class _UserInfoState extends State<UserInfo> {
   XFile? userAvatar = null;
 
 
@@ -63,6 +62,7 @@ class _UserHomePageState extends State<UserHomePage> {
                               child: InkWell(
                                   onTap: () {
                                     getAvatar();
+
                                   },
                                   child: Card(
                                       shape: RoundedRectangleBorder(
@@ -73,7 +73,10 @@ class _UserHomePageState extends State<UserHomePage> {
                                           ClipRRect(
                                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                             clipper: UserAvatarClipper(),
-                                            child: (userAvatar != null)
+                                            child: new SizedBox(
+                                              width: 80.0,
+                                              height: 80.0,
+                                              child: (userAvatar != null)
                                                 ? Image.file(
                                               File(userAvatar!.path),
                                               fit: BoxFit.fill,
@@ -81,6 +84,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                                 : Image.asset(
                                               'assets/images/user_without_photo.png',
                                               fit: BoxFit.fill,
+                                            ),
                                             ),
                                           ),
                                           Center(

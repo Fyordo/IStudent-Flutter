@@ -13,6 +13,8 @@ import 'bottom bar/home/home_page.dart';
 import 'bloc/user_page_bloc/user_page_bloc.dart';
 import 'bottom bar/home/user/user_page.dart';
 
+import 'bloc/timetable_page_bloc/timetable_page_bloc.dart';
+import 'bottom bar/home/timetable/timetable_page.dart';
 
 class MyHomePage extends StatefulWidget {
   List<Widget> screens = [];
@@ -26,10 +28,9 @@ class MyHomePage extends StatefulWidget {
               HomePage()),
       ChatsList(),
       BlocProvider(
-          create: (context) => UserPageBloc()..add(new UserPageLoadEvent()),
+          create: (context) => TimetablePageBloc()..add(new TimetablePageLoadEvent()),
           child:
-          //search
-          UserPage()),
+          TimetablePage()),
     ];
   }
   @override

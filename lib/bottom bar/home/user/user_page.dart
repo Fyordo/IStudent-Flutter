@@ -9,7 +9,6 @@ import '../user/widgets/user_widget.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key? key}) : super(key: key);
-  String avatar = '';
   @override
   _UserPageState createState() => _UserPageState();
 }
@@ -42,7 +41,7 @@ class _UserPageState extends State<UserPage> {
           return SingleChildScrollView(
             child: Column(
               children: [
-               UserHomePage()
+               UserInfo()
               ],
             ),
           );
