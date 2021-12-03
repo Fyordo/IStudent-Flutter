@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';//
 import 'dart:io';
 
 class UserHomePage extends StatefulWidget {
@@ -16,15 +17,16 @@ class UserHomePage extends StatefulWidget {
 class _UserHomePageState extends State<UserHomePage> {
   ImagePicker _picker = ImagePicker();
   XFile? userAvatar = null;
-  pickImageFromGallery(ImageSource source) async {
-    XFile? _imageFile = await _picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      userAvatar = _imageFile;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    Future getAvatar() async {
+      XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      setState(() {
+        userAvatar = image;
+      });
+    }
     return  Container(
                   color: Theme.of(context).bottomAppBarColor,
                   child: Column(
@@ -60,7 +62,7 @@ class _UserHomePageState extends State<UserHomePage> {
                               ),
                               child: InkWell(
                                   onTap: () {
-                                    pickImageFromGallery(ImageSource.gallery);
+                                    getAvatar();
                                   },
                                   child: Card(
                                       shape: RoundedRectangleBorder(
@@ -71,8 +73,15 @@ class _UserHomePageState extends State<UserHomePage> {
                                           ClipRRect(
                                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                             clipper: UserAvatarClipper(),
-                                            child: Image.network('https://picsum.photos/250?image=9')
-                                            ,
+                                            child: (userAvatar != null)
+                                                ? Image.file(
+                                              File(userAvatar!.path),
+                                              fit: BoxFit.fill,
+                                            )
+                                                : Image.asset(
+                                              'assets/images/user_without_photo.png',
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                           Center(
                                               child: Text("Нажмите, чтобы изменить аватарку")

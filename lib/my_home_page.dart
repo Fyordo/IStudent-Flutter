@@ -65,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Constants.svgProfileIcon,
-              activeIcon: Constants.svgProfileIconActive,
+              icon: Constants.svgFeedIcon,
+              activeIcon: Constants.svgFeedIconActive,
               label: '',
             ),
           ],

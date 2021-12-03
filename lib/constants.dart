@@ -32,12 +32,6 @@ class Constants {
   static final Widget svgChatIconActive =
        Icon(Icons.chat, color: Constants.hexToColor("#9370D8"));
 
-  static final Widget svgProfileIcon =
-      SvgPicture.asset(myassetProfileName, color: Colors.grey[600]);
-
-  static final Widget svgProfileIconActive =
-      SvgPicture.asset(myassetProfileName, color: Constants.hexToColor("#9370D8"));
-
   static final Widget svgHomeIcon =
       SvgPicture.asset(myassetHomeName, color: Colors.grey[600]);
 
@@ -48,7 +42,7 @@ class Constants {
       SvgPicture.asset(myassetFeedName, color: Colors.grey[600]);
 
   static final Widget svgFeedIconActive =
-      SvgPicture.asset(myassetFeedName, color: Colors.pink);
+      SvgPicture.asset(myassetFeedName, color: Constants.hexToColor("#9370D8"));
 
   static final Widget eyeIcon = SvgPicture.asset(_myassetEyeName,
       color: Colors.grey[600], height: 20, width: 2);
