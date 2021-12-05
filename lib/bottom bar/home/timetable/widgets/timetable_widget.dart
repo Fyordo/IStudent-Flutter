@@ -21,8 +21,8 @@ class _TimetableState extends State<Timetable> {
         ConstructDay(context, "ВТОРНИК"),
         ConstructDay(context, "СРЕДА"),
         ConstructDay(context, "ЧЕТВЕРГ"),
-        ConstructDay(context, "ПОНЕДЕЛЬНИК"),
-        ConstructDay(context, "ПОНЕДЕЛЬНИК"),
+        ConstructDay(context, "ПЯТНИЦА"),
+        ConstructDay(context, "СУББОТА"),
     ]
     );
   }
