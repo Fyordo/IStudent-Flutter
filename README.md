@@ -1,16 +1,17 @@
-# i_student
+# IStudent
 
-A new Flutter project.
+Все сервисы взаимодействия студентов мехмата с информацией разнесены по разным приложениям и разным сайтам. Чтобы получить некоторую информацию, студенту зачастую нужно авторизовываться заново, заходить на разные сайты или в разные приложения. Это долго и неудобно.
 
-## Getting Started
+Решением этой проблемы послужит проект **iStudent**.
 
-This project is a starting point for a Flutter application.
+**iStudent** - кроссплатформенное мобильное приложение с удобным и понятным интерфейсом, объединяющее большинство сервисов, которые используют студенты мехмата, в единую систему.
 
-A few resources to get you started if this is your first Flutter project:
+Мы будем использовать интерактивное расписание мехмата для получения расписания студентов всех групп, официального списка групп мехмата и списка преподавателей. Также мы воспользуемся официальным сайтом новостей и СИЦ мехмата, чтобы получать новости и объявления из открытых официальных источников. Мы найдём записи лекций на YouTube и загрузим их в нашу базу. И, наконец, мы реализуем чаты для студентов, чтобы наше приложение было удобным для рассылки важной информации от старост.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Стек технологий
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Dart
+- Flutter
+
+## Ссылка на второй репозиторий:
+https://github.com/Fyordo/IStudent-Backend
