@@ -15,13 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //color: Colors.white,
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light, //ThemeMode.system
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
 
       home: BlocProvider(
           create: (context) =>
-              UserBloc()..add(new UserLoadEvent()),
+              UserBloc()..add(new UserInitialEvent()),//UserBloc()..add(new UserLoadEvent()),
           child:
               //search
               RootPage('auto')),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:i_student/provider/theme_provider/theme_provider.dart';
 import 'dart:io';
 
-import 'timetable_support.dart';
+import '../../../../data/structures.dart';
 
 class Timetable extends StatefulWidget {
 const Timetable({ Key? key }) : super(key: key);
@@ -46,8 +46,7 @@ Column ConstructDay(BuildContext context, Day day) {
               day.name,
               style: TextStyle(
                   color: Theme
-                      .of(context)
-                      .hintColor,
+                      .of(context).hintColor,
                   fontSize: 22,
                   fontWeight: FontWeight.w600),
             )
@@ -60,14 +59,19 @@ Column ConstructDay(BuildContext context, Day day) {
             return Card(
               color: MyThemes.lightTheme.primaryColor,
                 child: ListTile(
-              leading: Text(day.lessons[index].time),
+              leading: Text(
+                  day.lessons[index].time,
+                  style: TextStyle(color: Colors.white),
+              ),
               title: Text(day.lessons[index].name,
                 style: TextStyle(
+                    color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600),
               ),
               subtitle: Text(day.lessons[index].place,
                 style: TextStyle(
+                    color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.w600),
               ),

@@ -34,7 +34,7 @@ dependencies:
   hive_flutter: ^1.1.0
   cupertino_icons: ^1.0.2
   floating_bottom_navigation_bar: ^1.5.2
-
+  url_launcher: ^6.0.20
 dev_dependencies:
   flutter_test:
     sdk: flutter

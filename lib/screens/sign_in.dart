@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:i_student/my_home_page.dart';
-import 'package:i_student/screens/sign_up.dart';
 import 'package:i_student/screens/welcome_screen.dart';
 import 'package:i_student/widgets/custom_password_field.dart';
 import 'package:i_student/widgets/custom_text_field.dart';
-
+import 'package:i_student/data/IStudent.dart';
 import '../constants.dart';
 
 
@@ -120,15 +119,7 @@ class _SignInState extends State<SignIn> {
                       margin:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       child: FlatButton(
-                        onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => SignUp(),
-                            ),
-                            (route) => false,
-                          );
-                        },
+                        onPressed: () => IStudent.launchAuth(),
                         child: Text('Регистрация',
                             style:
                                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 17, fontWeight: FontWeight.w400)),

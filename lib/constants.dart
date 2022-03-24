@@ -30,19 +30,19 @@ class Constants {
        Icon(Icons.chat, color: Colors.grey[600]);
 
   static final Widget svgChatIconActive =
-       Icon(Icons.chat, color: Constants.hexToColor("#9370D8"));
+       Icon(Icons.chat, color: Constants.hexToColor("#3A5199"));
 
   static final Widget svgHomeIcon =
       SvgPicture.asset(myassetHomeName, color: Colors.grey[600]);
 
   static final Widget svgHomeIconActive =
-      SvgPicture.asset(myassetHomeName, color: Constants.hexToColor("#9370D8"));
+      SvgPicture.asset(myassetHomeName, color: Constants.hexToColor("#3A5199"));
 
   static final Widget svgFeedIcon =
       SvgPicture.asset(myassetFeedName, color: Colors.grey[600]);
 
   static final Widget svgFeedIconActive =
-      SvgPicture.asset(myassetFeedName, color: Constants.hexToColor("#9370D8"));
+      SvgPicture.asset(myassetFeedName, color: Constants.hexToColor("#3A5199"));
 
   static final Widget eyeIcon = SvgPicture.asset(_myassetEyeName,
       color: Colors.grey[600], height: 20, width: 2);
