@@ -18,6 +18,9 @@ class Constants {
   static String myassetIconAddPhotoName = 'assets/icons/photo_add_icon.svg';
   static String myassetIconAddName = 'assets/icons/add_icon.svg';
 
+  static const String apiUrl = "https://i-student.herokuapp.com/api";
+  static const String newsUrl = "https://news-sfedu.herokuapp.com/api/news";
+
   static final Widget svgAddPhotoIcon = SvgPicture.asset(
     myassetIconAddPhotoName,
     width: 200,

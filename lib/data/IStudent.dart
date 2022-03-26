@@ -8,6 +8,8 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../constants.dart';
+
 class IStudent {
   static launchAuth() async {
     final url = 'https://i-student.herokuapp.com/auth';
@@ -21,7 +23,7 @@ class IStudent {
   static Future<void> logIn(String login, String password) async {
 
     Dio dio = new Dio();
-    final url = 'https://i-student.herokuapp.com/api/auth/login';
+    final url = Constants.apiUrl + '/auth/login';
 
     dio.options.headers["Content-Type"] = "application/json";
     dio.options.headers["Accept"] = "application/json";
@@ -40,7 +42,7 @@ class IStudent {
 
   static Future<Student> getStudent(String token) async {
     Dio dio = new Dio();
-    final url = 'https://i-student.herokuapp.com/api/my/student/get';
+    dynamic url = Constants.apiUrl + '/my/student/get';
     dio.options.headers["token"] = token;
     try {
       final response = await dio.get(url);
