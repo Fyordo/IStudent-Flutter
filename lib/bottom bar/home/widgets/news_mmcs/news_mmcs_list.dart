@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +28,9 @@ class NewsMmcsList extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   itemCount: 5,
 
-                  itemBuilder: (BuildContext context, int index) => ListTile(title: Text(state.news_mmcs[index].text.substring(0, 55) + "..."), trailing: Icon(Icons.chevron_right_rounded),),
+                  itemBuilder: (BuildContext context, int index) => ListTile(title: Text(
+                      state.news_mmcs[index].text != "" ? state.news_mmcs[index].text.substring(0, min(55, state.news_mmcs[index].text.length)) + "..." : "<новость не содержит текст> "
+                  ), trailing: Icon(Icons.chevron_right_rounded),),
                   separatorBuilder: (BuildContext context, int index) => Divider(height: 1, color: Theme.of(context).hintColor,),
                 ));
           }

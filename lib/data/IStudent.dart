@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../constants.dart';
 import 'NewsMMCS.dart';
+import 'NewsVK.dart';
 
 class IStudent {
   static launchAuth() async {
@@ -63,6 +64,24 @@ class IStudent {
       List<NewsMMCS> res = [];
       for (dynamic item in response.data["result"]){
         res.add(NewsMMCS(item));
+      }
+      return res;
+    }
+    on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
+
+  static Future<List<NewsVK>> getNewsVK() async {
+    Dio dio = new Dio();
+    dynamic url = Constants.newsUrl + '/vk';
+    try {
+      final response = await dio.get(url);
+      print(response.data["result"]);
+      List<NewsVK> res = [];
+      for (dynamic item in response.data["result"]){
+        res.add(NewsVK(item));
       }
       return res;
     }
