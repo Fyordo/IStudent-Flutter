@@ -24,10 +24,7 @@ class IStudent {
 
     try {
       final response = await dio.get(url);
-      print(response.data);
-      //String token = jsonDecode(response.data)["token"];
-      /*await Hive.box('Box').put(token, 0);
-      print(Hive.box('Box').get(0));*/
+      print(response.data["token"]);
     }
     on DioError catch (e) {
       print(e.response);
