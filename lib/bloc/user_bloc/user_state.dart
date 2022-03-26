@@ -7,15 +7,16 @@ class UserInitialState extends UserState {}
 
 class UserLoadingState extends UserState {}
 
-class UserLoadedState extends UserState{
- 
-
-}
+class UserLoadedState extends UserState{}
 
 class UserNoInternetState extends UserState{
   
   
 }
-class UserNotAccesState extends UserState{
+class UserNotAccessState extends UserState{
   
+}
+
+class UserWrongAuthState extends UserState{
+
 }

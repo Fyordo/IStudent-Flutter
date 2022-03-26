@@ -7,18 +7,22 @@ import 'package:i_student/widgets/custom_password_field.dart';
 import 'package:i_student/widgets/custom_text_field.dart';
 import 'package:i_student/data/IStudent.dart';
 import '../constants.dart';
+import 'package:i_student/root_page.dart';
 
+import 'package:bloc/bloc.dart';
+import '../bloc/user_bloc/user_bloc.dart';
 
 class SignIn extends StatefulWidget {
   static String myassetMailName = 'assets/images/mail_icon.svg';
   static String myassetEyeName = 'assets/images/eye_icon.svg';
   bool isObscure = true;
-  CustomTextFiled email = CustomTextFiled(
+  CustomTextField email = CustomTextField(
       'example@sfedu.ru',
       Constants.mailIcon,
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
       'Enter your real email address',
-      0, '',prefixText: 'E-mail   ',);
+      0, '',prefixText: 'E-mail   ',
+  );
 
   CustomPasswordField password = CustomPasswordField(
       "1 2 3 4 5", r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", prefixText: 'Пароль',);
@@ -101,14 +105,19 @@ class _SignInState extends State<SignIn> {
                         shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       ),
                       onPressed: () {
+                        if (widget.email.isValid && widget.password.isValid) {
+                          BlocProvider.of<UserBloc>(context).add(new UserLoadEvent(widget.email.getText(), widget.password
+                              .getText()));
+                          print(BlocProvider.of<UserBloc>(context).state.toString());
+                        }
                         //Constants.isInSystem = true;
-                        Navigator.pushAndRemoveUntil(
+                        /*Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (BuildContext context) => MyHomePage(0),
                             ),
                             (route) => false,
-                          );
+                          );*/
                       
                       },
                       child: Text("Войти",

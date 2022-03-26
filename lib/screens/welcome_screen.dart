@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:i_student/screens/sign_in.dart';
 import 'package:i_student/data/IStudent.dart';
-
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/user_bloc/user_bloc.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -52,7 +52,9 @@ class WelcomeScreen extends StatelessWidget {
                 child: FlatButton(
                   onPressed: () => {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignIn()))
+                  MaterialPageRoute(
+                  builder: (_) => SignIn(),)
+                  ),
                   },
                   child: Text('У меня уже есть аккаунт',
                       style: TextStyle(color:  Theme.of(context).primaryColor, fontSize: 15)),
