@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class IStudent {
   static launchAuth() async {
@@ -24,8 +25,10 @@ class IStudent {
 
     try {
       final response = await dio.get(url);
-      print(response.data["token"]);
+      Hive.box('tokenbox').put('token', response.data["token"]);
+      print(Hive.box('tokenbox').get('token'));
     }
+
     on DioError catch (e) {
       print(e.response);
     }

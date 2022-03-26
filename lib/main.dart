@@ -5,15 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/provider/theme_provider/theme_provider.dart';
 import 'package:i_student/root_page.dart';
 
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'bloc/user_bloc/user_bloc.dart';
 import 'data/IStudent.dart';
 
-void main() {
-  /*Hive..init(Directory.current.path);
+var box;
 
-  await Hive.openBox('Box');*/
-
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('tokenbox');
+  print('lf');
   runApp(MyApp());
 }
 
