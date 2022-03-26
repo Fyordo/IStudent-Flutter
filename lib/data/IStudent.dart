@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:i_student/data/Student.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
@@ -26,24 +30,23 @@ class IStudent {
     try {
       final response = await dio.get(url);
       Hive.box('tokenbox').put('token', response.data["token"]);
-      print(Hive.box('tokenbox').get('token'));
     }
-
     on DioError catch (e) {
       print(e.response);
     }
   }
 
-  static getStudent(String token) async {
+  static Future<Student> getStudent(String token) async {
     Dio dio = new Dio();
     final url = 'https://i-student.herokuapp.com/api/my/student/get';
     dio.options.headers["token"] = token;
     try {
       final response = await dio.get(url);
-      print(response.data);
+      return new Student(response.data);
     }
     on DioError catch (e) {
       print(e.response);
+      throw e;
     }
   }
 

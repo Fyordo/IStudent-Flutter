@@ -16,9 +16,4 @@ class Student{
     is_headman = data["is_headman"];
     notifications = data["notifications"];
   }
-
-  info(){
-    String s = this.id.toString() + " " + this.name + " " + this.email;
-    print(s);
-  }
 }
