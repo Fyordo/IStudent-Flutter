@@ -1,10 +1,13 @@
 import 'dart:ffi';
 
+import 'Group.dart';
+
 class Student{
   late int id;
   late String name;
   late String email;
-  late int group_id;
+  late String photo;
+  late Group group;
   late bool is_headman;
   late List notifications;
 
@@ -12,8 +15,9 @@ class Student{
     id = data["id"];
     name = data["name"];
     email = data["email"];
-    group_id = data["group_id"];
+    group = new Group(data["group"]);
     is_headman = data["is_headman"];
     notifications = data["notifications"];
+    photo = data["photo"];
   }
 }

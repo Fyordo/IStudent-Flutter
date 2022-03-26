@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,15 +49,8 @@ class UserHeader extends StatelessWidget {
                           child: new SizedBox(
                             width: 70.0,
                             height: 70.0,
-                            child: avatar != ''
-                                ? Image.network(
-                              avatar,
-                              fit: BoxFit.fill,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                    'assets/images/user_without_photo.png');
-                              },
-                            )
+                            child: state is HeaderStateWithStudent
+                                ? Image.memory(Base64Decoder().convert(state.student.photo))
                                 : Image.asset(
                               'assets/images/user_without_photo.png',
                               fit: BoxFit.fill,
@@ -71,10 +66,9 @@ class UserHeader extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:[
 
-                        //Text("Екатерина Смирнова",style: TextStyle(color: Theme.of(context).hintColor, fontSize: 18, fontWeight: FontWeight.w400)),
-                        Text(state is HeaderStateWithStudent ? state.student.name : "ERROR BLYAT",style: TextStyle(color: Theme.of(context).hintColor, fontSize: 18, fontWeight: FontWeight.w400)),
+                        Text(state is HeaderStateWithStudent ? state.student.name : "Загрузка...",style: TextStyle(color: Theme.of(context).hintColor, fontSize: 18, fontWeight: FontWeight.w400)),
                         SizedBox(height: 5),
-                        Text("Курс 1 Группа 2", style: TextStyle(color: Theme.of(context).highlightColor),)
+                        Text(state is HeaderStateWithStudent ? "Курс " + state.student.group.group_course.toString() + " Группа " + state.student.group.group_number.toString() : "Курс 1 Группа 2", style: TextStyle(color: Theme.of(context).highlightColor),)
 
                       ])
                 ]),

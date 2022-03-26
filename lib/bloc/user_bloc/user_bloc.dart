@@ -14,7 +14,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async* {
      if (event is UserLoadEvent) {
        //yield UserLoadingState();
-       IStudent.logIn(event.login, event.password);
+       await IStudent.logIn(event.login, event.password);
        yield new UserLoadedState();
     }
 

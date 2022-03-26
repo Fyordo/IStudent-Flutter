@@ -10,9 +10,7 @@ part 'header_event.dart';
 part 'header_state.dart';
 
 class HeaderBloc extends Bloc<HeaderEvent, HeaderState> {
-  HeaderBloc(HeaderState headerStateWithoutStudent) : super(headerStateWithoutStudent) {
-    on<HeaderEvent>((event, emit)  async*{});
-  }
+  HeaderBloc(HeaderState headerStateWithoutStudent) : super(headerStateWithoutStudent);
 
   @override
   Stream<HeaderState> mapEventToState(HeaderEvent event) async*{

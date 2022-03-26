@@ -18,7 +18,8 @@ class IStudent {
     }
   }
 
-  static logIn(String login, String password) async {
+  static Future<void> logIn(String login, String password) async {
+
     Dio dio = new Dio();
     final url = 'https://i-student.herokuapp.com/api/auth/login';
 
@@ -30,6 +31,7 @@ class IStudent {
     try {
       final response = await dio.get(url);
       Hive.box('tokenbox').put('token', response.data["token"]);
+      return;
     }
     on DioError catch (e) {
       print(e.response);
