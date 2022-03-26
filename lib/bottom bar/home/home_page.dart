@@ -60,9 +60,7 @@ class _HomePageState extends State<HomePage> {
 
         //*/
       }, builder: (context, state) {
-        if (state is! HomePageLoading) {
-          return Center(child: CupertinoActivityIndicator());
-        } else {
+        if (state is HomePageLoading) {
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -73,6 +71,8 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           );
+        } else {
+          return Center(child: CupertinoActivityIndicator());
         }
       }),
     );
