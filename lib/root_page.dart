@@ -12,15 +12,16 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<UserBloc, UserState>(listener: (c, state) {
+      body: BlocConsumer<UserBloc, UserState>(listener: (context, state) {
         print("State in Consumer");
-        print(state.toString());
+        print(BlocProvider.of<UserBloc>(context).hashCode);
+        //print(state.toString());
         if (state is UserNotAccessState) {
             //Constants.isInSystem = true;
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (_) =>  WelcomeScreen(),
+                builder: (context) =>  WelcomeScreen(),
               ),
                   (route) => false,
             );

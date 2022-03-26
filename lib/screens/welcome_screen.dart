@@ -53,7 +53,7 @@ class WelcomeScreen extends StatelessWidget {
                   onPressed: () => {
                     Navigator.push(context,
                   MaterialPageRoute(
-                  builder: (_) => SignIn(),)
+                  builder: (context) => SignIn(),)
                   ),
                   },
                   child: Text('У меня уже есть аккаунт',

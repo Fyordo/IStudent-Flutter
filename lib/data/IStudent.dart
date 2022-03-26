@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class IStudent {
   static launchAuth() async {
-    const url = 'https://i-student.herokuapp.com/auth';
+    final url = 'https://i-student.herokuapp.com/auth';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -17,12 +17,10 @@ class IStudent {
     Dio dio = new Dio();
     final url = 'https://i-student.herokuapp.com/api/auth/login';
 
-
     dio.options.headers["Content-Type"] = "application/json";
     dio.options.headers["Accept"] = "application/json";
     dio.options.headers["login"] = login;
     dio.options.headers["password"] = password;
-
 
     try {
       final response = await dio.get(url);
@@ -35,4 +33,19 @@ class IStudent {
       print(e.response);
     }
   }
+
+  static getStudent(String token) async {
+    Dio dio = new Dio();
+    final url = 'https://i-student.herokuapp.com/api/my/student/get';
+    dio.options.headers["token"] = token;
+    try {
+      final response = await dio.get(url);
+      print(response.data);
+    }
+    on DioError catch (e) {
+      print(e.response);
+    }
+  }
+
+
 }

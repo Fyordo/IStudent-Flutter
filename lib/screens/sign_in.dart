@@ -39,105 +39,119 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              splashRadius: 12,
-              color: Theme.of(context).iconTheme.color,
-              onPressed: () => {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => WelcomeScreen(),
-                  ),
-                  (route) => false,
-                )
-              },
-            ),
-            automaticallyImplyLeading: false,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-           
-            
+    return BlocListener<UserBloc, UserState>(listener: (context, state) {
+      if (state is UserLoadedState) {
+        print("Мы здесь?");
+        //Constants.isInSystem = true;
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) =>
+                MyHomePage(0),
           ),
-          backgroundColor: Colors.white,
-          body: SizedBox.expand(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      bottom: 35,
-                      top: 90,
+              (route) => false,
+        );
+      }
+    },
+      child: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                splashRadius: 12,
+                color: Theme.of(context).iconTheme.color,
+                onPressed: () => {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => WelcomeScreen(),
                     ),
-                    child: Text(
-                      "Авторизация",
-                      style: TextStyle(
-                        shadows: [
-                          Shadow(color: Colors.black, offset: Offset(0, -5))
-                        ],
-                        color: Colors.transparent,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
+                        (route) => false,
+                  )
+                },
+              ),
+              automaticallyImplyLeading: false,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
+
+            ),
+            backgroundColor: Colors.white,
+            body: SizedBox.expand(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        bottom: 35,
+                        top: 90,
+                      ),
+                      child: Text(
+                        "Авторизация",
+                        style: TextStyle(
+                          shadows: [
+                            Shadow(color: Colors.black, offset: Offset(0, -5))
+                          ],
+                          color: Colors.transparent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                        ),
                       ),
                     ),
-                  ),
-                  widget.email,
-                  widget.password,
-                  
-                  Container(
-                    margin: EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 50),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 70),
-                        shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      ),
-                      onPressed: () {
-                        if (widget.email.isValid && widget.password.isValid) {
-                          BlocProvider.of<UserBloc>(context).add(new UserLoadEvent(widget.email.getText(), widget.password
-                              .getText()));
-                          print(BlocProvider.of<UserBloc>(context).state.toString());
-                        }
-                        //Constants.isInSystem = true;
-                        /*Navigator.pushAndRemoveUntil(
+                    widget.email,
+                    widget.password,
+
+                    Container(
+                      margin: EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 50),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 70),
+                          shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        ),
+                        onPressed: () {
+                          if (widget.email.isValid && widget.password.isValid) {
+                            BlocProvider.of<UserBloc>(context).add(new UserLoadEvent(widget.email.getText(), widget.password
+                                .getText()));
+                            print(BlocProvider.of<UserBloc>(context).state.toString());
+                          }
+                          //Constants.isInSystem = true;
+                          /*Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (BuildContext context) => MyHomePage(0),
                             ),
                             (route) => false,
                           );*/
-                      
-                      },
-                      child: Text("Войти",
-                          style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold)),
+
+                        },
+                        child: Text("Войти",
+                            style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold)),
+                      ),
                     ),
-                  ),
-                  Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: FlatButton(
-                        onPressed: () => IStudent.launchAuth(),
-                        child: Text('Регистрация',
-                            style:
-                                TextStyle(color: Theme.of(context).primaryColor, fontSize: 17, fontWeight: FontWeight.w400)),
-                        textColor: Colors.black,
-                      ))
-                ],
+                    Container(
+                        margin:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: FlatButton(
+                          onPressed: () => IStudent.launchAuth(),
+                          child: Text('Регистрация',
+                              style:
+                              TextStyle(color: Theme.of(context).primaryColor, fontSize: 17, fontWeight: FontWeight.w400)),
+                          textColor: Colors.black,
+                        ))
+                  ],
+                ),
               ),
             ),
-          ),
-        ));
+          )),);
   }
 }
