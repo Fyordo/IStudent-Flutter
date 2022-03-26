@@ -42,6 +42,25 @@ class IStudent {
     }
   }
 
+  static Future<void> logOut(String token) async {
+
+    Dio dio = new Dio();
+    final url = Constants.apiUrl + '/auth/logout';
+
+    dio.options.headers["Content-Type"] = "application/json";
+    dio.options.headers["Accept"] = "application/json";
+    dio.options.headers["token"] = token;
+
+    try {
+      final response = await dio.post(url);
+      Hive.box('tokenbox').delete('token');
+      return;
+    }
+    on DioError catch (e) {
+      print(e.response);
+    }
+  }
+
   static Future<Student> getStudent(String token) async {
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/student/get';
