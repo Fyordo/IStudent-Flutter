@@ -6,23 +6,30 @@ import 'package:i_student/provider/theme_provider/theme_provider.dart';
 import 'package:i_student/root_page.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
+import 'bloc/memory_bloc/memory_bloc.dart';
 import 'bloc/user_bloc/user_bloc.dart';
 import 'data/IStudent.dart';
 
-var box;
 
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox('tokenbox');
-  print('lf');
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) =>
-    UserBloc()..add(UserInitialEvent()),//UserInitialEvent()
+    return MultiBlocProvider(providers: [
+      BlocProvider<UserBloc>(
+    create: (context) =>UserBloc()..add(UserInitialEvent()
+    )),
+
+      BlocProvider<MemoryBloc>(
+      create: (context) =>MemoryBloc()..add((Hive.box('tokenbox').isNotEmpty ? MemoryPresentEvent() : MemoryEmptyEvent())
+    )),
+    ],
+
       child: MaterialApp(
       //color: Colors.white,
       debugShowCheckedModeBanner: false,

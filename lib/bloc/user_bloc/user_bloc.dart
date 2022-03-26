@@ -8,6 +8,7 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
  UserBloc() : super(UserNotAccessState());
+
      @override
   Stream<UserState> mapEventToState(
     UserEvent event,

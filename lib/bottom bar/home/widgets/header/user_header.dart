@@ -29,52 +29,175 @@ class UserHeader extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Container(
-              width: double.infinity,
-              child: Card(
-                elevation: 5,
-                margin: EdgeInsets.only(top: 0, left: 0, right: 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(25),
-                      bottomLeft: Radius.circular(25)),
-                ),
-
-                child: Row(children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: CircleAvatar(
-                      radius: 45,
-                      child: ClipOval(
-                          child: new SizedBox(
-                            width: 70.0,
-                            height: 70.0,
-                            child: state is HeaderStateWithStudent
-                                ? Image.memory(Base64Decoder().convert(state.student.photo))
-                                : Image.asset(
-                              'assets/images/user_without_photo.png',
-                              fit: BoxFit.fill,
-                            ),
-                            //),
-                            //
-                          )),
-                      backgroundColor: Colors.transparent,
-                    ),
+          if (state is HeaderStateWithStudent) {
+            return Container(
+                width: double.infinity,
+                child: Card(
+                  elevation: 5,
+                  margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(25),
+                        bottomLeft: Radius.circular(25)),
                   ),
 
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:[
+                  child: Row(children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      child: CircleAvatar(
+                        radius: 45,
+                        child: ClipOval(
+                            child: new SizedBox(
+                              width: 70.0,
+                              height: 70.0,
+                              child: Image.memory(
+                                  Base64Decoder().convert(state.student.photo))
+                              //),
+                              //
+                            )),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
 
-                        Text(state is HeaderStateWithStudent ? state.student.name : "Загрузка...",style: TextStyle(color: Theme.of(context).hintColor, fontSize: 18, fontWeight: FontWeight.w400)),
-                        SizedBox(height: 5),
-                        Text(state is HeaderStateWithStudent ? "Курс " + state.student.group.group_course.toString() + " Группа " + state.student.group.group_number.toString() : "Курс 1 Группа 2", style: TextStyle(color: Theme.of(context).highlightColor),)
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
 
-                      ])
-                ]),
-              ));
+                          Text(state.student
+                              .name, style: TextStyle(
+                              color: Theme
+                                  .of(context)
+                                  .hintColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400)),
+                          SizedBox(height: 5),
+                          Text("Курс " +
+                              state.student.group.group_course.toString() +
+                              " Группа " + state.student.group.group_number
+                              .toString(), style: TextStyle(
+                              color: Theme
+                                  .of(context)
+                                  .highlightColor),)
+
+                        ])
+                  ]),
+                ));
+          }
+          else if (state is HeaderStateWithoutStudent) {
+            return Container(
+                width: double.infinity,
+                child: Card(
+                  elevation: 5,
+                  margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(25),
+                        bottomLeft: Radius.circular(25)),
+                  ),
+
+                  child: Row(children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      child: CircleAvatar(
+                        radius: 45,
+                        child: ClipOval(
+                            child: new SizedBox(
+                              width: 70.0,
+                              height: 70.0,
+                              child: Image.asset(
+                                'assets/images/user_without_photo.png',
+                                fit: BoxFit.fill,
+                              ),
+                              //),
+                              //
+                            )),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          Text("Загрузка...", style: TextStyle(
+                              color: Theme
+                                  .of(context)
+                                  .hintColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400)),
+                          SizedBox(height: 5),
+                          Text("Курс 1 Группа 2", style: TextStyle(
+                              color: Theme
+                                  .of(context)
+                                  .highlightColor),)
+
+                        ])
+                  ]),
+                ));
+          }
+          else return Text("Error");
         },
       ),
     );
   }
 }
+
+/*
+Container(
+                width: double.infinity,
+                child: Card(
+                  elevation: 5,
+                  margin: EdgeInsets.only(top: 0, left: 0, right: 0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(25),
+                        bottomLeft: Radius.circular(25)),
+                  ),
+
+                  child: Row(children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      child: CircleAvatar(
+                        radius: 45,
+                        child: ClipOval(
+                            child: new SizedBox(
+                              width: 70.0,
+                              height: 70.0,
+                              child: state is HeaderStateWithStudent
+                                  ? Image.memory(
+                                  Base64Decoder().convert(state.student.photo))
+                                  : Image.asset(
+                                'assets/images/user_without_photo.png',
+                                fit: BoxFit.fill,
+                              ),
+                              //),
+                              //
+                            )),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          Text(state is HeaderStateWithStudent ? state.student
+                              .name : "Загрузка...", style: TextStyle(
+                              color: Theme
+                                  .of(context)
+                                  .hintColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400)),
+                          SizedBox(height: 5),
+                          Text(state is HeaderStateWithStudent ? "Курс " +
+                              state.student.group.group_course.toString() +
+                              " Группа " + state.student.group.group_number
+                              .toString() : "Курс 1 Группа 2", style: TextStyle(
+                              color: Theme
+                                  .of(context)
+                                  .highlightColor),)
+
+                        ])
+                  ]),
+                ));
+ */
