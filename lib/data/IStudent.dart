@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../constants.dart';
+import 'NewsMMCS.dart';
 
 class IStudent {
   static launchAuth() async {
@@ -54,5 +55,20 @@ class IStudent {
     }
   }
 
-
+  static Future<List<NewsMMCS>> getNewsMMCS() async {
+    Dio dio = new Dio();
+    dynamic url = Constants.newsUrl + '/mmcs';
+    try {
+      final response = await dio.get(url);
+      List<NewsMMCS> res = [];
+      for (dynamic item in response.data["result"]){
+        res.add(NewsMMCS(item));
+      }
+      return res;
+    }
+    on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
 }
