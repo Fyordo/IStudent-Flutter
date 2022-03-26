@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:i_student/bottom%20bar/home/widgets/lectures/lectures_widget.dart';
 
-import 'package:i_student/bottom%20bar/home/widgets/news/news.dart';
+import 'package:i_student/bottom%20bar/home/widgets/news_mmcs/news_mmcs.dart';
+import 'package:i_student/bottom%20bar/home/widgets/news_vk/news_vk.dart';
 
 
 
@@ -67,7 +68,8 @@ class _HomePageState extends State<HomePage> {
                 HeaderHomePage(),
                 LecturesWidget(),
                 Tutors(),
-                News()
+                NewsMmcs(),
+                NewsVk(),
               ],
             ),
           );
