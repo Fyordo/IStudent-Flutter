@@ -7,14 +7,15 @@ import 'package:i_student/data/Schedule.dart';
 import 'package:i_student/data/Lesson.dart';
 //import '../../../../data/structures.dart';
 
+const List<String> dayNames = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
 class Timetable extends StatelessWidget {
-  Schedule schedule;
+  final Schedule schedule;
   Timetable(this.schedule);
 
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
-      height: 400.0,
+      height: MediaQuery.of(context).size.height-10,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
@@ -23,7 +24,7 @@ class Timetable extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) => Container(
           width: 300,
           height: 150,
-          child: ConstructDay(context, schedule[index]),//ConstructDay(context, days[index]),
+          child: ConstructDay(dayNames[index], schedule[index]),
         ),
       ),
     );
@@ -31,13 +32,18 @@ class Timetable extends StatelessWidget {
   }
 }
 
-Column ConstructDay(BuildContext context, List<Lesson> list) {
+class ConstructDay extends StatelessWidget {
+final String dayName;
+final List<Lesson> list;
+ConstructDay(this.dayName,this.list);
+
+Widget build(BuildContext context) {
   return Column(
       children: [
         Container(
             margin: EdgeInsets.only(left: 20, top: 20),
             child: Text(
-              "Day_name",
+              dayName,
               style: TextStyle(
                   color: Theme
                       .of(context).hintColor,
@@ -57,16 +63,19 @@ Column ConstructDay(BuildContext context, List<Lesson> list) {
                   list[index].time,
                   style: TextStyle(color: Colors.white),
                 ),
-                title: Text(list[index].title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text(list[index].title,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
                 subtitle: Text(list[index].location,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.w600),
                 ),
 
@@ -76,6 +85,7 @@ Column ConstructDay(BuildContext context, List<Lesson> list) {
         )
       ]
   );
+}
 }
 
 /*Column ConstructDay(BuildContext context, Day day) {

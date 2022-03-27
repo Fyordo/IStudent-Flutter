@@ -82,7 +82,7 @@ class IStudent {
     Dio dio = new Dio();
     dynamic url = Constants.newsUrl + '/mmcs';
     try {
-      final response = await dio.post(url);
+      final response = await dio.get(url);
       List<NewsMMCS> res = [];
       for (dynamic item in response.data["result"]){
         res.add(NewsMMCS(item));
@@ -99,7 +99,7 @@ class IStudent {
     Dio dio = new Dio();
     dynamic url = Constants.newsUrl + '/vk';
     try {
-      final response = await dio.post(url);
+      final response = await dio.get(url);
       print(response.data["result"]);
       List<NewsVK> res = [];
       for (dynamic item in response.data["result"]){
@@ -123,13 +123,12 @@ class IStudent {
       print("Ответ на запрос расписаниия:");
       print(response.data);
       print("Вызов конструктора");
-      return Schedule(response.data);
+      return Schedule.upperWeek(response.data);
     }
     on DioError catch (e) {
       print(e.response);
       throw e;
     }
-
   }
 
 
