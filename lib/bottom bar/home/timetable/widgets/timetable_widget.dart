@@ -3,20 +3,14 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:i_student/provider/theme_provider/theme_provider.dart';
 import 'dart:io';
+import 'package:i_student/data/Schedule.dart';
+import 'package:i_student/data/Lesson.dart';
+//import '../../../../data/structures.dart';
 
-import '../../../../data/structures.dart';
+class Timetable extends StatelessWidget {
+  Schedule schedule;
+  Timetable(this.schedule);
 
-class Timetable extends StatefulWidget {
-const Timetable({ Key? key }) : super(key: key);
-
-@override
-_TimetableState createState() => _TimetableState();
-}
-
-
-
-class _TimetableState extends State<Timetable> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
@@ -29,7 +23,7 @@ class _TimetableState extends State<Timetable> {
         itemBuilder: (BuildContext context, int index) => Container(
           width: 300,
           height: 150,
-          child: ConstructDay(context, days[index]),
+          child: ConstructDay(context, schedule[index]),//ConstructDay(context, days[index]),
         ),
       ),
     );
@@ -37,7 +31,54 @@ class _TimetableState extends State<Timetable> {
   }
 }
 
-Column ConstructDay(BuildContext context, Day day) {
+Column ConstructDay(BuildContext context, List<Lesson> list) {
+  return Column(
+      children: [
+        Container(
+            margin: EdgeInsets.only(left: 20, top: 20),
+            child: Text(
+              "Day_name",
+              style: TextStyle(
+                  color: Theme
+                      .of(context).hintColor,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600),
+            )
+        ),
+
+        ListView.builder(
+          itemCount: list.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return Card(
+              color: MyThemes.lightTheme.primaryColor,
+              child: ListTile(
+                leading: Text(
+                  list[index].time,
+                  style: TextStyle(color: Colors.white),
+                ),
+                title: Text(list[index].title,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
+                ),
+                subtitle: Text(list[index].location,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+
+              ),
+            );
+          },
+        )
+      ]
+  );
+}
+
+/*Column ConstructDay(BuildContext context, Day day) {
   return Column(
       children: [
         Container(
@@ -82,4 +123,4 @@ Column ConstructDay(BuildContext context, Day day) {
         )
       ]
   );
-}
+}*/

@@ -11,6 +11,7 @@ import 'package:i_student/bloc/user_bloc/user_bloc.dart';
 import '../constants.dart';
 import 'NewsMMCS.dart';
 import 'NewsVK.dart';
+import 'Schedule.dart';
 
 class IStudent {
   static launchAuth() async {
@@ -33,7 +34,7 @@ class IStudent {
     dio.options.headers["password"] = password;
 
     try {
-      final response = await dio.get(url);
+      final response = await dio.post(url);
       Hive.box('tokenbox').put('token', response.data["token"]);
       return "Ok";
     }
@@ -68,7 +69,7 @@ class IStudent {
     dynamic url = Constants.apiUrl + '/my/student/get';
     dio.options.headers["token"] = token;
     try {
-      final response = await dio.get(url);
+      final response = await dio.post(url);
       return new Student(response.data);
     }
     on DioError catch (e) {
@@ -81,7 +82,7 @@ class IStudent {
     Dio dio = new Dio();
     dynamic url = Constants.newsUrl + '/mmcs';
     try {
-      final response = await dio.get(url);
+      final response = await dio.post(url);
       List<NewsMMCS> res = [];
       for (dynamic item in response.data["result"]){
         res.add(NewsMMCS(item));
@@ -98,7 +99,7 @@ class IStudent {
     Dio dio = new Dio();
     dynamic url = Constants.newsUrl + '/vk';
     try {
-      final response = await dio.get(url);
+      final response = await dio.post(url);
       print(response.data["result"]);
       List<NewsVK> res = [];
       for (dynamic item in response.data["result"]){
@@ -111,4 +112,25 @@ class IStudent {
       throw e;
     }
   }
+
+  static Future<Schedule> getSchedule(String token) async {
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/my/schedule/full';
+
+    dio.options.headers["token"] = token;
+    try {
+      final response = await dio.post(url);
+      print("Ответ на запрос расписаниия:");
+      print(response.data);
+      print("Вызов конструктора");
+      return Schedule(response.data);
+    }
+    on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+
+  }
+
+
 }

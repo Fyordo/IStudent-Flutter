@@ -20,4 +20,5 @@ class Student{
     notifications = data["notifications"];
     photo = data["photo"];
   }
+
 }

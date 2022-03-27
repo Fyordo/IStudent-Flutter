@@ -1,5 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:i_student/data/IStudent.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:i_student/data/Schedule.dart';
 
 part 'timetable_page_event.dart';
 part 'timetable_page_state.dart';
@@ -12,8 +15,8 @@ class TimetablePageBloc extends Bloc<TimetablePageEvent, TimetablePageState> {
       TimetablePageEvent event,
   ) async* {
      if (event is TimetablePageLoadEvent) {
-       
-      yield TimetablePageLoading();
+      Schedule schedule = await IStudent.getSchedule(Hive.box('tokenbox').get('token'));
+      yield TimetablePageLoaded(schedule);
     }
     
   }
