@@ -15,7 +15,7 @@ class TimetablePage extends StatelessWidget {
         title: Text("Расписание", style: TextStyle(fontSize: 25),
         ),
       ),
-      body: BlocConsumer<TimetablePageBloc, TimetablePageState>(listener: (c, state) {},
+      body: BlocBuilder<TimetablePageBloc, TimetablePageState>(
           builder: (context, state) {
             if (state is TimetablePageLoaded) {
               return SingleChildScrollView(

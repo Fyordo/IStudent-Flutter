@@ -3,7 +3,6 @@ class Lesson {
   late String time;
   late String location;
   late String teacher;
-  late bool upWeek;
 
   Lesson(data) {
     title = data["title"];
@@ -31,6 +30,5 @@ class Lesson {
     }
     location = data["location"] ?? "-";
     teacher = data["teacher"] == null ? "-" : (data["teacher"]["name"] ?? "-");
-    upWeek = data["up_week"];
   }
 }
