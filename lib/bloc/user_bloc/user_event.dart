@@ -16,3 +16,4 @@ class UserLoginFailEvent extends UserEvent {
   final message;
   UserLoginFailEvent(this.message);
 }
+

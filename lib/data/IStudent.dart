@@ -38,7 +38,7 @@ class IStudent {
       return "Ok";
     }
     on DioError catch (e) {
-      final _response = e.response?.data["error"] ?? "Неивзестная ошибка";
+      final _response = e.response?.data["error"] ?? e.message;
       print(_response);
       return _response;
     }

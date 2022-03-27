@@ -11,8 +11,8 @@ import '../../../../data/Student.dart';
 
 class UserHeader extends StatelessWidget {
   
-  String avatar;
-  UserHeader(this.avatar);
+  /*String avatar;
+  UserHeader(this.avatar);*/
   @override
   Widget build(BuildContext context) {
     String token = Hive.box('tokenbox').get('token');
@@ -126,7 +126,7 @@ class UserHeader extends StatelessWidget {
                               fontSize: 18,
                               fontWeight: FontWeight.w400)),
                           SizedBox(height: 5),
-                          Text("Курс 1 Группа 2", style: TextStyle(
+                          Text("Курс ?? Группа ??", style: TextStyle(
                               color: Theme
                                   .of(context)
                                   .highlightColor),)

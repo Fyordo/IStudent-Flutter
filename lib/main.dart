@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -17,6 +18,12 @@ void main() async {
   runApp(MyApp());
 }
 
+bool checkMemory() {
+  if (Hive.box('tokenbox').isEmpty)
+    return false;
+  return true;
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,8 +33,8 @@ class MyApp extends StatelessWidget {
     )),
 
       BlocProvider<MemoryBloc>(
-      create: (context) =>MemoryBloc()..add((Hive.box('tokenbox').isNotEmpty ? MemoryPresentEvent() : MemoryEmptyEvent())
-    )),
+      create: (context) =>MemoryBloc()..add(checkMemory() ? MemoryPresentEvent() : MemoryEmptyEvent())
+    ),
     ],
 
       child: MaterialApp(
@@ -37,7 +44,7 @@ class MyApp extends StatelessWidget {
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
 
-      home: RootPage()),//RootPage('auto'))
+      home: RootPage()),
     );
   }
 }
