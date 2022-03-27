@@ -41,7 +41,6 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return BlocListener<UserBloc, UserState>(listener: (context, state) {
       if (state is UserLoadedState) {
-        print("Мы здесь?");
         //Constants.isInSystem = true;
         Navigator.pushAndRemoveUntil(
           context,
@@ -51,6 +50,13 @@ class _SignInState extends State<SignIn> {
           ),
               (route) => false,
         );
+      }
+      if (state is UserWrongAuthState) {
+        SnackBar snackBar = SnackBar(
+          content: Text(state.message, style: TextStyle(color: Colors.redAccent)),
+          behavior: SnackBarBehavior.floating,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     },
       child: GestureDetector(

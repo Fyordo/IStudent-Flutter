@@ -1,6 +1,7 @@
 part of 'user_bloc.dart';
 
 abstract class UserState{
+  const UserState();
 }
 
 class UserInitialState extends UserState {}
@@ -18,5 +19,6 @@ class UserNotAccessState extends UserState{
 }
 
 class UserWrongAuthState extends UserState{
-
+  final message;
+  const UserWrongAuthState(this.message);
 }

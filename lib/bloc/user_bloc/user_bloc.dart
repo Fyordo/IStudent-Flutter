@@ -14,9 +14,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserEvent event,
   ) async* {
      if (event is UserLoadEvent) {
-       //yield UserLoadingState();
-       await IStudent.logIn(event.login, event.password);
-       yield new UserLoadedState();
+       String res = await IStudent.logIn(event.login, event.password);
+       //yield UserLoadedState();
+       if (res == "Ok") {
+         yield UserLoadedState();
+       }
+       else yield UserWrongAuthState(res);
+
     }
 
      if (event is UserInitialEvent) {
@@ -27,4 +31,3 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 }
 
-//UserBloc userBloc = UserBloc();

@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
-
+import 'package:i_student/bloc/user_bloc/user_bloc.dart';
 import '../constants.dart';
 import 'NewsMMCS.dart';
 import 'NewsVK.dart';
@@ -22,7 +22,7 @@ class IStudent {
     }
   }
 
-  static Future<void> logIn(String login, String password) async {
+  static Future<String> logIn(String login, String password) async {
 
     Dio dio = new Dio();
     final url = Constants.apiUrl + '/auth/login';
@@ -35,10 +35,12 @@ class IStudent {
     try {
       final response = await dio.get(url);
       Hive.box('tokenbox').put('token', response.data["token"]);
-      return;
+      return "Ok";
     }
     on DioError catch (e) {
-      print(e.response);
+      final _response = e.response?.data["error"] ?? "Неивзестная ошибка";
+      print(_response);
+      return _response;
     }
   }
 

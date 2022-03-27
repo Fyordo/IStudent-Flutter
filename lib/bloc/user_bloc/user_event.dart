@@ -11,3 +11,8 @@ class UserLoadEvent extends UserEvent {
 }
 
 class UserInitialEvent extends UserEvent {}
+
+class UserLoginFailEvent extends UserEvent {
+  final message;
+  UserLoginFailEvent(this.message);
+}
