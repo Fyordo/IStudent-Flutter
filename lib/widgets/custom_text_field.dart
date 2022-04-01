@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class CustomTextFiled extends StatefulWidget {
+class CustomTextField extends StatefulWidget {
   String text;
   Widget icon;
   String RegExpStr;
@@ -10,10 +10,10 @@ class CustomTextFiled extends StatefulWidget {
   int minLength;
   String data;
   String prefixText;
-  CustomTextFiled(this.text, this.icon, this.RegExpStr, this.ErrorMessage, this.minLength, this.data, {this.prefixText = ''});
+  CustomTextField(this.text, this.icon, this.RegExpStr, this.ErrorMessage, this.minLength, this.data, {this.prefixText = ''});
 
   @override
-  _CustomTextFiledState createState() => _CustomTextFiledState();
+  _CustomTextFieldState createState() => _CustomTextFieldState();
 
   final myController = TextEditingController();
   bool isValid = true;
@@ -25,7 +25,7 @@ class CustomTextFiled extends StatefulWidget {
   }
 }
 
-class _CustomTextFiledState extends State<CustomTextFiled> {
+class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.

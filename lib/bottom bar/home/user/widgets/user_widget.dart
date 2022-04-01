@@ -1,9 +1,15 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:i_student/data/IStudent.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';//
 import 'dart:io';
+
+import '../../../../bloc/memory_bloc/memory_bloc.dart';
+import '../../../../screens/welcome_screen.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({ Key? key }) : super(key: key);
@@ -43,6 +49,8 @@ class _UserInfoState extends State<UserInfo> {
                                 onTap: () {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Logout')));
+                                  IStudent.logOut(Hive.box('tokenbox').get('token'));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen()));
                                 },
                                 child: Icon(
                                   Icons.logout,

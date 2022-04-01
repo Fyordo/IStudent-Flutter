@@ -36,7 +36,7 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            UserHeader(''),
+            UserHeader(),/*UserHeader('')*/
             LessonsTableList(),
           ],
         ),

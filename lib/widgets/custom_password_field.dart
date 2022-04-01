@@ -48,7 +48,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
               Expanded(
                 child: TextFormField(
                   validator: (value) {
-                    if (value == '') {
+                    /*if (value == '') {
                       widget.isValid = true;
                       return null;
                     }
@@ -65,7 +65,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                     } else {
                       widget.isValid = true;
                       return null;
-                    }
+                    }*/
                   },
                   controller: widget.myController,
                   obscureText: widget.isObscure,

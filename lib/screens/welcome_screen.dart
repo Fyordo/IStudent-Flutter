@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:i_student/screens/sign_in.dart';
-import 'package:i_student/screens/sign_up.dart';
+import 'package:i_student/data/IStudent.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/user_bloc/user_bloc.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -15,7 +17,7 @@ class WelcomeScreen extends StatelessWidget {
 
             Container(
               height: 200,
-              child: Image.asset("assets/images/istudent_logo.png")),
+              child: Image.asset("assets/images/i_student_logo.png")),
             Container(
               margin: EdgeInsets.only(top: 40, bottom: 40),
               child: Text(
@@ -38,10 +40,7 @@ class WelcomeScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   padding: EdgeInsets.symmetric(vertical: 10),
                 ),
-                onPressed: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUp()))
-                },
+                onPressed: () => IStudent.launchAuth(),
                 child: Text("Создать аккаунт",
                     style: TextStyle(color: Colors.white, fontSize: 15)),
                     
@@ -53,7 +52,9 @@ class WelcomeScreen extends StatelessWidget {
                 child: FlatButton(
                   onPressed: () => {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignIn()))
+                  MaterialPageRoute(
+                  builder: (context) => SignIn(),)
+                  ),
                   },
                   child: Text('У меня уже есть аккаунт',
                       style: TextStyle(color:  Theme.of(context).primaryColor, fontSize: 15)),
