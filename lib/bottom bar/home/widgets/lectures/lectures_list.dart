@@ -4,14 +4,15 @@ class LecturesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
+      margin: EdgeInsets.symmetric(vertical: 10),
       height: 150.0,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 15,
+        itemCount: 6,
         itemBuilder: (BuildContext context, int index) => Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
           width: 360,
           child: Card(
             elevation: 5,

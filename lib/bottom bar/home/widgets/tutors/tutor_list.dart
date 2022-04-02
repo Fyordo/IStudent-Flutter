@@ -7,13 +7,14 @@ class TutorList extends StatelessWidget {
       'https://elementy.ru/images/eltperson/uchit_erusalimsky_2009.jpg';
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
-      height: 150.0,
+      height: 170.0,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) => Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
           width: 300,
           height: 150,
           child: Card(
