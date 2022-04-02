@@ -6,7 +6,11 @@ class LessonsTableList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.only(
+        top: 10,
+        bottom: 10,
+        left: 8,
+      ),
       height: 170.0,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),

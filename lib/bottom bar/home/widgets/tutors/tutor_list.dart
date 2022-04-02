@@ -6,7 +6,11 @@ class TutorList extends StatelessWidget {
      String avatar =
       'https://elementy.ru/images/eltperson/uchit_erusalimsky_2009.jpg';
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
+      margin: EdgeInsets.only(
+        top: 10,
+        bottom: 10,
+        left: 8,
+      ),
       height: 170.0,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),

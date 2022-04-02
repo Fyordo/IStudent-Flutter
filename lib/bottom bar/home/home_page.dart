@@ -62,16 +62,19 @@ class _HomePageState extends State<HomePage> {
         //*/
       }, builder: (context, state) {
         if (state is HomePageLoading) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                HeaderHomePage(),
-                LecturesWidget(),
-                Tutors(),
-                NewsMmcs(),
-                NewsVk(),
-              ],
-            ),
+          return Container(
+            color: Colors.grey[100],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  HeaderHomePage(),
+                  LecturesWidget(),
+                  Tutors(),
+                  NewsMmcs(),
+                  NewsVk(),
+                ],
+              ),
+            )
           );
         } else {
           return Center(child: CupertinoActivityIndicator());

@@ -14,7 +14,11 @@ class Timetable extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
+      margin: EdgeInsets.only(
+        top: 20,
+        bottom: 20,
+        left: 8,
+      ),
       height: MediaQuery.of(context).size.height-10,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
@@ -57,7 +61,8 @@ Widget build(BuildContext context) {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return Card(
-              color: MyThemes.lightTheme.primaryColor,
+              //color: MyThemes.lightTheme.primaryColor,
+              color: Color(0xffcdd3e5),
               child: ListTile(
                 leading: Text(
                   list[index].time,
