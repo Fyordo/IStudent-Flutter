@@ -16,31 +16,31 @@ class HeaderHomePage extends StatefulWidget {
 class _HeaderHomePageState extends State<HeaderHomePage> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => BlocProvider(
-                create: (context) =>
-                    UserPageBloc()..add(new UserPageLoadEvent()),
-                child:
-                    //search
-                    UserPage()),
-          ),
-        );
-      },
-      child: Container(
+    return Container(
         color: Theme.of(context).primaryColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            UserHeader(),/*UserHeader('')*/
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => BlocProvider(
+                        create: (context) =>
+                        UserPageBloc()..add(new UserPageLoadEvent()),
+                        child:
+                        //search
+                        UserPage()),
+                  ),
+                );
+              },
+              child: UserHeader()
+            ),/*UserHeader('')*/
             LessonsTableList(),
           ],
         ),
-      ),
-    );
+      );
   }
 }

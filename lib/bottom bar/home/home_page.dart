@@ -65,6 +65,7 @@ class _HomePageState extends State<HomePage> {
           return Container(
             color: Colors.grey[100],
             child: SingleChildScrollView(
+
               child: Column(
                 children: [
                   HeaderHomePage(),
