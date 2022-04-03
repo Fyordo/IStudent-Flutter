@@ -14,9 +14,7 @@ class NewsMmcsList extends StatelessWidget {
           ..add(NewsMmcsEventWithNews());
       },
       child: BlocConsumer<NewsMmcsBloc, NewsMmcsState>(
-        listener: (context, state) {
-
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           if (state is NewsMmcsStateWithNews) {
             return Container(
@@ -27,14 +25,21 @@ class NewsMmcsList extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: 5,
-
-                  itemBuilder: (BuildContext context, int index) => ListTile(title: Text(
-                      state.news_mmcs[index].text != "" ? state.news_mmcs[index].text.substring(0, min(55, state.news_mmcs[index].text.length)) + "..." : "<новость не содержит текст> "
-                  ), trailing: Icon(Icons.chevron_right_rounded),),
-                  separatorBuilder: (BuildContext context, int index) => Divider(height: 1, color: Theme.of(context).hintColor,),
+                  itemBuilder: (BuildContext context, int index) => ListTile(
+                    title: Text(state.news_mmcs[index].text != ""
+                        ? state.news_mmcs[index].text.substring(0,
+                                min(55, state.news_mmcs[index].text.length)) +
+                            "..."
+                        : "<новость не содержит текст> "),
+                    trailing: Icon(Icons.chevron_right_rounded),
+                  ),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(
+                    height: 1,
+                    color: Theme.of(context).hintColor,
+                  ),
                 ));
-          }
-          else if (state is NewsMmcsStateWithoutNews) {
+          } else if (state is NewsMmcsStateWithoutNews) {
             return Container(
                 margin: EdgeInsets.symmetric(vertical: 20),
                 width: double.infinity,
@@ -43,15 +48,20 @@ class NewsMmcsList extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: 5,
-
-                  itemBuilder: (BuildContext context, int index) => ListTile(title: Text("Мехмат объявлен лучшим вузом страны"), trailing: Icon(Icons.chevron_right_rounded),),
-                  separatorBuilder: (BuildContext context, int index) => Divider(height: 1, color: Theme.of(context).hintColor,),
+                  itemBuilder: (BuildContext context, int index) => ListTile(
+                    title: Text("Мехмат объявлен лучшим вузом страны"),
+                    trailing: Icon(Icons.chevron_right_rounded),
+                  ),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(
+                    height: 1,
+                    color: Theme.of(context).hintColor,
+                  ),
                 ));
-          }
-          else return Text("Error");
+          } else
+            return Text("Error");
         },
       ),
     );
-    
   }
 }

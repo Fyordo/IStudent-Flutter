@@ -11,14 +11,18 @@ class _ChatsListState extends State<ChatsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(backgroundColor: Theme.of(context).primaryColor, 
-    title: Row(
-      children: [
-        Text("Чаты", style: TextStyle(fontSize: 25), ),
-        Icon(Icons.keyboard_arrow_down_rounded)
-      ],
-    ),
-    ),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Row(
+          children: [
+            Text(
+              "Чаты",
+              style: TextStyle(fontSize: 25),
+            ),
+            Icon(Icons.keyboard_arrow_down_rounded)
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
             margin: EdgeInsets.symmetric(vertical: 10),
@@ -30,19 +34,19 @@ class _ChatsListState extends State<ChatsList> {
               itemCount: 5,
               itemBuilder: (BuildContext context, int index) => ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: Theme.of(context).secondaryHeaderColor,
+                    backgroundColor: Theme.of(context).secondaryHeaderColor,
                     radius: 30,
                     child: ClipOval(
-                      
                         child: new SizedBox(
                             child: Image.network(
                       "widget.avatar",
                       fit: BoxFit.fill,
                       errorBuilder: (context, error, stackTrace) {
-                        return Image.asset('assets/images/user_without_photo.png');
+                        return Image.asset(
+                            'assets/images/user_without_photo.png');
                       },
                     )
-          
+
                             //),
                             //
                             ))),
@@ -62,17 +66,17 @@ class _ChatsListState extends State<ChatsList> {
                 trailing: Container(
                   width: 20,
                   height: 20,
-          
                   child: ClipOval(
                     child: Container(
                       color: Theme.of(context).primaryColor,
                       child: Center(
                         child: Text("1",
                             style: TextStyle(
-                                color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15)),
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15)),
                       ),
                     ),
-                     
                   ),
                 ),
               ),

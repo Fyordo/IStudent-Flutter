@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
-import 'package:flutter/services.dart';
-
 class Constants {
   //static String noInternetPicturePath = 'assets/images/no_internet.png';
   //static String webAdressForPicture = "http://gallery.dev.webant.ru/media/";
@@ -29,11 +27,10 @@ class Constants {
   static final Widget svgAddIcon =
       SvgPicture.asset(myassetIconAddName, color: Colors.grey[600]);
 
-  static final Widget svgChatIcon =
-       Icon(Icons.chat, color: Colors.grey[600]);
+  static final Widget svgChatIcon = Icon(Icons.chat, color: Colors.grey[600]);
 
   static final Widget svgChatIconActive =
-       Icon(Icons.chat, color: Constants.hexToColor("#3A5199"));
+      Icon(Icons.chat, color: Constants.hexToColor("#3A5199"));
 
   static final Widget svgHomeIcon =
       SvgPicture.asset(myassetHomeName, color: Colors.grey[600]);

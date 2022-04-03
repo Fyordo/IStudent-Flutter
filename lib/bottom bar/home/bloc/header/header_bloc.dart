@@ -10,11 +10,12 @@ part 'header_event.dart';
 part 'header_state.dart';
 
 class HeaderBloc extends Bloc<HeaderEvent, HeaderState> {
-  HeaderBloc(HeaderState headerStateWithoutStudent) : super(headerStateWithoutStudent);
+  HeaderBloc(HeaderState headerStateWithoutStudent)
+      : super(headerStateWithoutStudent);
 
   @override
-  Stream<HeaderState> mapEventToState(HeaderEvent event) async*{
-    if (event is HeaderEventWithStudent){
+  Stream<HeaderState> mapEventToState(HeaderEvent event) async* {
+    if (event is HeaderEventWithStudent) {
       Student student = await IStudent.getStudent(event.token);
       yield HeaderStateWithStudent(student: student);
     }

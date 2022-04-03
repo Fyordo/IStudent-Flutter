@@ -1,8 +1,6 @@
-import 'dart:ffi';
-
 import 'Group.dart';
 
-class Student{
+class Student {
   late int id;
   late String name;
   late String email;
@@ -11,7 +9,7 @@ class Student{
   late bool is_headman;
   late List notifications;
 
-  Student(data){
+  Student(data) {
     id = data["id"];
     name = data["name"];
     email = data["email"];
@@ -21,11 +19,11 @@ class Student{
     photo = data["photo"];
   }
 
-  getLastName(){
+  getLastName() {
     return name.split(' ')[0];
   }
 
-  getFirstName(){
+  getFirstName() {
     return name.split(' ')[1];
   }
 }

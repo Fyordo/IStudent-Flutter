@@ -1,13 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:i_student/data/Student.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:dio/dio.dart';
-import 'dart:convert';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:i_student/bloc/user_bloc/user_bloc.dart';
+
 import '../constants.dart';
 import 'NewsMMCS.dart';
 import 'NewsVK.dart';
@@ -24,7 +22,6 @@ class IStudent {
   }
 
   static Future<String> logIn(String login, String password) async {
-
     Dio dio = new Dio();
     final url = Constants.apiUrl + '/auth/login';
 
@@ -37,8 +34,7 @@ class IStudent {
       final response = await dio.post(url);
       Hive.box('tokenbox').put('token', response.data["token"]);
       return "Ok";
-    }
-    on DioError catch (e) {
+    } on DioError catch (e) {
       final _response = e.response?.data["error"] ?? e.message;
       print(_response);
       return _response;
@@ -46,7 +42,6 @@ class IStudent {
   }
 
   static Future<void> logOut(String token) async {
-
     Dio dio = new Dio();
     final url = Constants.apiUrl + '/auth/logout';
 
@@ -58,8 +53,7 @@ class IStudent {
       final response = await dio.post(url);
       Hive.box('tokenbox').delete('token');
       return;
-    }
-    on DioError catch (e) {
+    } on DioError catch (e) {
       print(e.response);
     }
   }
@@ -71,8 +65,7 @@ class IStudent {
     try {
       final response = await dio.post(url);
       return new Student(response.data);
-    }
-    on DioError catch (e) {
+    } on DioError catch (e) {
       print(e.response);
       throw e;
     }
@@ -84,12 +77,11 @@ class IStudent {
     try {
       final response = await dio.get(url);
       List<NewsMMCS> res = [];
-      for (dynamic item in response.data["result"]){
+      for (dynamic item in response.data["result"]) {
         res.add(NewsMMCS(item));
       }
       return res;
-    }
-    on DioError catch (e) {
+    } on DioError catch (e) {
       print(e.response);
       throw e;
     }
@@ -102,12 +94,11 @@ class IStudent {
       final response = await dio.get(url);
       print(response.data["result"]);
       List<NewsVK> res = [];
-      for (dynamic item in response.data["result"]){
+      for (dynamic item in response.data["result"]) {
         res.add(NewsVK(item));
       }
       return res;
-    }
-    on DioError catch (e) {
+    } on DioError catch (e) {
       print(e.response);
       throw e;
     }
@@ -124,12 +115,9 @@ class IStudent {
       print(response.data);
       print("Вызов конструктора");
       return Schedule.upperWeek(response.data);
-    }
-    on DioError catch (e) {
+    } on DioError catch (e) {
       print(e.response);
       throw e;
     }
   }
-
-
 }

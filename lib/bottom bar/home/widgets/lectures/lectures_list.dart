@@ -5,8 +5,8 @@ class LecturesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-          top: 10,
-          bottom: 10,
+        top: 10,
+        bottom: 10,
       ),
       height: 150.0,
       child: ListView.builder(
@@ -53,16 +53,12 @@ class LecturesList extends StatelessWidget {
                     child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          
                           'Ерусалимский Яков Михайлович',
                           style: TextStyle(
                               color: Theme.of(context).cardColor,
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
                         )),
-                        
-
-                        
                   ),
                   Container(
                       margin: EdgeInsets.only(left: 5, top: 5),
@@ -73,7 +69,7 @@ class LecturesList extends StatelessWidget {
                             fontSize: 15,
                             fontWeight: FontWeight.w400),
                       )),
-                    Card(
+                  Card(
                     color: Theme.of(context).secondaryHeaderColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -81,16 +77,12 @@ class LecturesList extends StatelessWidget {
                     child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          
                           'https://www.google.com/lectures/ls2',
                           style: TextStyle(
                               color: Theme.of(context).cardColor,
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
                         )),
-                        
-
-                        
                   ),
                 ],
               ),

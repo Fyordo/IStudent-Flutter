@@ -6,10 +6,13 @@ class CustomPasswordField extends StatefulWidget {
   String text;
   String RegExpStr;
   String prefixText;
+
   CustomPasswordField(this.text, this.RegExpStr, {this.prefixText = ''});
+
   bool isObscure = true;
   bool isValid = true;
   final myController = TextEditingController();
+
   String getText() {
     if (isValid)
       return myController.text;
@@ -72,10 +75,10 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                   decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                    
                     suffixIconConstraints:
                         BoxConstraints(minHeight: 44, minWidth: 30),
                     hintText: widget.text,
+                    hintStyle: TextStyle(color: Colors.grey),
                     suffixIcon: IconButton(
                       padding: EdgeInsets.only(left: 13, top: 10),
                       onPressed: () {

@@ -5,16 +5,14 @@ part 'home_page_event.dart';
 part 'home_page_state.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
- HomePageBloc() : super(HomePageInitial());
+  HomePageBloc() : super(HomePageInitial());
 
-     @override
+  @override
   Stream<HomePageState> mapEventToState(
     HomePageEvent event,
   ) async* {
-     if (event is HomePageLoadEvent) {
-       
+    if (event is HomePageLoadEvent) {
       yield HomePageLoading();
     }
-    
   }
 }

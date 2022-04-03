@@ -1,16 +1,11 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:i_student/bottom%20bar/home/bloc/header/header_bloc.dart';
-import 'package:i_student/data/IStudent.dart';
-
-import '../../../../data/Student.dart';
 
 class UserHeader extends StatelessWidget {
-  
   /*String avatar;
   UserHeader(this.avatar);*/
   @override
@@ -24,7 +19,7 @@ class UserHeader extends StatelessWidget {
       },
       child: BlocConsumer<HeaderBloc, HeaderState>(
         listener: (context, state) {
-          if (state is HeaderStateWithStudent){
+          if (state is HeaderStateWithStudent) {
             print(state.student);
           }
         },
@@ -40,7 +35,6 @@ class UserHeader extends StatelessWidget {
                         bottomRight: Radius.circular(25),
                         bottomLeft: Radius.circular(25)),
                   ),
-
                   child: Row(children: [
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
@@ -48,42 +42,37 @@ class UserHeader extends StatelessWidget {
                         radius: 45,
                         child: ClipOval(
                             child: new SizedBox(
-                              width: 70.0,
-                              height: 70.0,
-                              child: Image.memory(
-                                  Base64Decoder().convert(state.student.photo))
-                              //),
-                              //
-                            )),
+                                width: 70.0,
+                                height: 70.0,
+                                child: Image.memory(Base64Decoder()
+                                    .convert(state.student.photo))
+                                //),
+                                //
+                                )),
                         backgroundColor: Colors.transparent,
                       ),
                     ),
-
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
-                          Text(state.student
-                              .name, style: TextStyle(
-                              color: Theme
-                                  .of(context)
-                                  .hintColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400)),
+                          Text(state.student.name,
+                              style: TextStyle(
+                                  color: Theme.of(context).hintColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400)),
                           SizedBox(height: 5),
-                          Text("Курс " +
-                              state.student.group.group_course.toString() +
-                              " Группа " + state.student.group.group_number
-                              .toString(), style: TextStyle(
-                              color: Theme
-                                  .of(context)
-                                  .highlightColor),)
-
+                          Text(
+                            "Курс " +
+                                state.student.group.group_course.toString() +
+                                " Группа " +
+                                state.student.group.group_number.toString(),
+                            style: TextStyle(
+                                color: Theme.of(context).highlightColor),
+                          )
                         ])
                   ]),
                 ));
-          }
-          else if (state is HeaderStateWithoutStudent) {
+          } else if (state is HeaderStateWithoutStudent) {
             return Container(
                 width: double.infinity,
                 child: Card(
@@ -94,7 +83,6 @@ class UserHeader extends StatelessWidget {
                         bottomRight: Radius.circular(25),
                         bottomLeft: Radius.circular(25)),
                   ),
-
                   child: Row(children: [
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
@@ -102,40 +90,37 @@ class UserHeader extends StatelessWidget {
                         radius: 45,
                         child: ClipOval(
                             child: new SizedBox(
-                              width: 70.0,
-                              height: 70.0,
-                              child: Image.asset(
-                                'assets/images/user_without_photo.png',
-                                fit: BoxFit.fill,
-                              ),
-                              //),
-                              //
-                            )),
+                          width: 70.0,
+                          height: 70.0,
+                          child: Image.asset(
+                            'assets/images/user_without_photo.png',
+                            fit: BoxFit.fill,
+                          ),
+                          //),
+                          //
+                        )),
                         backgroundColor: Colors.transparent,
                       ),
                     ),
-
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
-                          Text("Загрузка...", style: TextStyle(
-                              color: Theme
-                                  .of(context)
-                                  .hintColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400)),
+                          Text("Загрузка...",
+                              style: TextStyle(
+                                  color: Theme.of(context).hintColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400)),
                           SizedBox(height: 5),
-                          Text("Курс ?? Группа ??", style: TextStyle(
-                              color: Theme
-                                  .of(context)
-                                  .highlightColor),)
-
+                          Text(
+                            "Курс ?? Группа ??",
+                            style: TextStyle(
+                                color: Theme.of(context).highlightColor),
+                          )
                         ])
                   ]),
                 ));
-          }
-          else return Text("Error");
+          } else
+            return Text("Error");
         },
       ),
     );

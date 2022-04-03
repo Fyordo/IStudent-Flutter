@@ -3,21 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:i_student/bottom%20bar/home/widgets/lectures/lectures_widget.dart';
-
 import 'package:i_student/bottom%20bar/home/widgets/news_mmcs/news_mmcs.dart';
 import 'package:i_student/bottom%20bar/home/widgets/news_vk/news_vk.dart';
 
-
-
 import 'widgets/header/header.dart';
-import 'widgets/header/user_header.dart';
 import 'widgets/tutors/tutors.dart';
 
 class HomePage extends StatefulWidget {
- 
   @override
   _HomePageState createState() => _HomePageState();
   List<Tab> d = [];
+
   // ignore: non_constant_identifier_names
   List<String> categories = [
     "algem",
@@ -36,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   late bool lectionsFlag;
   late bool newsFlag;
   late bool lectorFlag;
+
   @override
   void initState() {
     super.initState();
@@ -63,26 +60,24 @@ class _HomePageState extends State<HomePage> {
       }, builder: (context, state) {
         if (state is HomePageLoading) {
           return Container(
-            color: Colors.grey[100],
-            child: SingleChildScrollView(
-
-              child: Column(
-                children: [
-                  HeaderHomePage(),
-                  LecturesWidget(),
-                  Tutors(),
-                  NewsMmcs(),
-                  const Divider(
-                    thickness: 1,
-                    indent: 10,
-                    endIndent: 10,
-                    color: Colors.black,
-                  ),
-                  NewsVk(),
-                ],
-              ),
-            )
-          );
+              color: Colors.grey[100],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    HeaderHomePage(),
+                    LecturesWidget(),
+                    Tutors(),
+                    NewsMmcs(),
+                    const Divider(
+                      thickness: 1,
+                      indent: 10,
+                      endIndent: 10,
+                      color: Colors.black,
+                    ),
+                    NewsVk(),
+                  ],
+                ),
+              ));
         } else {
           return Center(child: CupertinoActivityIndicator());
         }

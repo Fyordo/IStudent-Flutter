@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:meta/meta.dart';
 
 part 'internet_event.dart';
 part 'internet_state.dart';
@@ -15,9 +15,8 @@ class InternetBloc extends Bloc<InternetEvent, InternetState> {
   @override
   Stream<InternetState> mapEventToState(InternetEvent event) async* {
     if (event is ListenConnection) {
-      listener =
-      InternetConnectionChecker().onStatusChange.listen(
-            (InternetConnectionStatus status) {
+      listener = InternetConnectionChecker().onStatusChange.listen(
+        (InternetConnectionStatus status) {
           switch (status) {
             case InternetConnectionStatus.connected:
               ConnectionSuccess();
@@ -38,4 +37,3 @@ class InternetBloc extends Bloc<InternetEvent, InternetState> {
     return super.close();
   }
 }
-

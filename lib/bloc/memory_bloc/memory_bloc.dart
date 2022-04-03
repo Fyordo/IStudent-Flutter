@@ -11,8 +11,8 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
 
   @override
   Stream<MemoryState> mapEventToState(
-      MemoryEvent event,
-      ) async* {
+    MemoryEvent event,
+  ) async* {
     if (event is MemoryEmptyEvent) {
       //yield UserLoadingState();
       yield MemoryEmptyState();
@@ -21,7 +21,5 @@ class MemoryBloc extends Bloc<MemoryEvent, MemoryState> {
     if (event is MemoryPresentEvent) {
       yield MemoryPresentState();
     }
-
-
   }
 }

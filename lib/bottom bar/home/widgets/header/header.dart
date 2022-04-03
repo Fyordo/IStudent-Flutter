@@ -17,30 +17,29 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Theme.of(context).primaryColor,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GestureDetector(
+      color: Theme.of(context).primaryColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => BlocProvider(
                         create: (context) =>
-                        UserPageBloc(UserPageStateWithoutStudent())
-                          ..add(new UserPageEventWithoutStudent()),
-                        child: UserPage()
-                    ),
+                            UserPageBloc(UserPageStateWithoutStudent())
+                              ..add(new UserPageEventWithoutStudent()),
+                        child: UserPage()),
                   ),
                 );
               },
-              child: UserHeader()
-            ),/*UserHeader('')*/
-            LessonsTableList(),
-          ],
-        ),
-      );
+              child: UserHeader()),
+          /*UserHeader('')*/
+          LessonsTableList(),
+        ],
+      ),
+    );
   }
 }

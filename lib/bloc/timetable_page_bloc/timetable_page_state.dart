@@ -7,6 +7,7 @@ class TimetablePageInitial extends TimetablePageState {}
 
 class TimetablePageLoaded extends TimetablePageState {
   final Schedule schedule;
+
   TimetablePageLoaded(this.schedule);
 }
 

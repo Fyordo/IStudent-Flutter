@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class TutorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-     String avatar =
-      'https://elementy.ru/images/eltperson/uchit_erusalimsky_2009.jpg';
+    String avatar =
+        'https://elementy.ru/images/eltperson/uchit_erusalimsky_2009.jpg';
     return Container(
       margin: EdgeInsets.only(
         top: 10,

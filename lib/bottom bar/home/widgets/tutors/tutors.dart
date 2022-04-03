@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'tutor_list.dart';
 
 class Tutors extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +30,7 @@ class Tutors extends StatelessWidget {
                 )),
           ],
         ),
-       TutorList(),
+        TutorList(),
       ],
     );
   }
