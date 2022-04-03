@@ -3,8 +3,11 @@ part of 'user_page_bloc.dart';
 @immutable
 abstract class UserPageState {}
 
-class UserPageInitial extends UserPageState {}
+class UserPageStateWithStudent extends UserPageState {
+  final Student student;
+  UserPageStateWithStudent({required this.student});
+}
 
-class UserPageLoading extends UserPageState {}
+class UserPageStateWithoutStudent extends UserPageState {}
 
 

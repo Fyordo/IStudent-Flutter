@@ -13,4 +13,8 @@ class Group{
     group_course = data["group_course"];
     headman_id = data["headman_id"];
   }
+
+  getGroupTitle(){
+    return group_course.toString() + "." + group_number.toString();
+  }
 }

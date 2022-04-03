@@ -29,7 +29,8 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                   MaterialPageRoute(
                     builder: (BuildContext context) => BlocProvider(
                         create: (context) =>
-                        UserPageBloc()..add(new UserPageLoadEvent()),
+                        UserPageBloc(UserPageStateWithoutStudent())
+                          ..add(new UserPageEventWithoutStudent()),
                         child: UserPage()
                     ),
                   ),

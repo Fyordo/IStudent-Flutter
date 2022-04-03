@@ -21,4 +21,11 @@ class Student{
     photo = data["photo"];
   }
 
+  getLastName(){
+    return name.split(' ')[0];
+  }
+
+  getFirstName(){
+    return name.split(' ')[1];
+  }
 }
