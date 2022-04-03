@@ -9,7 +9,6 @@ class TutorList extends StatelessWidget {
       margin: EdgeInsets.only(
         top: 10,
         bottom: 10,
-        left: 8,
       ),
       height: 170.0,
       child: ListView.builder(
@@ -18,7 +17,7 @@ class TutorList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) => Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           width: 300,
           height: 150,
           child: Card(

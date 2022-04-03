@@ -30,9 +30,8 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                     builder: (BuildContext context) => BlocProvider(
                         create: (context) =>
                         UserPageBloc()..add(new UserPageLoadEvent()),
-                        child:
-                        //search
-                        UserPage()),
+                        child: UserPage()
+                    ),
                   ),
                 );
               },
