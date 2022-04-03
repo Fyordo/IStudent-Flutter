@@ -71,8 +71,8 @@ Widget build(BuildContext context) {
           const Divider(
             height: 20,
             thickness: 2,
-            indent: 0,
-            endIndent: 0,
+            indent: 10,
+            endIndent: 10,
             color: Colors.grey,
           ),
           ListView.builder(
@@ -115,7 +115,7 @@ Widget build(BuildContext context) {
                     title: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
-                        list[index].title,
+                        17 > list[index].title.length ? list[index].title : list[index].title.substring(0, 17) + "...",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
