@@ -72,6 +72,12 @@ class _HomePageState extends State<HomePage> {
                   LecturesWidget(),
                   Tutors(),
                   NewsMmcs(),
+                  const Divider(
+                    thickness: 1,
+                    indent: 10,
+                    endIndent: 10,
+                    color: Colors.black,
+                  ),
                   NewsVk(),
                 ],
               ),
