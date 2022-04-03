@@ -17,11 +17,11 @@ class Timetable extends StatelessWidget {
       margin: EdgeInsets.only(
         top: 20,
         bottom: 20,
-        left: 8,
+        left: 0,
       ),
-      height: MediaQuery.of(context).size.height-10,
+      height: MediaQuery.of(context).size.height-200,
       child: ListView.builder(
-        physics: ClampingScrollPhysics(),
+        physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: 6,
@@ -29,10 +29,12 @@ class Timetable extends StatelessWidget {
           margin: EdgeInsets.only(
             top: 10,
             left: 8,
+            right: 8,
           ),
-          width: 300,
+          width: 350,
           child: Card(
               elevation: 5,
+              margin: EdgeInsets.symmetric(vertical: 10),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
@@ -51,21 +53,20 @@ final List<Lesson> list;
 ConstructDay(this.dayName,this.list);
 
 Widget build(BuildContext context) {
-  return Container(
-      height: 100,
-      child: Column(
+  return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             alignment: Alignment.center,
-              margin: EdgeInsets.only(left: 20, top: 20),
-              child: Text(
-                dayName,
-                style: TextStyle(
-                    color: Theme
-                        .of(context).hintColor,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600),
-              )
+            margin: EdgeInsets.only(top: 20),
+            child: Text(
+              dayName,
+              style: TextStyle(
+                  color: Theme
+                      .of(context).hintColor,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600),
+            )
           ),
           const Divider(
             height: 20,
@@ -94,7 +95,6 @@ Widget build(BuildContext context) {
                   ),
                   color: clr,
                   child: Container(
-
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: clr,
@@ -136,9 +136,8 @@ Widget build(BuildContext context) {
             },
           )
         ]
-      )
-  );
-}
+      );
+  }
 }
 
 /*Column ConstructDay(BuildContext context, Day day) {

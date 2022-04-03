@@ -22,7 +22,6 @@ class TimetablePage extends StatelessWidget {
         ),
       ),
       body: BlocBuilder<TimetablePageBloc, TimetablePageState>(
-
           builder: (context, state) {
             if (state is TimetablePageLoaded) {
               return Container(
@@ -46,8 +45,6 @@ class TimetablePage extends StatelessWidget {
                   )
               );
             }
-
-
             else return Text(state.toString());
           }
         ),
