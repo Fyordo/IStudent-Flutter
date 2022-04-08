@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:i_student/data/Student.dart';
+import 'package:i_student/data/Teacher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
@@ -115,6 +116,25 @@ class IStudent {
       print(response.data);
       print("Вызов конструктора");
       return Schedule.upperWeek(response.data);
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
+
+  static Future<List<Teacher>> getTeachers(String token) async {
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/my/teacher/all';
+
+    dio.options.headers["token"] = token;
+    try {
+      final response = await dio.post(url);
+      List<Teacher> res = [];
+      print(response.data);
+      for (dynamic item in response.data) {
+        res.add(Teacher(item));
+      }
+      return res;
     } on DioError catch (e) {
       print(e.response);
       throw e;
