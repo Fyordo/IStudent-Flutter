@@ -65,7 +65,8 @@ class ConstructDay extends StatelessWidget {
                 color: Theme.of(context).hintColor,
                 fontSize: 22,
                 fontWeight: FontWeight.w600),
-          )),
+          )
+      ),
       const Divider(
         height: 20,
         thickness: 2,
@@ -127,50 +128,3 @@ class ConstructDay extends StatelessWidget {
     ]);
   }
 }
-
-/*Column ConstructDay(BuildContext context, Day day) {
-  return Column(
-      children: [
-        Container(
-            margin: EdgeInsets.only(left: 20, top: 20),
-            child: Text(
-              day.name,
-              style: TextStyle(
-                  color: Theme
-                      .of(context).hintColor,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600),
-            )
-        ),
-
-        ListView.builder(
-          itemCount: day.count,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Card(
-              color: MyThemes.lightTheme.primaryColor,
-                child: ListTile(
-              leading: Text(
-                  day.lessons[index].time,
-                  style: TextStyle(color: Colors.white),
-              ),
-              title: Text(day.lessons[index].name,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
-              ),
-              subtitle: Text(day.lessons[index].place,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600),
-              ),
-
-            ),
-              );
-          },
-        )
-      ]
-  );
-}*/

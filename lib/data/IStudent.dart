@@ -106,14 +106,28 @@ class IStudent {
     }
   }
 
-  static Future<Schedule> getSchedule(String token) async {
+  static Future<bool> upWeek(String token) async{
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/schedule/week';
+
+    dio.options.headers["token"] = token;
+    try {
+      final weekType = await dio.get(url);
+      return weekType.data["type"] == "up";
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
+
+  static Future<Schedule> getSchedule(String token, bool isUpWeek) async {
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/schedule/full';
 
     dio.options.headers["token"] = token;
     try {
       final response = await dio.post(url);
-      return Schedule.upperWeek(response.data);
+      return isUpWeek ? Schedule.upperWeek(response.data) : Schedule.lowerWeek(response.data);
     } on DioError catch (e) {
       print(e.response);
       throw e;

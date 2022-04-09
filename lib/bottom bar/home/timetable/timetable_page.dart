@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';import 'package:i_student/bloc/timetable_page_bloc/timetable_page_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_student/bloc/timetable_page_bloc/timetable_page_bloc.dart';
 
 import '../timetable/widgets/timetable_widget.dart';
 
@@ -37,7 +38,10 @@ class TimetablePage extends StatelessWidget {
                 ),
               ));
         } else
-          return Text(state.toString());
+          return Center(
+              child: CircularProgressIndicator(
+            color: Theme.of(context).primaryColor,
+          ));
       }),
     );
   }
