@@ -8,6 +8,7 @@ import 'package:i_student/data/Teacher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
+import 'Lesson.dart';
 import 'NewsMMCS.dart';
 import 'NewsVK.dart';
 import 'Schedule.dart';
@@ -112,9 +113,6 @@ class IStudent {
     dio.options.headers["token"] = token;
     try {
       final response = await dio.post(url);
-      print("Ответ на запрос расписаниия:");
-      print(response.data);
-      print("Вызов конструктора");
       return Schedule.upperWeek(response.data);
     } on DioError catch (e) {
       print(e.response);
@@ -130,9 +128,31 @@ class IStudent {
     try {
       final response = await dio.post(url);
       List<Teacher> res = [];
-      print(response.data);
       for (dynamic item in response.data) {
         res.add(Teacher(item));
+      }
+      return res;
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
+
+  static Future<List<Lesson>> getTodaySchedule(String token) async {
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/my/schedule/list';
+    DateTime date = DateTime.now();
+    dio.options.headers["token"] = token;
+    try {
+      final response = await dio.post(url, data: {
+        "day": date.day,
+        "month": date.month,
+        "year": date.year
+      });
+      List<Lesson> res = [];
+      print(response.data["lessons"]);
+      for (dynamic item in response.data["lessons"]) {
+        res.add(Lesson(item));
       }
       return res;
     } on DioError catch (e) {

@@ -68,7 +68,8 @@ class TutorList extends StatelessWidget {
                                     fit: BoxFit.fill,
                                     errorBuilder: (context, error, stackTrace) {
                                       return Image.asset(
-                                          'assets/images/user_without_photo.png');
+                                          'assets/images/user_without_photo.png'
+                                      );
                                     },
                                   )
                               )),

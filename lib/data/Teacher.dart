@@ -5,9 +5,19 @@ class Teacher{
   late String photo;
 
   Teacher(data) {
-    id = data["id"];
-    name = data["name"];
-    degree = data["degree"];
-    photo = data["photo"];
+      id = data["id"];
+      name = data["name"];
+      degree = data["degree"];
+      photo = data["photo"];
+
+  }
+
+  Teacher.defaultTeacher()
+  {
+
+    id = -1;
+    name = "-";
+    degree = "-";
+    photo = "-";
   }
 }
