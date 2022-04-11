@@ -34,12 +34,11 @@ class _UserPageState extends State<UserPage> {
             if (state is UserPageStateWithStudent) {
               print(state.student);
             }
-            if(!(state is UserPageStateWithStudent) && !(state is UserPageStateWithoutStudent))
-              {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error")));
-
-              }
-
+            if (!(state is UserPageStateWithStudent) &&
+                !(state is UserPageStateWithoutStudent)) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text("Error")));
+            }
           },
           builder: (context, state) {
             if (state is UserPageStateWithStudent) {
@@ -155,10 +154,59 @@ class _UserPageState extends State<UserPage> {
                 ),
               );
             } else if (state is UserPageStateWithoutStudent) {
-              return Center(
-                  child: CircularProgressIndicator(
-                color: Theme.of(context).primaryColor,
-              ));
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      color: Theme.of(context).bottomAppBarColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppBar(
+                            title: Text('Личный кабинет',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                            centerTitle: true,
+                            backgroundColor: Colors.white,
+                            actions: <Widget>[
+                              Padding(
+                                  padding: EdgeInsets.only(right: 15.0),
+                                  child: InkWell(
+                                    onTap: () {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                          content: Text('Logout')));
+                                      IStudent.logOut(
+                                          Hive.box('tokenbox').get('token'));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  WelcomeScreen()));
+                                    },
+                                    child: Icon(
+                                      Icons.logout,
+                                      size: 26.0,
+                                      color: Colors.black,
+                                    ),
+                                  )),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 100,
+                    ),
+                    Center(
+                        child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                        ))
+                  ],
+                ),
+              );
             } else
               return Text("Error");
           },
