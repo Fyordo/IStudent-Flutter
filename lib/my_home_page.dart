@@ -59,8 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Constants.svgChatIcon,
-                activeIcon: Constants.svgChatIconActive,
+                icon: Constants.svgGroupIcon,
+                activeIcon: Constants.svgGroupIconActive,
                 label: '',
               ),
               BottomNavigationBarItem(

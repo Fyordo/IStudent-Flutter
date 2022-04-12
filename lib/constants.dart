@@ -15,6 +15,7 @@ class Constants {
   static String myassetCameraName = 'assets/icons/chat_icon.svg';
   static String myassetIconAddPhotoName = 'assets/icons/photo_add_icon.svg';
   static String myassetIconAddName = 'assets/icons/add_icon.svg';
+  static String myassetIconGroup = 'assets/icons/group.svg';
 
   static const String apiUrl = "https://i-student.herokuapp.com/api";
   static const String newsUrl = "https://news-sfedu.herokuapp.com/api/news";
@@ -37,6 +38,21 @@ class Constants {
 
   static final Widget svgHomeIconActive =
       SvgPicture.asset(myassetHomeName, color: Constants.hexToColor("#3A5199"));
+
+  static final Widget svgGroupIcon =
+      SvgPicture.asset(
+          myassetIconGroup,
+          color: Colors.grey[600],
+          height: 24,
+          width: 24
+      );
+
+  static final Widget svgGroupIconActive = SvgPicture.asset(
+      myassetIconGroup,
+      color: Constants.hexToColor("#3A5199"),
+      height: 24,
+      width: 24
+  );
 
   static final Widget svgFeedIcon =
       SvgPicture.asset(myassetFeedName, color: Colors.grey[600]);
