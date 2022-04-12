@@ -44,31 +44,35 @@ class _MyHomePageState extends State<MyHomePage> {
           index: widget._currentIndex,
           children: widget.screens,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          currentIndex: widget._currentIndex,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Constants.svgHomeIcon,
-              activeIcon: Constants.svgHomeIconActive,
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Constants.svgChatIcon,
-              activeIcon: Constants.svgChatIconActive,
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Constants.svgFeedIcon,
-              activeIcon: Constants.svgFeedIconActive,
-              label: '',
-            ),
-          ],
-          onTap: (index) => setState(() {
-            widget._currentIndex = index;
-          }),
+        bottomNavigationBar: SizedBox(
+          height: 54,
+          child: BottomNavigationBar(
+            backgroundColor: Colors.grey[300],
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            currentIndex: widget._currentIndex,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                icon: Constants.svgHomeIcon,
+                activeIcon: Constants.svgHomeIconActive,
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Constants.svgChatIcon,
+                activeIcon: Constants.svgChatIconActive,
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Constants.svgFeedIcon,
+                activeIcon: Constants.svgFeedIconActive,
+                label: '',
+              ),
+            ],
+            onTap: (index) => setState(() {
+              widget._currentIndex = index;
+            }),
+          )
         ),
       ),
     );

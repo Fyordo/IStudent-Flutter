@@ -20,26 +20,28 @@ class Timetable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.only(
-          top: 20,
-          bottom: 20,
+          top: 0,
+          bottom: 0,
           left: 0,
         ),
-        height: MediaQuery.of(context).size.height - 200,
+        height: MediaQuery.of(context).size.height - 159, // 159 - волшебное число!!! его не трогать!!!
         child: ListView.builder(
           physics: AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
+
           itemCount: 6,
           itemBuilder: (BuildContext context, int index) => Container(
               margin: EdgeInsets.only(
-                top: 10,
+                top: 5,
                 left: 8,
                 right: 8,
+                bottom: 8
               ),
               width: 350,
               child: Card(
                   elevation: 5,
-                  margin: EdgeInsets.symmetric(vertical: 10),
+                  margin: EdgeInsets.only(top: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
@@ -55,76 +57,82 @@ class ConstructDay extends StatelessWidget {
   ConstructDay(this.dayName, this.list);
 
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Container(
-          alignment: Alignment.center,
-          margin: EdgeInsets.only(top: 20),
-          child: Text(
-            dayName,
-            style: TextStyle(
-                color: Theme.of(context).hintColor,
-                fontSize: 22,
-                fontWeight: FontWeight.w600),
-          )
-      ),
-      const Divider(
-        height: 20,
-        thickness: 2,
-        indent: 10,
-        endIndent: 10,
-        color: Colors.grey,
-      ),
-      ListView.builder(
-        itemCount: list.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          Color clr = Colors.white;
-          if (list[index].location != "Online(Teams)") {
-            clr = Color(0xffcdd3e5);
-          }
-          return Container(
-              margin: EdgeInsets.only(top: 10, left: 5, right: 5),
-              child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                  ),
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _getPairs(list, context)),
+    );
+  }
+
+  List<Widget> _getPairs(List<Lesson> list, BuildContext context) {
+    List<Widget> res = List<Widget>.empty(growable: true);
+
+    res.add(Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.only(top: 20),
+        child: Text(
+          dayName,
+          style: TextStyle(
+              color: Theme.of(context).hintColor,
+              fontSize: 22,
+              fontWeight: FontWeight.w600),
+        )));
+    res.add(Divider(
+      height: 20,
+      thickness: 2,
+      indent: 10,
+      endIndent: 10,
+      color: Colors.grey,
+    ));
+
+    for (int index = 0; index < list.length; index++) {
+      Color clr = Colors.white;
+      if (list[index].location != "Online(Teams)") {
+        clr = Color(0xffcdd3e5);
+      }
+      res.add(Container(
+          margin: EdgeInsets.only(top: 10, left: 5, right: 5),
+          child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              color: clr,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
                   color: clr,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: clr,
-                      boxShadow: [
-                        BoxShadow(color: Colors.grey, spreadRadius: 2),
-                      ],
+                  boxShadow: [
+                    BoxShadow(color: Colors.grey, spreadRadius: 2),
+                  ],
+                ),
+                child: ListTile(
+                  leading: Text(
+                    list[index].time,
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  title: Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text(
+                      17 > list[index].title.length
+                          ? list[index].title
+                          : list[index].title.substring(0, 17) + "...",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600),
                     ),
-                    child: ListTile(
-                      leading: Text(
-                        list[index].time,
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
-                      title: Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                          17 > list[index].title.length
-                              ? list[index].title
-                              : list[index].title.substring(0, 17) + "...",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      subtitle: Text(
-                        list[index].location,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  )));
-        },
-      )
-    ]);
+                  ),
+                  subtitle: Text(
+                    list[index].location,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ))));
+    }
+    return res;
   }
 }
