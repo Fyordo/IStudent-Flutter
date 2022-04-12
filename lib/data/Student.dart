@@ -9,11 +9,13 @@ class Student {
   late bool is_headman;
   late List notifications;
 
-  Student(data) {
+  Student(data, {bool setGroup = true}) {
     id = data["id"];
     name = data["name"];
     email = data["email"];
-    group = new Group(data["group"]);
+    if (setGroup){
+      group = new Group(data["group"]);
+    }
     is_headman = data["is_headman"];
     notifications = data["notifications"];
     photo = data["photo"];

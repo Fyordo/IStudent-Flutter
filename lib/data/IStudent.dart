@@ -9,6 +9,7 @@ import 'package:i_student/data/Teacher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
+import 'Group.dart';
 import 'Lesson.dart';
 import 'NewsMMCS.dart';
 import 'NewsVK.dart';
@@ -169,6 +170,39 @@ class IStudent {
       print(response.data["lessons"]);
       for (dynamic item in response.data["lessons"]) {
         res.add(Lesson(item));
+      }
+      return res;
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
+
+  static Future<Group> getGroup(String token) async {
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/my/group/get';
+
+    dio.options.headers["token"] = token;
+    try {
+      final response = await dio.post(url);
+
+      return new Group(response.data);
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
+
+  static Future<List<Student>> getGroupStudents(String token) async {
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/my/group/students';
+
+    dio.options.headers["token"] = token;
+    try {
+      final response = await dio.post(url);
+      List<Student> res = [];
+      for (dynamic item in response.data) {
+        res.add(Student(item, setGroup: false));
       }
       return res;
     } on DioError catch (e) {

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_student/bottom%20bar/chats/chats_list.dart';
+import 'package:i_student/bottom%20bar/groups/group_list.dart';
 import 'package:i_student/constants.dart';
 
 import 'bloc/home_page_bloc/home_page_bloc.dart';
@@ -20,7 +20,7 @@ class MyHomePage extends StatefulWidget {
           child:
               //search
               HomePage()),
-      ChatsList(),
+      GroupList(),
       BlocProvider(
           create: (context) =>
               TimetablePageBloc()..add(new TimetablePageLoadEvent()),
