@@ -1,3 +1,4 @@
+import 'package:i_student/data/LessonAddiction.dart';
 import 'package:i_student/data/Teacher.dart';
 
 class Lesson {
@@ -6,6 +7,7 @@ class Lesson {
   late int _lesson_number;
   late String location;
   late Teacher teacher;
+  late List<LessonAddiction> addictions;
 
   Lesson(data) {
     title = data["title"];
@@ -34,6 +36,11 @@ class Lesson {
     }
     location = data["location"] ?? "-";
     teacher = data["teacher"] == null ? Teacher.defaultTeacher() : Teacher(data["teacher"]);
+    addictions = [];
+
+    for (dynamic addiction in data["addictions"]){
+      addictions.add(LessonAddiction(addiction));
+    }
   }
 
   String start(){

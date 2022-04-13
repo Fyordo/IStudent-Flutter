@@ -10,7 +10,6 @@ class TutorList extends StatelessWidget {
   Widget build(BuildContext context)
   {
     String token = Hive.box('tokenbox').get('token');
-    print("Token в tutors: " + token);
 
     String avatar =
         'assets/images/user_without_photo.png';

@@ -60,7 +60,6 @@ class _LecturesWidgetState extends State<LecturesWidget> {
               indicatorColor: Theme.of(context).secondaryHeaderColor,
               tabs:
                   List<Widget>.generate(widget.categories.length, (int index) {
-                print(widget.categories[0]);
                 return new Tab(
                   text: widget.categories[index],
                 );
