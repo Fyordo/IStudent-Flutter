@@ -33,7 +33,7 @@ class TimetablePage extends StatelessWidget {
 
         actions: [
           IconButton(
-              onPressed: () {BlocProvider.of<TimetablePageBloc>(context).add(TimetableBuildWeekEvent(WeekType.upper));},
+              onPressed: () {BlocProvider.of<TimetablePageBloc>(context).add(TimetablePageLoadEvent());},
               icon: Icon(Icons.update,color: Colors.black)
           )
         ],
