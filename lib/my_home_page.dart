@@ -44,35 +44,47 @@ class _MyHomePageState extends State<MyHomePage> {
           index: widget._currentIndex,
           children: widget.screens,
         ),
-        bottomNavigationBar: SizedBox(
-          height: 54,
-          child: BottomNavigationBar(
-            backgroundColor: Colors.grey[300],
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            currentIndex: widget._currentIndex,
-            type: BottomNavigationBarType.fixed,
-            items: [
-              BottomNavigationBarItem(
-                icon: Constants.svgHomeIcon,
-                activeIcon: Constants.svgHomeIconActive,
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Constants.svgGroupIcon,
-                activeIcon: Constants.svgGroupIconActive,
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Constants.svgFeedIcon,
-                activeIcon: Constants.svgFeedIconActive,
-                label: '',
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 1), // changes position of shadow
               ),
             ],
-            onTap: (index) => setState(() {
-              widget._currentIndex = index;
-            }),
-          )
+          ),
+          child: SizedBox(
+              height: 54,
+              child: BottomNavigationBar(
+                backgroundColor: Colors.white,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                currentIndex: widget._currentIndex,
+                type: BottomNavigationBarType.fixed,
+                items: [
+                  BottomNavigationBarItem(
+                    icon: Constants.svgHomeIcon,
+                    activeIcon: Constants.svgHomeIconActive,
+                    label: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Constants.svgGroupIcon,
+                    activeIcon: Constants.svgGroupIconActive,
+                    label: '',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Constants.svgFeedIcon,
+                    activeIcon: Constants.svgFeedIconActive,
+                    label: '',
+                  ),
+                ],
+                onTap: (index) => setState(() {
+                  widget._currentIndex = index;
+                }),
+              )),
         ),
       ),
     );

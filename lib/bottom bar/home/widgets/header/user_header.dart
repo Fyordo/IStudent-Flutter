@@ -11,7 +11,6 @@ class UserHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String token = Hive.box('tokenbox').get('token');
-    print("Token в user_header: " + token);
     return BlocProvider<HeaderBloc>(
       create: (context) {
         return HeaderBloc(HeaderStateWithoutStudent())

@@ -17,7 +17,6 @@ class _GroupListState extends State<GroupList> {
   @override
   Widget build(BuildContext context) {
     String token = Hive.box('tokenbox').get('token');
-    print("Token в group: " + token);
 
     return BlocProvider<GroupBloc>(
       create: (context) {

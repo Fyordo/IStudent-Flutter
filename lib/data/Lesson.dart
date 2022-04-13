@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:i_student/data/LessonAddiction.dart';
 import 'package:i_student/data/Teacher.dart';
 
 part 'Lesson.g.dart';
@@ -15,6 +16,7 @@ class Lesson {
   late String location;
   @HiveField(4)
   late Teacher teacher;
+  late List<LessonAddiction> addictions;
 
   Lesson();
 
@@ -45,6 +47,11 @@ class Lesson {
     }
     location = data["location"] ?? "-";
     teacher = data["teacher"] == null ? Teacher.defaultTeacher() : Teacher.fromData(data["teacher"]);
+    addictions = [];
+
+    for (dynamic addiction in data["addictions"]){
+      addictions.add(LessonAddiction(addiction));
+    }
   }
 
   String start(){
