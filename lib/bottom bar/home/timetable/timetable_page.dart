@@ -11,10 +11,32 @@ class TimetablePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
-          "Расписание",
-          style: TextStyle(fontSize: 25, color: Colors.black),
+        title: PopupMenuButton(
+
+            onSelected: (res) {BlocProvider.of<TimetablePageBloc>(context).add(TimetableBuildWeekEvent(res as WeekType));},
+            child:Text("Расписание", style: TextStyle(fontSize: 25, color: Colors.black),),
+            itemBuilder:(context) => [
+              PopupMenuItem(
+                child: Text("Текущая"),
+                value: WeekType.current,
+              ),
+              PopupMenuItem(
+                child: Text("Верхняя"),
+                value: WeekType.upper,
+              ),
+              PopupMenuItem(
+                child: Text("Нижняя"),
+                value: WeekType.lower,
+              )
+            ]
         ),
+
+        actions: [
+          IconButton(
+              onPressed: () {BlocProvider.of<TimetablePageBloc>(context).add(TimetableBuildWeekEvent(WeekType.upper));},
+              icon: Icon(Icons.update,color: Colors.black)
+          )
+        ],
       ),
       body: BlocBuilder<TimetablePageBloc, TimetablePageState>(
           builder: (context, state) {
@@ -37,8 +59,12 @@ class TimetablePage extends StatelessWidget {
                   children: [Timetable(state.schedule)],
                 ),
               ));
-        } else
+        }
+        else if (state is TimetablePageFail) {
           return Center(
+              child: Text('Похоже в памяти устройства нет расписания. Попробуйте загрузить его, нажав кнопку в верхнем правом углу экрана'));
+        }
+        else return Center(
               child: CircularProgressIndicator(
             color: Theme.of(context).primaryColor,
           ));

@@ -11,4 +11,8 @@ class TimetablePageLoaded extends TimetablePageState {
   TimetablePageLoaded(this.schedule);
 }
 
+class TimeTableUpperWeek extends TimetablePageState {}
+
+class TimeTableLowerWeek extends TimetablePageState {}
+
 class TimetablePageFail extends TimetablePageState {}

@@ -146,7 +146,7 @@ class IStudent {
       final response = await dio.post(url);
       List<Teacher> res = [];
       for (dynamic item in response.data) {
-        res.add(Teacher(item));
+        res.add(Teacher.fromData(item));
       }
       return res;
     } on DioError catch (e) {
@@ -169,7 +169,7 @@ class IStudent {
       List<Lesson> res = [];
       print(response.data["lessons"]);
       for (dynamic item in response.data["lessons"]) {
-        res.add(Lesson(item));
+        res.add(Lesson.fromData(item));
       }
       return res;
     } on DioError catch (e) {

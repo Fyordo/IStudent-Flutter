@@ -1,13 +1,24 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:i_student/data/Teacher.dart';
 
+part 'Lesson.g.dart';
+
+@HiveType(typeId: 2)
 class Lesson {
+  @HiveField(0)
   late String title;
+  @HiveField(1)
   late String time;
+  @HiveField(2)
   late int _lesson_number;
+  @HiveField(3)
   late String location;
+  @HiveField(4)
   late Teacher teacher;
 
-  Lesson(data) {
+  Lesson();
+
+  Lesson.fromData(data) {
     title = data["title"];
     _lesson_number = data["lesson_number"];
     switch (data["lesson_number"]) {
@@ -33,7 +44,7 @@ class Lesson {
         time = "??";
     }
     location = data["location"] ?? "-";
-    teacher = data["teacher"] == null ? Teacher.defaultTeacher() : Teacher(data["teacher"]);
+    teacher = data["teacher"] == null ? Teacher.defaultTeacher() : Teacher.fromData(data["teacher"]);
   }
 
   String start(){

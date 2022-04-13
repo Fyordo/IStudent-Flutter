@@ -32,6 +32,8 @@ dependencies:
   flutter_bloc: ^7.2.0
   hive: ^2.0.4
   hive_flutter: ^1.1.0
+  build_runner: ^2.1.8
+  hive_generator: ^1.1.2
   cupertino_icons: ^1.0.2
   floating_bottom_navigation_bar: ^1.5.2
   url_launcher: ^6.0.20

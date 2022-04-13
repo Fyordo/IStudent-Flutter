@@ -23,7 +23,7 @@ class MyHomePage extends StatefulWidget {
       GroupList(),
       BlocProvider(
           create: (context) =>
-              TimetablePageBloc()..add(new TimetablePageLoadEvent()),
+              TimetablePageBloc()..add(new TimetableBuildWeekEvent(WeekType.current)),//TimetablePageLoadEvent()
           child: TimetablePage()),
     ];
   }
