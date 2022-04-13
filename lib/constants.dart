@@ -28,11 +28,6 @@ class Constants {
   static final Widget svgAddIcon =
       SvgPicture.asset(myassetIconAddName, color: Colors.grey[600]);
 
-  static final Widget svgChatIcon = Icon(Icons.chat, color: Colors.grey[600]);
-
-  static final Widget svgChatIconActive =
-      Icon(Icons.chat, color: Constants.hexToColor("#3A5199"));
-
   static final Widget svgHomeIcon =
       SvgPicture.asset(myassetHomeName, color: Colors.grey[600]);
 

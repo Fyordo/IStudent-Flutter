@@ -37,7 +37,7 @@ class _GroupListState extends State<GroupList> {
                 title: Row(
                   children: [
                     Text(
-                      "Моя группа ${state.group.getGroupTitle()}",
+                      "Группа ${state.group.getGroupTitle()}",
                       style: TextStyle(fontSize: 25, color: Colors.black),
                     )
                   ],
