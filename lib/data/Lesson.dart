@@ -16,7 +16,7 @@ class Lesson {
   late String location;
   @HiveField(4)
   late Teacher teacher;
-  @HiveField(5)
+
   late List<LessonAddiction> addictions;
 
   Lesson();

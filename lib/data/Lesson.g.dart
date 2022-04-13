@@ -21,14 +21,13 @@ class LessonAdapter extends TypeAdapter<Lesson> {
       ..time = fields[1] as String
       .._lesson_number = fields[2] as int
       ..location = fields[3] as String
-      ..teacher = fields[4] as Teacher
-      ..addictions = (fields[5] as List).cast<LessonAddiction>();
+      ..teacher = fields[4] as Teacher;
   }
 
   @override
   void write(BinaryWriter writer, Lesson obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -38,9 +37,7 @@ class LessonAdapter extends TypeAdapter<Lesson> {
       ..writeByte(3)
       ..write(obj.location)
       ..writeByte(4)
-      ..write(obj.teacher)
-      ..writeByte(5)
-      ..write(obj.addictions);
+      ..write(obj.teacher);
   }
 
   @override
