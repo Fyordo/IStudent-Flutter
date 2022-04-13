@@ -12,30 +12,45 @@ class TimetablePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: PopupMenuButton(
-
-            onSelected: (res) {BlocProvider.of<TimetablePageBloc>(context).add(TimetableBuildWeekEvent(res as WeekType));},
-            child:Text("Расписание", style: TextStyle(fontSize: 25, color: Colors.black),),
-            itemBuilder:(context) => [
-              PopupMenuItem(
-                child: Text("Текущая"),
-                value: WeekType.current,
-              ),
-              PopupMenuItem(
-                child: Text("Верхняя"),
-                value: WeekType.upper,
-              ),
-              PopupMenuItem(
-                child: Text("Нижняя"),
-                value: WeekType.lower,
-              )
-            ]
-        ),
-
+            onSelected: (res) {
+              BlocProvider.of<TimetablePageBloc>(context)
+                  .add(TimetableBuildWeekEvent(res as WeekType));
+            },
+            child: Row(
+              children: [
+                Text(
+                  "Расписание",
+                  style: TextStyle(
+                      fontSize: 25, color: Colors.black
+                  ),
+                ),
+                Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: Colors.black
+                )
+              ],
+            ),
+            itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: Text("Текущая"),
+                    value: WeekType.current,
+                  ),
+                  PopupMenuItem(
+                    child: Text("Верхняя"),
+                    value: WeekType.upper,
+                  ),
+                  PopupMenuItem(
+                    child: Text("Нижняя"),
+                    value: WeekType.lower,
+                  )
+                ]),
         actions: [
           IconButton(
-              onPressed: () {BlocProvider.of<TimetablePageBloc>(context).add(TimetablePageLoadEvent());},
-              icon: Icon(Icons.update,color: Colors.black)
-          )
+              onPressed: () {
+                BlocProvider.of<TimetablePageBloc>(context)
+                    .add(TimetablePageLoadEvent());
+              },
+              icon: Icon(Icons.update, color: Colors.black))
         ],
       ),
       body: BlocBuilder<TimetablePageBloc, TimetablePageState>(
@@ -59,12 +74,32 @@ class TimetablePage extends StatelessWidget {
                   children: [Timetable(state.schedule)],
                 ),
               ));
-        }
-        else if (state is TimetablePageFail) {
+        } else if (state is TimetablePageFail) {
+          return Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[
+                    Color(0x2b7b3a99),
+                    Color(0x2b3a5199)
+                  ], // red to yellow
+                  tileMode:
+                      TileMode.repeated, // repeats the gradient over the canvas
+                ),
+              ),
+              child: Center(
+                  child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        'Похоже в памяти устройства нет расписания. Попробуйте загрузить его, нажав кнопку в верхнем правом углу экрана.',
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ))));
+        } else
           return Center(
-              child: Text('Похоже в памяти устройства нет расписания. Попробуйте загрузить его, нажав кнопку в верхнем правом углу экрана'));
-        }
-        else return Center(
               child: CircularProgressIndicator(
             color: Theme.of(context).primaryColor,
           ));
