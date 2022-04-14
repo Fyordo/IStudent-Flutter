@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/bloc/timetable_page_bloc/timetable_page_bloc.dart';
 
@@ -12,6 +13,10 @@ class TimetablePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: PopupMenuButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+            ),
+            offset: Offset(0, 30),
             onSelected: (res) {
               BlocProvider.of<TimetablePageBloc>(context)
                   .add(TimetableBuildWeekEvent(res as WeekType));
@@ -20,14 +25,9 @@ class TimetablePage extends StatelessWidget {
               children: [
                 Text(
                   "Расписание",
-                  style: TextStyle(
-                      fontSize: 25, color: Colors.black
-                  ),
+                  style: TextStyle(fontSize: 25, color: Colors.black),
                 ),
-                Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    color: Colors.black
-                )
+                Icon(Icons.keyboard_arrow_down_outlined, color: Colors.black)
               ],
             ),
             itemBuilder: (context) => [
