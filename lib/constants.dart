@@ -39,22 +39,22 @@ class Constants {
       SvgPicture.asset(
           myassetIconGroup,
           color: Colors.grey[600],
-          height: 24,
-          width: 24
+          height: 23,
+          width: 23
       );
 
   static final Widget svgGroupIconActive = SvgPicture.asset(
       myassetIconGroup,
       color: Constants.hexToColor("#3A5199"),
-      height: 24,
-      width: 24
+      height: 23,
+      width: 23
   );
 
   static final Widget svgScheduleIcon =
-      SvgPicture.asset(myassetScheduleName, color: Colors.grey[600], height: 24, width: 24);
+      SvgPicture.asset(myassetScheduleName, color: Colors.grey[600], height: 23, width: 23);
 
   static final Widget svgScheduleIconActive =
-      SvgPicture.asset(myassetScheduleName, color: Constants.hexToColor("#3A5199"), height: 24, width: 24);
+      SvgPicture.asset(myassetScheduleName, color: Constants.hexToColor("#3A5199"), height: 23, width: 23);
 
   static final Widget eyeIcon = SvgPicture.asset(_myassetEyeName,
       color: Colors.grey[600], height: 20, width: 2);
