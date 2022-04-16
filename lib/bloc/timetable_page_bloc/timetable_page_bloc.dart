@@ -15,6 +15,9 @@ class TimetablePageBloc extends Bloc<TimetablePageEvent, TimetablePageState> {
     TimetablePageEvent event,
   ) async* {
     if (event is TimetablePageLoadEvent) {
+
+      yield TimetablePageLoading();
+
       bool isUpWeek = await IStudent.upWeek(Hive.box('tokenbox').get('token'));
       await Hive.box('schedulebox').put('isUpWeek', isUpWeek);
 
