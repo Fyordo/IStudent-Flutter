@@ -38,7 +38,7 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8)),
                   padding: EdgeInsets.symmetric(vertical: 10),
                 ),
-                onPressed: () => IStudent.launchAuth(),
+                onPressed: () => IStudent.launchURL("https://i-student.herokuapp.com/auth"),
                 child: Text("Создать аккаунт",
                     style: TextStyle(color: Colors.white, fontSize: 15)),
               ),
