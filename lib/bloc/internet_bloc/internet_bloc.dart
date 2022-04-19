@@ -17,14 +17,9 @@ class InternetBloc extends Bloc<InternetEvent, InternetState> {
     if (event is ListenConnection) {
       listener = InternetConnectionChecker().onStatusChange.listen(
         (InternetConnectionStatus status) {
-          switch (status) {
-            case InternetConnectionStatus.connected:
-              ConnectionSuccess();
-              break;
-            case InternetConnectionStatus.disconnected:
-              ConnectionFailure();
-              break;
-          }
+          add(ConnectionChanged(status == InternetConnectionStatus.disconnected
+              ? ConnectionFailure()
+              : ConnectionSuccess()));
         },
       );
     }
