@@ -124,6 +124,9 @@ class _UserPageState extends State<UserPage> {
                                       child: Text(state.student.email),
                                       style: ElevatedButton.styleFrom(
                                         primary: Theme.of(context).primaryColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(25),
+                                        ),
                                         elevation: 15.0,
                                       ),
                                     ),
@@ -139,6 +142,9 @@ class _UserPageState extends State<UserPage> {
                                           child: Text("Оценки"),
                                           style: ElevatedButton.styleFrom(
                                             primary: Theme.of(context).primaryColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(25),
+                                            ),
                                             elevation: 15.0,
                                           ),
                                         ),
@@ -153,6 +159,9 @@ class _UserPageState extends State<UserPage> {
                                           child: Text("ЛК ЮФУ"),
                                           style: ElevatedButton.styleFrom(
                                             primary: Theme.of(context).primaryColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(25),
+                                            ),
                                             elevation: 15.0,
                                           ),
                                         ),
@@ -183,7 +192,7 @@ class _UserPageState extends State<UserPage> {
                                               Icons.logout,
                                               size: 26.0,
                                             ),
-                                            Text("Logout",
+                                            Text("Выйти",
                                             style: TextStyle(
                                               fontSize: 20,
                                             )),
