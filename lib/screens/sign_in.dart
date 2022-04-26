@@ -158,7 +158,7 @@ class _SignInState extends State<SignIn> {
                         margin:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: FlatButton(
-                          onPressed: () => IStudent.launchAuth(),
+                          onPressed: () => IStudent.launchURL("https://i-student.herokuapp.com/auth"),
                           child: Text('Регистрация',
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,

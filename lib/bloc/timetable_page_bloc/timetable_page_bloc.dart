@@ -15,6 +15,9 @@ class TimetablePageBloc extends Bloc<TimetablePageEvent, TimetablePageState> {
     TimetablePageEvent event,
   ) async* {
     if (event is TimetablePageLoadEvent) {
+
+      yield TimetablePageLoading();
+
       bool isUpWeek = await IStudent.upWeek(Hive.box('tokenbox').get('token'));
       await Hive.box('schedulebox').put('isUpWeek', isUpWeek);
 
@@ -31,23 +34,24 @@ class TimetablePageBloc extends Bloc<TimetablePageEvent, TimetablePageState> {
       if (!Hive.box('schedulebox').containsKey('isUpWeek') || !Hive.box('schedulebox').containsKey('isUpWeek')) {
         yield TimetablePageFail();
       }
+      else {
+        Schedule schedule;
+        switch (event.weekType) {
+          case WeekType.current:
+            bool isUpWeek = await Hive.box('schedulebox').get("isUpWeek");
+            schedule = await Hive.box('schedulebox').get(
+                isUpWeek ? "upper_schedule" : "lower_schedule");
+            break;
+          case WeekType.upper:
+            schedule = await Hive.box('schedulebox').get("upper_schedule");
+            break;
+          case WeekType.lower:
+            schedule = await Hive.box('schedulebox').get("lower_schedule");
+            break;
+        }
 
-
-      Schedule schedule;
-      switch (event.weekType) {
-        case WeekType.current:
-          bool isUpWeek = Hive.box('schedulebox').get("isUpWeek");
-          schedule = await Hive.box('schedulebox').get(isUpWeek ? "upper_schedule" : "lower_schedule");
-          break;
-        case WeekType.upper:
-          schedule = await Hive.box('schedulebox').get("upper_schedule");
-          break;
-        case WeekType.lower:
-          schedule = await Hive.box('schedulebox').get("lower_schedule");
-          break;
+        yield TimetablePageLoaded(schedule);
       }
-
-      yield TimetablePageLoaded(schedule);
     }
 
 

@@ -16,14 +16,14 @@ import 'NewsVK.dart';
 import 'Schedule.dart';
 
 class IStudent {
-  static launchAuth() async {
-    final url = 'https://i-student.herokuapp.com/auth';
+  static launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
   }
+
 
   static Future<String> logIn(String login, String password) async {
     Dio dio = new Dio();

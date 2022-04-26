@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_student/bloc/internet_bloc/internet_bloc.dart';
 import 'package:i_student/bloc/timetable_page_bloc/timetable_page_bloc.dart';
 
 import '../timetable/widgets/timetable_widget.dart';
@@ -47,7 +48,15 @@ class TimetablePage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                BlocProvider.of<TimetablePageBloc>(context)
+                if (BlocProvider.of<InternetBloc>(context).state is ConnectionSuccess) {
+                  SnackBar snackBar = SnackBar(
+                    content:
+                    Text("Нет подключения к интернету", style: TextStyle(color: Colors.redAccent)),
+                    behavior: SnackBarBehavior.floating,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+                else BlocProvider.of<TimetablePageBloc>(context)
                     .add(TimetablePageLoadEvent());
               },
               icon: Icon(Icons.update, color: Colors.black))
@@ -98,11 +107,15 @@ class TimetablePage extends StatelessWidget {
                           fontSize: 20,
                         ),
                       ))));
-        } else
+        }
+        else if (state is TimetablePageLoading)
           return Center(
               child: CircularProgressIndicator(
-            color: Theme.of(context).primaryColor,
-          ));
+                color: Theme.of(context).primaryColor,
+              ));
+        else
+          return Center(
+              child: Text("Неизвестная ошибка"));
       }),
     );
   }

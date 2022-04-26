@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_student/data/IStudent.dart';
 
 import '../../bloc/vk_news/vk_news_bloc.dart';
 
@@ -24,13 +25,16 @@ class NewsVkList extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) => ListTile(
-                    title: Text(state.news_vk[index].text != ""
-                        ? state.news_vk[index].text.substring(
-                                0, min(55, state.news_vk[index].text.length)) +
-                            "..."
-                        : "<новость не содержит текст> "),
-                    trailing: Icon(Icons.chevron_right_rounded),
+                  itemBuilder: (BuildContext context, int index) => GestureDetector(
+                    onTap: () {IStudent.launchURL(state.news_vk[index].url);},
+                    child: ListTile(
+                      title: Text(state.news_vk[index].text != ""
+                          ? state.news_vk[index].text.substring(
+                                  0, min(55, state.news_vk[index].text.length)) +
+                              "..."
+                          : "<новость не содержит текст> "),
+                      trailing: Icon(Icons.chevron_right_rounded),
+                    ),
                   ),
                   separatorBuilder: (BuildContext context, int index) =>
                       Divider(
