@@ -31,5 +31,7 @@ class MyThemes {
       bottomAppBarColor: Constants.hexToColor("#3A5199", alphaChannel: 'F1'),
       //6B3286
       hintColor: Colors.black,
-      highlightColor: Colors.black54);
+      highlightColor: Colors.black54,
+      fontFamily: 'Montserrat',
+  );
 }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/data/IStudent.dart';
+import '../../../../constants.dart';
 import '../../bloc/mmcs_news/mmcs_news_bloc.dart';
 
 class NewsMmcsList extends StatelessWidget {
@@ -26,7 +27,7 @@ class NewsMmcsList extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     itemCount: 5,
                     itemBuilder: (BuildContext context, int index) => GestureDetector(
-                      onTap: () {IStudent.launchURL("http://mmcs.sfedu.ru");},
+                      onTap: () {IStudent.launchURL(Constants.mmcsUrl);},
                       child: ListTile(
                         title: Text(state.news_mmcs[index].text != ""
                             ? state.news_mmcs[index].text.substring(0,

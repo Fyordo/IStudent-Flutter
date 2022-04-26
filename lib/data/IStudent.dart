@@ -17,11 +17,8 @@ import 'Schedule.dart';
 
 class IStudent {
   static launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    Uri address = Uri.parse(url);
+    if (!await launchUrl(address)) throw 'Could not launch $url';
   }
 
 

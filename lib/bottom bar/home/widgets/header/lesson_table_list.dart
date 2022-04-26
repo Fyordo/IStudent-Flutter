@@ -101,7 +101,8 @@ class LessonsTableList extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                         color: Theme.of(context).cardColor,
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w500
+                                    ),
                                   )),
                             ),
                             Container(
@@ -109,6 +110,7 @@ class LessonsTableList extends StatelessWidget {
                                 child: Text(
                                   'Проходит в: ${(state.lessons[index].location == "" ? "<не указано>" : state.lessons[index].location)}',
                                   style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
                                       color: Theme.of(context).highlightColor,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w400),
