@@ -54,11 +54,18 @@ class UserHeader extends StatelessWidget {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(state.student.name,
-                              style: TextStyle(
-                                  color: Theme.of(context).hintColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400)),
+                             Container(
+                               width: MediaQuery.of(context).size.width * 0.7,
+                               child: FittedBox(
+                               fit: BoxFit.scaleDown,
+                               child: Text(state.student.name,
+                                  style: TextStyle(
+                                      color: Theme.of(context).hintColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400),
+                               ),
+                               ),
+                             ),
                           SizedBox(height: 5),
                           Text(
                             "Курс " +
