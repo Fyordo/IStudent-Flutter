@@ -6,6 +6,7 @@ import 'package:i_student/my_home_page.dart';
 import 'package:i_student/screens/welcome_screen.dart';
 import 'package:i_student/widgets/custom_password_field.dart';
 import 'package:i_student/widgets/custom_text_field.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 import '../bloc/user_bloc/user_bloc.dart';
 import '../constants.dart';
@@ -44,7 +45,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<UserBloc, UserState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is UserLoadedState) {
           //Constants.isInSystem = true;
           Navigator.pushAndRemoveUntil(
@@ -56,12 +57,13 @@ class _SignInState extends State<SignIn> {
           );
         }
         if (state is UserWrongAuthState) {
-          SnackBar snackBar = SnackBar(
-            content:
-                Text(state.message, style: TextStyle(color: Colors.redAccent)),
-            behavior: SnackBarBehavior.floating,
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          await Flushbar(
+            title: 'Ошибка',
+            message:
+            state.message,
+            duration: Duration(seconds: 3),
+            backgroundColor: Theme.of(context).primaryColor,
+          ).show(context);
         }
       },
       child: GestureDetector(

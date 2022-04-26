@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/bloc/internet_bloc/internet_bloc.dart';
 import 'package:i_student/bloc/timetable_page_bloc/timetable_page_bloc.dart';
 
+import 'package:another_flushbar/flushbar.dart';
+
 import '../timetable/widgets/timetable_widget.dart';
 
 class TimetablePage extends StatelessWidget {
@@ -47,14 +49,16 @@ class TimetablePage extends StatelessWidget {
                 ]),
         actions: [
           IconButton(
-              onPressed: () {
-                if (BlocProvider.of<InternetBloc>(context).state is ConnectionSuccess) {
-                  SnackBar snackBar = SnackBar(
-                    content:
-                    Text("Нет подключения к интернету", style: TextStyle(color: Colors.redAccent)),
-                    behavior: SnackBarBehavior.floating,
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              onPressed: () async {
+                print(BlocProvider.of<InternetBloc>(context).state);
+                if (BlocProvider.of<InternetBloc>(context).state is ConnectionFailure) {
+                    await Flushbar(
+                    title: 'Ошибка',
+                    message:
+                    'Нет подключения к интернету',
+                    duration: Duration(seconds: 3),
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ).show(context);
                 }
                 else BlocProvider.of<TimetablePageBloc>(context)
                     .add(TimetablePageLoadEvent());

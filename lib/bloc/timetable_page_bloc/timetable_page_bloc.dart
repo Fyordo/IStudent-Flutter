@@ -20,6 +20,7 @@ class TimetablePageBloc extends Bloc<TimetablePageEvent, TimetablePageState> {
 
       bool isUpWeek = await IStudent.upWeek(Hive.box('tokenbox').get('token'));
       await Hive.box('schedulebox').put('isUpWeek', isUpWeek);
+      await Hive.box('schedulebox').put('lastLoadTime', DateTime.now());
 
       Schedule upper_schedule = await IStudent.getSchedule(Hive.box('tokenbox').get('token'), true);
       await Hive.box('schedulebox').put('upper_schedule', upper_schedule);
@@ -39,6 +40,15 @@ class TimetablePageBloc extends Bloc<TimetablePageEvent, TimetablePageState> {
         switch (event.weekType) {
           case WeekType.current:
             bool isUpWeek = await Hive.box('schedulebox').get("isUpWeek");
+
+            DateTime lastLoadTime = await Hive.box('schedulebox').get("lastLoadTime");
+            DateTime nowTime = DateTime.now();
+            int weekDif = (nowTime.difference(lastLoadTime).inDays + lastLoadTime.weekday - nowTime.weekday) ~/ 7;
+
+            if (weekDif % 2 != 0) {
+              isUpWeek = !isUpWeek;
+            }
+
             schedule = await Hive.box('schedulebox').get(
                 isUpWeek ? "upper_schedule" : "lower_schedule");
             break;

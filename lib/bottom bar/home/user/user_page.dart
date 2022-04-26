@@ -242,9 +242,6 @@ class _UserPageState extends State<UserPage> {
                                   padding: EdgeInsets.only(right: 15.0),
                                   child: InkWell(
                                     onTap: () {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                          content: Text('Logout')));
                                       IStudent.logOut(
                                           Hive.box('tokenbox').get('token'));
                                       Navigator.push(
