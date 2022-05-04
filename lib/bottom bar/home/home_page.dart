@@ -66,9 +66,9 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     HeaderHomePage(),
-
                     BlocProvider(
-                      create: (context) => LecturesBloc()..add(LecturesLoadEvent()),
+                      create: (context) =>
+                          LecturesBloc()..add(LecturesLoadEvent()),
                       child: BlocBuilder<LecturesBloc, LecturesState>(
                         builder: (context, state) {
                           if (state is LecturesLoaded) {
@@ -76,14 +76,31 @@ class _HomePageState extends State<HomePage> {
                           }
 
                           if (state is LecturesLoading) {
-                            return CircularProgressIndicator();
+                            return Column(
+                              children: [
+                                Container(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Загрузка виджета лекций..."
+                                ),
+                                Container(
+                                  height: 20,
+                                ),
+                                CircularProgressIndicator(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                Container(
+                                  height: 20,
+                                ),
+                              ],
+                            );
                           }
 
                           return Text("Неизвестная ошибка");
                         },
                       ),
                     ),
-
                     Tutors(),
                     NewsMmcs(),
                     const Divider(

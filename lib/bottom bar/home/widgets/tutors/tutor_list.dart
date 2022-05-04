@@ -97,70 +97,24 @@ class TutorList extends StatelessWidget {
               ),
             );
           } else if (state is TutorsStateWithoutTutors) {
-            return Container(
-              margin: EdgeInsets.only(
-                top: 10,
-                bottom: 10,
-              ),
-              height: 170.0,
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) => Container(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                  width: 300,
-                  height: 150,
-                  child: Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                              child: new SizedBox(
-                                  width: 100.0,
-                                  height: 180.0,
-                                  child: Image.network(
-                                    avatar,
-                                    fit: BoxFit.fill,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Image.asset(
-                                          'assets/images/user_without_photo.png');
-                                    },
-                                  )
-
-                                //),
-                                //
-                              )),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: Text(
-                                    'Загрузка...',
-                                    style: TextStyle(
-                                        color: Theme.of(context).hintColor,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+            return Column(
+              children: [
+                Container(
+                  height: 20,
                 ),
-              ),
+                Text(
+                    "Загрузка виджета преподавателей..."
+                ),
+                Container(
+                  height: 20,
+                ),
+                CircularProgressIndicator(
+                  color: Theme.of(context).primaryColor,
+                ),
+                Container(
+                  height: 20,
+                ),
+              ],
             );
           } else
             return Text("Error");

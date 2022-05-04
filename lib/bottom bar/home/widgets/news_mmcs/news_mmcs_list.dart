@@ -45,24 +45,25 @@ class NewsMmcsList extends StatelessWidget {
                   )
                );
           } else if (state is NewsMmcsStateWithoutNews) {
-            return Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
-                width: double.infinity,
-                child: ListView.separated(
-                  physics: ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) => ListTile(
-                    title: Text("Мехмат объявлен лучшим вузом страны"),
-                    trailing: Icon(Icons.chevron_right_rounded),
-                  ),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      Divider(
-                    height: 1,
-                    color: Theme.of(context).hintColor,
-                  ),
-                ));
+            return Column(
+              children: [
+                Container(
+                  height: 20,
+                ),
+                Text(
+                    "Загрузка виджета новостей мехмата..."
+                ),
+                Container(
+                  height: 20,
+                ),
+                CircularProgressIndicator(
+                  color: Theme.of(context).primaryColor,
+                ),
+                Container(
+                  height: 20,
+                ),
+              ],
+            );
           } else
             return Text("Error");
         },
