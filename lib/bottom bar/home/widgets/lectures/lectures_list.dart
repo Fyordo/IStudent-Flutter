@@ -38,7 +38,7 @@ class LecturesList extends StatelessWidget {
                   Container(
                       margin: EdgeInsets.only(left: 5, bottom: 10),
                       child: Text(
-                        'Лекция от ' + lectures[index].strdate,
+                        'Пара от ${lectures[index].strdate} | ${lectures[index].time}',
                         style: TextStyle(
                             color: Theme.of(context).hintColor,
                             fontSize: 18,
