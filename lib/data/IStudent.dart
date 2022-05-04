@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'Lesson.dart';
 import 'NewsMMCS.dart';
 import 'NewsVK.dart';
 import 'Schedule.dart';
+import 'AllLectures.dart';
 
 class IStudent {
   static launchURL(String url) async {
@@ -202,6 +204,30 @@ class IStudent {
         res.add(Student(item, setGroup: false));
       }
       return res;
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
+
+  static Future<AllLectures> getAllLectures(String token) async {
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/my/schedule/all';
+
+
+
+    dio.options.headers["token"] = token;
+
+    try {
+      final response = await dio.post(url,
+        data: {
+          //"day": 3,
+          "month": 5,
+          "year": 2022
+        },
+      );
+      return AllLectures.fromData(response.data);
+
     } on DioError catch (e) {
       print(e.response);
       throw e;

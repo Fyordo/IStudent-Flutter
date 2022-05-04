@@ -29,6 +29,9 @@ class MyThemes {
       secondaryHeaderColor: Constants.hexToColor("#3A5199"),
       //"#9966CC"
       bottomAppBarColor: Constants.hexToColor("#3A5199", alphaChannel: 'F1'),
+
+
+      //cardColor: Color(0xffcdd3e5),
       //6B3286
       hintColor: Colors.black,
       highlightColor: Colors.black54,

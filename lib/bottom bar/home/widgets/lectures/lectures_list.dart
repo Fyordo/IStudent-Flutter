@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:i_student/data/Lecture.dart';
 
 class LecturesList extends StatelessWidget {
+  List<Lecture> lectures;
+  int offset;
+  LecturesList(this.lectures, this.offset);
+
   @override
   Widget build(BuildContext context) {
+    ScrollController controller = ScrollController(initialScrollOffset: 370.0*offset);
+
     return Container(
       margin: EdgeInsets.only(
         top: 10,
@@ -13,7 +20,8 @@ class LecturesList extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 6,
+        controller: controller,
+        itemCount: lectures.length,
         itemBuilder: (BuildContext context, int index) => Container(
           margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           width: 360,
@@ -30,7 +38,7 @@ class LecturesList extends StatelessWidget {
                   Container(
                       margin: EdgeInsets.only(left: 5, bottom: 10),
                       child: Text(
-                        'Лекция от 22.11.21',
+                        'Лекция от ' + lectures[index].strdate,
                         style: TextStyle(
                             color: Theme.of(context).hintColor,
                             fontSize: 18,
@@ -53,7 +61,7 @@ class LecturesList extends StatelessWidget {
                     child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          'Ерусалимский Яков Михайлович',
+                          lectures[index].teacher.length !=0 ? lectures[index].teacher: 'Не указан',
                           style: TextStyle(
                               color: Theme.of(context).cardColor,
                               fontSize: 15,
@@ -63,7 +71,7 @@ class LecturesList extends StatelessWidget {
                   Container(
                       margin: EdgeInsets.only(left: 5, top: 5),
                       child: Text(
-                        'Ссылка на лекцию:',
+                        'Дополнения:',
                         style: TextStyle(
                             color: Theme.of(context).highlightColor,
                             fontSize: 15,

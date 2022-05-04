@@ -88,7 +88,7 @@ class ConstructDay extends StatelessWidget {
     for (int index = 0; index < list.length; index++) {
       Color clr = Colors.white;
       if (list[index].location != "Online(Teams)") {
-        clr = Color(0xffcdd3e5);
+        clr = Color(0xffcdd3e5);//Theme.of(context).cardColor;
       }
       res.add(
           GestureDetector(

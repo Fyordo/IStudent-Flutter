@@ -1,17 +1,20 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
+import 'package:i_student/data/AllLectures.dart';
+import 'package:i_student/data/Lecture.dart';
 import 'lectures_list.dart';
 
 class LecturesWidget extends StatefulWidget {
-  List<String> categories = [
-    "Алгебра и геометрия",
-    "Непрерывная математика",
-    "Вычислительная математикика",
-    "Математичесткая Логика",
-    "Физкультура",
-    "Экономика",
-    "Право",
-  ];
+  late List<String> categories;
+  late HashMap<String, List<Lecture>> lectures;
+  late HashMap<String, int> offsets;
+  LecturesWidget(AllLectures allLectures) {
+    categories = allLectures.Categories;
+    lectures = allLectures.Lectures;
+    offsets = allLectures.Offsets;
+  }
 
   @override
   _LecturesWidgetState createState() => _LecturesWidgetState();
@@ -71,7 +74,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
             child: TabBarView(
               children:
                   List<Widget>.generate(widget.categories.length, (int index) {
-                return LecturesList();
+                return LecturesList(widget.lectures[widget.categories[index]] ?? [], widget.offsets[widget.categories[index]] ?? 0);
               }),
             ),
           )

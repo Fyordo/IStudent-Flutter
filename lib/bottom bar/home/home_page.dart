@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_student/bloc/home_page_bloc/home_page_bloc.dart';
+import 'package:i_student/bloc/lectures_bloc/lectures_bloc.dart';
 import 'package:i_student/bottom%20bar/home/widgets/lectures/lectures_widget.dart';
 import 'package:i_student/bottom%20bar/home/widgets/news_mmcs/news_mmcs.dart';
 import 'package:i_student/bottom%20bar/home/widgets/news_vk/news_vk.dart';
@@ -65,7 +66,24 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     HeaderHomePage(),
-                    LecturesWidget(),
+
+                    BlocProvider(
+                      create: (context) => LecturesBloc()..add(LecturesLoadEvent()),
+                      child: BlocBuilder<LecturesBloc, LecturesState>(
+                        builder: (context, state) {
+                          if (state is LecturesLoaded) {
+                            return LecturesWidget(state.allLectures);
+                          }
+
+                          if (state is LecturesLoading) {
+                            return CircularProgressIndicator();
+                          }
+
+                          return Text("Неизвестная ошибка");
+                        },
+                      ),
+                    ),
+
                     Tutors(),
                     NewsMmcs(),
                     const Divider(
