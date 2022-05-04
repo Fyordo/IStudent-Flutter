@@ -1,12 +1,14 @@
 import 'package:intl/intl.dart';
 
+import 'LessonAddiction.dart';
+
 class Lecture {
   late int id;
   late String strdate;
   late DateTime date;
   late String teacher;
   late String time;
-  String additions = "-";
+  late List<LessonAddiction> addictions;
 
   Lecture.fromData(data) {
     id = data["id"];
@@ -36,5 +38,10 @@ class Lecture {
     }
     date = format.parse(strdate);
     teacher = data["teacher"]["name"];
+    addictions = [];
+
+    for (dynamic addition in data['addictions']){
+      addictions.add(LessonAddiction(addition));
+    }
   }
 }

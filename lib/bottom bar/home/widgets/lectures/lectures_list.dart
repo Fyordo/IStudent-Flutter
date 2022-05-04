@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:i_student/data/Lecture.dart';
 
@@ -77,6 +79,7 @@ class LecturesList extends StatelessWidget {
                             fontSize: 15,
                             fontWeight: FontWeight.w400),
                       )),
+                  lectures[index].addictions.length == 0 ?
                   Card(
                     color: Theme.of(context).secondaryHeaderColor,
                     shape: RoundedRectangleBorder(
@@ -85,7 +88,23 @@ class LecturesList extends StatelessWidget {
                     child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          'https://www.google.com/lectures/ls2',
+                          'Дополнений нет...',
+                          style: TextStyle(
+                              color: Theme.of(context).cardColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
+                        )),
+                  )
+                  :
+                  Card(
+                    color: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                    child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          lectures[index].addictions[0].description,
                           style: TextStyle(
                               color: Theme.of(context).cardColor,
                               fontSize: 15,

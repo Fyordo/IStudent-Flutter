@@ -34,7 +34,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
               Container(
                   margin: EdgeInsets.only(left: 20, top: 20),
                   child: Text(
-                    'Ваши лекции'.toUpperCase(),
+                    'Ваши пары'.toUpperCase(),
                     style: TextStyle(
                         color: Theme.of(context).hintColor,
                         fontSize: 17,

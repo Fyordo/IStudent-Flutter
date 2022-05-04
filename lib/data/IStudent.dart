@@ -214,16 +214,14 @@ class IStudent {
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/schedule/all';
 
-
-
     dio.options.headers["token"] = token;
-
+    DateTime date = DateTime.now();
     try {
       final response = await dio.post(url,
         data: {
-          //"day": 3,
-          "month": 5,
-          "year": 2022
+          "day": date.day,
+          "month": date.month,
+          "year": date.year
         },
       );
       return AllLectures.fromData(response.data);
