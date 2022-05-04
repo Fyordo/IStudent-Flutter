@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:i_student/data/IStudent.dart';
 import 'package:i_student/provider/theme_provider/theme_provider.dart';
 import 'package:i_student/root_page.dart';
 import 'package:i_student/data/Teacher.dart';
@@ -11,6 +12,7 @@ import 'bloc/internet_bloc/internet_bloc.dart';
 import 'bloc/memory_bloc/memory_bloc.dart';
 import 'bloc/user_bloc/user_bloc.dart';
 
+bool checkToken = false;
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TeacherAdapter());
@@ -18,15 +20,25 @@ void main() async {
   Hive.registerAdapter(ScheduleAdapter());
   await Hive.openBox('tokenbox');
   await Hive.openBox('schedulebox');
+  checkToken = await checkMemory();
   runApp(MyApp());
 }
 
-bool checkMemory() {
+
+
+Future<bool> checkMemory() async {
   if (Hive.box('tokenbox').isEmpty) return false;
+
+  bool check = await IStudent.checkToken(Hive.box('tokenbox').get("token"));
+  if (!check) {
+    return false;
+  }
+
   return true;
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -37,7 +49,7 @@ class MyApp extends StatelessWidget {
             create: (context) => UserBloc()..add(UserInitialEvent())),
         BlocProvider<MemoryBloc>(
             create: (context) => MemoryBloc()
-              ..add(checkMemory() ? MemoryPresentEvent() : MemoryEmptyEvent())),
+              ..add(checkToken ? MemoryPresentEvent() : MemoryEmptyEvent())),
       ],
       child: MaterialApp(
           //color: Colors.white,
