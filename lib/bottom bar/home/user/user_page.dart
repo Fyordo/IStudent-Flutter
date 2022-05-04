@@ -1,4 +1,6 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -119,7 +121,15 @@ class _UserPageState extends State<UserPage> {
                                   Container(
                                     width: MediaQuery.of(context).size.width * 0.5,
                                     child: ElevatedButton(
-                                      onPressed: () {IStudent.launchURL("https://outlook.office365.com/mail");},
+                                      onPressed: () async {
+                                        //IStudent.launchURL("https://outlook.office365.com/mail");
+                                        Clipboard.setData(ClipboardData(text: state.student.email));
+                                        await Flushbar(
+                                            message: "Скопировано в буфер обмена",
+                                            duration: Duration(seconds: 3),
+                                        backgroundColor: Theme.of(context).primaryColor,
+                                        ).show(context);
+                                        },
                                       child: Text(state.student.email),
                                       style: ElevatedButton.styleFrom(
                                         primary: Theme.of(context).primaryColor,
@@ -210,9 +220,6 @@ class _UserPageState extends State<UserPage> {
                                 ],
                               ),
                             ),
-
-
-
                         ],
                       ),
                     )

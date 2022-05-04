@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:i_student/data/Lecture.dart';
 import 'package:i_student/data/Student.dart';
 import 'package:i_student/data/Teacher.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -222,6 +224,29 @@ class IStudent {
         },
       );
       return AllLectures.fromData(response.data);
+
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
+
+  static Future<void> sendAddition(String token, Lecture lesson, String text) async {
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/my/schedule/addiction';
+
+    dio.options.headers["token"] = token;
+    DateTime date = DateTime.now();
+    try {
+      final response = await dio.post(url,
+        data: {
+          "day": lesson.date.day,
+          "month": lesson.date.month,
+          "year": lesson.date.year,
+          "lesson_number": lesson.lesson_number,
+          "text": text
+        },
+      );
 
     } on DioError catch (e) {
       print(e.response);

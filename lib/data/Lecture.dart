@@ -5,6 +5,7 @@ import 'LessonAddiction.dart';
 class Lecture {
   late int id;
   late String strdate;
+  late int lesson_number;
   late DateTime date;
   late String teacher;
   late String time;
@@ -13,6 +14,7 @@ class Lecture {
   Lecture.fromData(data) {
     id = data["id"];
     strdate = data["date"];
+    lesson_number = data["lesson_number"];
     DateFormat format = DateFormat("dd.MM.yyyy");
     switch (data["lesson_number"]) {
       case 1:
