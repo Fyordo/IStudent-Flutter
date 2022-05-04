@@ -136,9 +136,6 @@ class _SignInState extends State<SignIn> {
                             BlocProvider.of<UserBloc>(context).add(
                                 new UserLoadEvent(widget.email.getText(),
                                     widget.password.getText()));
-                            print(BlocProvider.of<UserBloc>(context)
-                                .state
-                                .toString());
                           }
                           //Constants.isInSystem = true;
                           /*Navigator.pushAndRemoveUntil(

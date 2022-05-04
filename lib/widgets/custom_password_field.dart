@@ -85,7 +85,6 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
                         setState(() {
                           widget.isObscure = !widget.isObscure;
 
-                          print(widget.isObscure);
                         });
                       },
                       icon: Constants.eyeIcon,

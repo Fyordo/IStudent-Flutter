@@ -70,7 +70,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
             ),
           ),
           SizedBox(
-            height: 210,
+            height: 236,
             child: TabBarView(
               children:
                   List<Widget>.generate(widget.categories.length, (int index) {

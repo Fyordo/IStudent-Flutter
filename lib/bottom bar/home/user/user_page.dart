@@ -25,7 +25,6 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     String token = Hive.box('tokenbox').get('token');
-    print("Token в user_page: " + token);
     return BlocProvider<UserPageBloc>(
       create: (context) {
         return UserPageBloc(UserPageStateWithoutStudent())
@@ -35,7 +34,7 @@ class _UserPageState extends State<UserPage> {
         body: BlocConsumer<UserPageBloc, UserPageState>(
           listener: (context, state) {
             if (state is UserPageStateWithStudent) {
-              print(state.student);
+              //print(state.student);
             }
             if (!(state is UserPageStateWithStudent) &&
                 !(state is UserPageStateWithoutStudent)) {

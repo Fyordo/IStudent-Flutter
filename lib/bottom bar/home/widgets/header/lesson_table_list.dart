@@ -21,7 +21,7 @@ class LessonsTableList extends StatelessWidget {
       child: BlocConsumer<HeaderLecturesBloc, HeaderLecturesState>(
         listener: (context, state) {
           if (state is HeaderLecturesStateWithData) {
-            print(state.lessons);
+            //print(state.lessons);
           }
         },
         builder: (context, state) {

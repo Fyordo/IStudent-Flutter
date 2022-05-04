@@ -22,7 +22,7 @@ class TutorList extends StatelessWidget {
       child: BlocConsumer<TutorsBloc, TutorsState>(
         listener: (context, state) {
           if (state is TutorsStateWithTutors) {
-            print(state.teachers);
+            //print(state.teachers);
           }
         },
         builder: (context, state) {

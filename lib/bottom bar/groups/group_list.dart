@@ -26,7 +26,7 @@ class _GroupListState extends State<GroupList> {
       child: BlocConsumer<GroupBloc, GroupState>(
         listener: (context, state) {
           if (state is GroupStateWithData) {
-            print(state.group);
+            //print(state.group);
           }
         },
         builder: (context, state) {

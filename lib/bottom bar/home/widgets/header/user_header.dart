@@ -19,7 +19,7 @@ class UserHeader extends StatelessWidget {
       child: BlocConsumer<HeaderBloc, HeaderState>(
         listener: (context, state) {
           if (state is HeaderStateWithStudent) {
-            print(state.student);
+            //print(state.student);
           }
         },
         builder: (context, state) {

@@ -50,7 +50,6 @@ class TimetablePage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () async {
-                print(BlocProvider.of<InternetBloc>(context).state);
                 if (BlocProvider.of<InternetBloc>(context).state is ConnectionFailure) {
                     await Flushbar(
                     title: 'Ошибка',

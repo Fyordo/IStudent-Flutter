@@ -39,7 +39,6 @@ class IStudent {
       return "Ok";
     } on DioError catch (e) {
       final _response = e.response?.data["error"] ?? e.message;
-      print(_response);
       return _response;
     }
   }
@@ -96,7 +95,6 @@ class IStudent {
     dynamic url = Constants.newsUrl + '/vk';
     try {
       final response = await dio.get(url);
-      print(response.data["result"]);
       List<NewsVK> res = [];
       for (dynamic item in response.data["result"]) {
         res.add(NewsVK(item));
@@ -166,7 +164,6 @@ class IStudent {
         "year": date.year
       });
       List<Lesson> res = [];
-      print(response.data["lessons"]);
       for (dynamic item in response.data["lessons"]) {
         res.add(Lesson.fromData(item));
       }
