@@ -231,4 +231,19 @@ class IStudent {
       throw e;
     }
   }
+
+  static Future<bool> checkToken(String token) async{
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/auth/check';
+
+    dio.options.headers["token"] = token;
+    try {
+      final response = await dio.post(url);
+      return response.data["type"] == 0;
+
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
 }
