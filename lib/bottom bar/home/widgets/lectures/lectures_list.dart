@@ -35,6 +35,7 @@ class LecturesList extends StatelessWidget {
           child: GestureDetector(
             onTap: () async {
               await Flushbar(
+
                 dismissDirection: FlushbarDismissDirection.HORIZONTAL,
                 userInputForm: Form(
                   child: TextFormField(

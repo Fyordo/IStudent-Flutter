@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:i_student/data/Lesson.dart';
 import 'package:i_student/data/Schedule.dart';
 
-
 const List<String> dayNames = [
   "Понедельник",
   "Вторник",
@@ -24,20 +23,15 @@ class Timetable extends StatelessWidget {
           bottom: 0,
           left: 0,
         ),
-        height: MediaQuery.of(context).size.height - 159, // 159 - волшебное число!!! его не трогать!!!
+        height: MediaQuery.of(context).size.height -
+            159, // 159 - волшебное число!!! его не трогать!!!
         child: ListView.builder(
           physics: AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
-
           itemCount: 6,
           itemBuilder: (BuildContext context, int index) => Container(
-              margin: EdgeInsets.only(
-                top: 5,
-                left: 8,
-                right: 8,
-                bottom: 8
-              ),
+              margin: EdgeInsets.only(top: 5, left: 8, right: 8, bottom: 8),
               width: 350,
               child: Card(
                   elevation: 5,
@@ -88,15 +82,16 @@ class ConstructDay extends StatelessWidget {
     for (int index = 0; index < list.length; index++) {
       Color clr = Colors.white;
       if (list[index].location != "Online(Teams)") {
-        clr = Color(0xffcdd3e5);//Theme.of(context).cardColor;
+        clr = Color(0xffcdd3e5); //Theme.of(context).cardColor;
       }
-      res.add(
-          GestureDetector(
-            onTap: () {
-              currentLesson = list[index];
-              Navigator.of(context).restorablePush(_pairDialogBuilder);
-              },
-            child: Container(
+      res.add(GestureDetector(
+        onTap: () {
+          // Navigator.of(context).restorablePush((context, arg) {
+          //   return _pairDialogBuilder(context, list[index]);
+          // });
+          _showMyDialog(context, list[index]);
+        },
+        child: Container(
             margin: EdgeInsets.only(top: 10, left: 5, right: 5),
             child: Card(
                 shape: RoundedRectangleBorder(
@@ -143,82 +138,70 @@ class ConstructDay extends StatelessWidget {
   }
 }
 
-Lesson? currentLesson;
+Future<void> _showMyDialog(context, Lesson currentLesson) async {
+  var title = currentLesson.title;
+  var time = currentLesson.time;
+  var teacher = currentLesson.teacher.name;
+  var place = currentLesson.location;
 
-Route<Object?> _pairDialogBuilder(
-      BuildContext context, Object? arguments) {
-      return RawDialogRoute<void>(
-        pageBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-            ) {
-              var title = currentLesson?.title ?? "...";
-              var time = currentLesson?.time ?? "......";
-              var teacher = currentLesson?.teacher.name ?? "...";
-              var place = currentLesson?.location ?? "...";
+  var label =
+      TextStyle(color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600);
+  var value =
+      TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600);
 
-              var label = TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600);
-              var value = TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600);
-
-              return SimpleDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)
-                ),
-                  title: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColorDark,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-
-                    ),
-                  ),
-                  children: <Widget>[
-                    SimpleDialogOption(
-                      child: Row(
-                                children: [
-                                  Text("Время начала:", style: label),
-                                  Spacer(),
-                                  Text(time.substring(0, time.length ~/ 2), style: value),
-                                ],
-                              ),
-                      ),
-                    SimpleDialogOption(
-                      child: Row(
-                        children: [
-                          Text("Время конца:", style: label),
-                          Spacer(),
-                          Text(time.substring(time.length ~/ 2, time.length), style: value),
-                        ],
-                      ),
-                    ),
-
-                    SimpleDialogOption(
-                      child: Text("Преподаватель:", style: label),
-                    ),
-
-                    SimpleDialogOption(
-                      child: Text(teacher, style: value),
-                    ),
-
-                    SimpleDialogOption(
-                      child: Text("Место проведения:", style: label),
-                    ),
-
-                    SimpleDialogOption(
-                      child: Text(place, style: value),
-                    ),
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        title: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor),
+        ),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              SimpleDialogOption(
+                child: Row(
+                  children: [
+                    Text("Время начала:", style: label),
+                    Spacer(),
+                    Text(time.substring(0, time.length ~/ 2), style: value),
                   ],
-              );
-              },
+                ),
+              ),
+              SimpleDialogOption(
+                child: Row(
+                  children: [
+                    Text("Время конца:", style: label),
+                    Spacer(),
+                    Text(time.substring(time.length ~/ 2, time.length),
+                        style: value),
+                  ],
+                ),
+              ),
+              SimpleDialogOption(
+                child: Text("Преподаватель:", style: label),
+              ),
+              SimpleDialogOption(
+                child: Text(teacher, style: value),
+              ),
+              SimpleDialogOption(
+                child: Text("Место проведения:", style: label),
+              ),
+              SimpleDialogOption(
+                child: Text(place, style: value),
+              ),
+            ],
+          ),
+        ),
       );
-
+    },
+  );
 }
