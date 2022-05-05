@@ -36,9 +36,9 @@ class UserHeader extends StatelessWidget {
                   ),
                   child: Row(children: [
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: CircleAvatar(
-                        radius: 45,
+                        radius: 36,
                         child: ClipOval(
                             child: new SizedBox(
                                 width: 70.0,
@@ -48,7 +48,7 @@ class UserHeader extends StatelessWidget {
                                 //),
                                 //
                                 )),
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: Colors.black,
                       ),
                     ),
                     Column(

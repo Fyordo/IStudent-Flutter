@@ -56,7 +56,8 @@ class _UserPageState extends State<UserPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppBar(
-                            title: Text('Личный кабинет',
+                            title: Text(
+                                'Личный кабинет',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
@@ -73,13 +74,21 @@ class _UserPageState extends State<UserPage> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: Row (
                                     children: <Widget>[
-                                      SizedBox(
-                                          width: MediaQuery.of(context).size.width * 0.4,
-                                          height: MediaQuery.of(context).size.width * 0.4,
-                                          child: Image.memory(Base64Decoder()
-                                              .convert(state.student.photo))
-                                        //),
-                                        //
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Colors.black,
+                                          boxShadow: [
+                                            BoxShadow(color: Colors.grey, spreadRadius: 2),
+                                          ],
+                                        ),
+                                        child: SizedBox(
+                                            width: MediaQuery.of(context).size.width * 0.4,
+                                            height: MediaQuery.of(context).size.width * 0.4,
+                                            child: Image.memory(Base64Decoder()
+                                                .convert(state.student.photo)
+                                            )
+                                        ),
                                       ),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width * 0.1,
