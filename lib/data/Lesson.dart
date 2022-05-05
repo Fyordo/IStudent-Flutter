@@ -26,10 +26,10 @@ class Lesson {
     _lesson_number = data["lesson_number"];
     switch (data["lesson_number"]) {
       case 1:
-        time = "8:00\n9:35";
+        time = "08:00\n09:35";
         break;
       case 2:
-        time = "9:50\n11:25";
+        time = "09:50\n11:25";
         break;
       case 3:
         time = "11:55\n13:30";
@@ -58,9 +58,9 @@ class Lesson {
   String start(){
     switch (_lesson_number) {
       case 1:
-        return "8:00";
+        return "08:00";
       case 2:
-        return "9:50";
+        return "09:50";
       case 3:
         return "11:55";
       case 4:
@@ -77,7 +77,7 @@ class Lesson {
   String end(){
     switch (_lesson_number) {
       case 1:
-        return "9:35";
+        return "09:35";
       case 2:
         return "11:25";
       case 3:

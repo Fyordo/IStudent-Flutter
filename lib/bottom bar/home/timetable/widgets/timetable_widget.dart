@@ -156,6 +156,7 @@ Route<Object?> _pairDialogBuilder(
               var title = currentLesson?.title ?? "...";
               var time = currentLesson?.time ?? "......";
               var teacher = currentLesson?.teacher.name ?? "...";
+              var place = currentLesson?.location ?? "...";
 
               var label = TextStyle(
                   color: Colors.grey,
@@ -167,18 +168,24 @@ Route<Object?> _pairDialogBuilder(
                   fontWeight: FontWeight.w600);
 
               return SimpleDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)
+                ),
                   title: Text(
                     title,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Theme.of(context).primaryColorDark,
                         fontSize: 22,
-                        fontWeight: FontWeight.w600),
+                        fontWeight: FontWeight.w600,
+
+                    ),
                   ),
                   children: <Widget>[
                     SimpleDialogOption(
                       child: Row(
                                 children: [
-                                  Text("время начала:", style: label),
+                                  Text("Время начала:", style: label),
                                   Spacer(),
                                   Text(time.substring(0, time.length ~/ 2), style: value),
                                 ],
@@ -187,7 +194,7 @@ Route<Object?> _pairDialogBuilder(
                     SimpleDialogOption(
                       child: Row(
                         children: [
-                          Text("время конца:", style: label),
+                          Text("Время конца:", style: label),
                           Spacer(),
                           Text(time.substring(time.length ~/ 2, time.length), style: value),
                         ],
@@ -195,11 +202,19 @@ Route<Object?> _pairDialogBuilder(
                     ),
 
                     SimpleDialogOption(
-                      child: Text("ФИО преподавателя:", style: label),
+                      child: Text("Преподаватель:", style: label),
                     ),
 
                     SimpleDialogOption(
                       child: Text(teacher, style: value),
+                    ),
+
+                    SimpleDialogOption(
+                      child: Text("Место проведения:", style: label),
+                    ),
+
+                    SimpleDialogOption(
+                      child: Text(place, style: value),
                     ),
                   ],
               );

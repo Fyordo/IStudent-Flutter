@@ -61,6 +61,7 @@ class _HomePageState extends State<HomePage> {
       }, builder: (context, state) {
         if (state is HomePageLoading) {
           return RefreshIndicator(
+            color: Theme.of(context).primaryColor,
             child: Container(
               color: Colors.grey[100],
               child: SingleChildScrollView(
