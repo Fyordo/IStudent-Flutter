@@ -231,7 +231,7 @@ class IStudent {
     }
   }
 
-  static Future<void> sendAddition(String token, Lecture lecture, String text) async {
+  static Future<String> sendAddition(String token, Lecture lecture, String text) async {
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/schedule/addiction';
 
@@ -247,6 +247,8 @@ class IStudent {
           "text": text
         },
       );
+
+      return response.data["status"];
 
     } on DioError catch (e) {
       print(e.response);

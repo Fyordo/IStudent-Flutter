@@ -35,7 +35,7 @@ class LecturesList extends StatelessWidget {
           child: GestureDetector(
             onTap: () async {
               await Flushbar(
-                dismissDirection: FlushbarDismissDirection.VERTICAL,
+                dismissDirection: FlushbarDismissDirection.HORIZONTAL,
                 userInputForm: Form(
                   child: TextFormField(
                     style: TextStyle(color: Colors.white),
@@ -49,10 +49,18 @@ class LecturesList extends StatelessWidget {
                     onFieldSubmitted: (String? value) async {
                       if (value != null && value.isNotEmpty) {
                         String token = await Hive.box('tokenbox').get('token');
-                        await IStudent.sendAddition(token, lectures[index], value);
+                        String res = await IStudent.sendAddition(token, lectures[index], value);
                         BlocProvider.of<LecturesBloc>(context).add(LecturesLoadEvent());
+
+
+                        await Flushbar(
+                          flushbarPosition: FlushbarPosition.TOP,
+                          dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+                          backgroundColor: res == 'Дополнение успешно сохранено' ? Colors.green : Colors.red,
+                          message: res,
+                        ).show(context);
                       }
-                      //Close Flushbar
+
                     },
                   ),
                 ),
