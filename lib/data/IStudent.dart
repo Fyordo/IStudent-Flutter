@@ -231,7 +231,7 @@ class IStudent {
     }
   }
 
-  static Future<void> sendAddition(String token, Lecture lesson, String text) async {
+  static Future<void> sendAddition(String token, Lecture lecture, String text) async {
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/schedule/addiction';
 
@@ -240,10 +240,10 @@ class IStudent {
     try {
       final response = await dio.post(url,
         data: {
-          "day": lesson.date.day,
-          "month": lesson.date.month,
-          "year": lesson.date.year,
-          "lesson_number": lesson.lesson_number,
+          "day": lecture.date.day,
+          "month": lecture.date.month,
+          "year": lecture.date.year,
+          "lesson_number": lecture.lesson_number,
           "text": text
         },
       );
