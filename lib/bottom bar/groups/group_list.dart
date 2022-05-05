@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
@@ -54,6 +56,14 @@ class _GroupListState extends State<GroupList> {
                       itemCount: state.group.students.length,
                       itemBuilder: (BuildContext context, int index) =>
                           ListTile(
+                            onTap: () async{
+                              Clipboard.setData(ClipboardData(text: state.group.students[index].email));
+                              await Flushbar(
+                                  message: "Почта скопирована в буфер обмена",
+                                  duration: Duration(seconds: 3),
+                              backgroundColor: Theme.of(context).primaryColor,
+                              ).show(context);
+                            },
                               leading: CircleAvatar(
                                   backgroundColor:
                                       Theme.of(context).secondaryHeaderColor,

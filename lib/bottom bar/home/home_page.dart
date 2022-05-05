@@ -60,7 +60,8 @@ class _HomePageState extends State<HomePage> {
         //*/
       }, builder: (context, state) {
         if (state is HomePageLoading) {
-          return Container(
+          return RefreshIndicator(
+            child: Container(
               color: Colors.grey[100],
               child: SingleChildScrollView(
                 child: Column(
@@ -81,9 +82,7 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   height: 20,
                                 ),
-                                Text(
-                                  "Загрузка виджета лекций..."
-                                ),
+                                Text("Загрузка виджета лекций..."),
                                 Container(
                                   height: 20,
                                 ),
@@ -112,7 +111,12 @@ class _HomePageState extends State<HomePage> {
                     NewsVk(),
                   ],
                 ),
-              ));
+              ),
+            ),
+            onRefresh: () async {
+              print("print");
+            },
+          );
         } else {
           return Center(child: CupertinoActivityIndicator());
         }
