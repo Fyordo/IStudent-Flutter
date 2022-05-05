@@ -7,7 +7,7 @@ import 'package:i_student/data/Student.dart';
 class Group {
   late int id;
   late int group_number;
-  late int group_course;
+  late String group_course;
   late int headman_id;
   late List<Student> students;
 
