@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:i_student/data/IStudent.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -217,6 +218,14 @@ Future<void> showAdditionsDialogue(context, Lecture lecture) async {
                           itemBuilder: (BuildContext context, int index) => Column(
                             children: [
                               ListTile(
+                                onTap: () async{
+                                  Clipboard.setData(ClipboardData(text: lecture.addictions[index].description));
+                                  await Flushbar(
+                                    message: "Дополнение скопировано в буфер обмена",
+                                    duration: Duration(seconds: 3),
+                                    backgroundColor: Theme.of(context).primaryColor,
+                                  ).show(context);
+                                },
                                 title: Text(lecture.addictions[index].description),
                               ),
                               Divider(
