@@ -10,12 +10,12 @@ part 'mmcs_news_event.dart';
 part 'mmcs_news_state.dart';
 
 class NewsMmcsBloc extends Bloc<NewsMmcsEvent, NewsMmcsState> {
-  NewsMmcsBloc(NewsMmcsState headerStateWithoutNews)
-      : super(headerStateWithoutNews);
+  NewsMmcsBloc() : super(NewsMmcsStateWithoutNews());
 
   @override
   Stream<NewsMmcsState> mapEventToState(NewsMmcsEvent event) async* {
     if (event is NewsMmcsEventWithNews) {
+      yield NewsMmcsStateWithoutNews();
       List<NewsMMCS> news_mmcs = await IStudent.getNewsMMCS();
       yield NewsMmcsStateWithNews(news_mmcs: news_mmcs);
     }

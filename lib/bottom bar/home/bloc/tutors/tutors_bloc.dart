@@ -10,12 +10,12 @@ part 'tutors_event.dart';
 part 'tutors_state.dart';
 
 class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
-  TutorsBloc(TutorsState tutorsStateWithoutTutors)
-      : super(tutorsStateWithoutTutors);
+  TutorsBloc() : super(TutorsStateWithoutTutors());
 
   @override
   Stream<TutorsState> mapEventToState(TutorsEvent event) async* {
     if (event is TutorsEventWithTutors) {
+      yield TutorsStateWithoutTutors();
       List<Teacher> teachers = await IStudent.getTeachers(event.token);
       yield TutorsStateWithTutors(teachers: teachers);
     }

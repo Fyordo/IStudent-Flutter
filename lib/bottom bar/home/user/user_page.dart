@@ -29,21 +29,11 @@ class _UserPageState extends State<UserPage> {
     String token = Hive.box('tokenbox').get('token');
     return BlocProvider<UserPageBloc>(
       create: (context) {
-        return UserPageBloc(UserPageStateWithoutStudent())
+        return UserPageBloc()
           ..add(UserPageEventWithStudent(token: token));
       },
       child: Scaffold(
-        body: BlocConsumer<UserPageBloc, UserPageState>(
-          listener: (context, state) {
-            if (state is UserPageStateWithStudent) {
-              //print(state.student);
-            }
-            if (!(state is UserPageStateWithStudent) &&
-                !(state is UserPageStateWithoutStudent)) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("Error")));
-            }
-          },
+        body: BlocBuilder<UserPageBloc, UserPageState>(
           builder: (context, state) {
             if (state is UserPageStateWithStudent) {
               return SingleChildScrollView(
