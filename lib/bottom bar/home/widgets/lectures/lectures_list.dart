@@ -5,17 +5,21 @@ import 'package:i_student/data/IStudent.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'package:i_student/data/Lecture.dart';
 import 'package:i_student/bloc/lectures_bloc/lectures_bloc.dart';
 
 class LecturesList extends StatelessWidget {
   List<Lecture> lectures;
   int offset;
+
   LecturesList(this.lectures, this.offset);
 
   @override
   Widget build(BuildContext context) {
-    ScrollController controller = ScrollController(initialScrollOffset: 370.0*offset);
+    ScrollController controller =
+        ScrollController(initialScrollOffset: 370.0 * offset);
 
     return Container(
       margin: EdgeInsets.only(
@@ -34,39 +38,8 @@ class LecturesList extends StatelessWidget {
           width: 360,
           child: GestureDetector(
             onTap: () async {
-              await Flushbar(
+              await showAdditionsDialogue(context, lectures[index]);
 
-                dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                userInputForm: Form(
-                  child: TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
-                    decoration: const InputDecoration(
-                      hintText: 'Введите дополнение',
-                      hintStyle: TextStyle(color: Colors.white),
-                    ),
-
-
-                    onFieldSubmitted: (String? value) async {
-                      if (value != null && value.isNotEmpty) {
-                        String token = await Hive.box('tokenbox').get('token');
-                        String res = await IStudent.sendAddition(token, lectures[index], value);
-                        BlocProvider.of<LecturesBloc>(context).add(LecturesLoadEvent());
-
-
-                        await Flushbar(
-                          flushbarPosition: FlushbarPosition.TOP,
-                          dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                          backgroundColor: res == 'Дополнение успешно сохранено' ? Colors.green : Colors.red,
-                          message: res,
-                        ).show(context);
-                      }
-
-                    },
-                  ),
-                ),
-                backgroundColor: Theme.of(context).primaryColor,
-              ).show(context);
             },
             child: Card(
               elevation: 5,
@@ -113,7 +86,9 @@ class LecturesList extends StatelessWidget {
                       child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            lectures[index].teacher.length !=0 ? lectures[index].teacher: 'Не указан',
+                            lectures[index].teacher.length != 0
+                                ? lectures[index].teacher
+                                : 'Не указан',
                             style: TextStyle(
                                 color: Theme.of(context).cardColor,
                                 fontSize: 15,
@@ -129,38 +104,39 @@ class LecturesList extends StatelessWidget {
                               fontSize: 15,
                               fontWeight: FontWeight.w400),
                         )),
-                    lectures[index].addictions.length == 0 ?
-                    Card(
-                      color: Theme.of(context).secondaryHeaderColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            'Дополнений нет...',
-                            style: TextStyle(
-                                color: Theme.of(context).cardColor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500),
-                          )),
-                    )
-                    :
-                    Card(
-                      color: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            lectures[index].addictions[0].description,
-                            style: TextStyle(
-                                color: Theme.of(context).cardColor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500),
-                          )),
-                    ),
+                    lectures[index].addictions.length == 0
+                        ? Card(
+                            color: Theme.of(context).secondaryHeaderColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  'Дополнений нет...',
+                                  style: TextStyle(
+                                      color: Theme.of(context).cardColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                          )
+                        : Card(
+                            color: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  lectures[index].addictions[0].description,
+                                  style: TextStyle(
+                                      color: Theme.of(context).cardColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                          ),
                   ],
                 ),
               ),
@@ -170,4 +146,90 @@ class LecturesList extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> showAdditionsDialogue(context, Lecture lecture) async {
+
+  showBarModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return FractionallySizedBox(
+          heightFactor: 0.9,
+          child: Container(
+              //height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                  physics: ScrollPhysics(),
+                  child: Column(
+                      children: [
+                        AppBar(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          automaticallyImplyLeading: false,
+                          title: Text("Дополнения"),
+                          centerTitle: true,
+                          actions: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Icon(Icons.close)),
+                            ),
+                          ],
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              hintText: 'Введите дополнение',
+                            ),
+                            onFieldSubmitted: (String? value) async {
+                              if (value != null && value.isNotEmpty) {
+
+                                String token = await Hive.box('tokenbox').get('token');
+                                String res =
+                                await IStudent.sendAddition(token, lecture, value);
+                                if (res == 'Дополнение успешно сохранено') {
+                                  Navigator.of(context).pop();
+                                  BlocProvider.of<LecturesBloc>(context)
+                                      .add(LecturesLoadEvent());
+                                }
+                                await Flushbar(
+                                  duration: Duration(seconds: 2),
+                                  flushbarPosition: FlushbarPosition.TOP,
+                                  dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+                                  backgroundColor: res == 'Дополнение успешно сохранено'
+                                      ? Colors.green
+                                      : Colors.red,
+                                  message: res,
+                                ).show(context);
+                              }
+
+                            },
+                          ),
+                        ),
+
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: lecture.addictions.length,
+                          itemBuilder: (BuildContext context, int index) => Column(
+                            children: [
+                              ListTile(
+                                title: Text(lecture.addictions[index].description),
+                              ),
+                              Divider(
+
+                              )
+
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+            ),
+        );
+      });
 }
