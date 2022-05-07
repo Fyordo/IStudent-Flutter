@@ -10,7 +10,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:i_student/data/Lecture.dart';
 import 'package:i_student/bloc/lectures_bloc/lectures_bloc.dart';
-
+import 'package:i_student/bottom bar/home/home_page.dart';
 class LecturesList extends StatelessWidget {
   List<Lecture> lectures;
   int offset;
@@ -40,7 +40,6 @@ class LecturesList extends StatelessWidget {
           child: GestureDetector(
             onTap: () async {
               await showAdditionsDialogue(context, lectures[index]);
-
             },
             child: Card(
               elevation: 5,
@@ -149,7 +148,8 @@ class LecturesList extends StatelessWidget {
   }
 }
 
-Future<void> showAdditionsDialogue(context, Lecture lecture) async {
+Future<void> showAdditionsDialogue(BuildContext context, Lecture lecture) async {
+  final _controller = TextEditingController();
 
   showBarModalBottomSheet(
       context: context,
@@ -157,88 +157,104 @@ Future<void> showAdditionsDialogue(context, Lecture lecture) async {
         return FractionallySizedBox(
           heightFactor: 0.9,
           child: Container(
-              //height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                  physics: ScrollPhysics(),
-                  child: Column(
-                      children: [
-                        AppBar(
-                          backgroundColor: Theme.of(context).primaryColor,
-                          automaticallyImplyLeading: false,
-                          title: Text("Дополнения"),
-                          centerTitle: true,
-                          actions: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Icon(Icons.close)),
-                            ),
-                          ],
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+            //height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              physics: ScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppBar(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    automaticallyImplyLeading: false,
+                    title: Text("Дополнения"),
+                    centerTitle: true,
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Icon(Icons.close)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
                           child: TextFormField(
+                            controller: _controller,
                             decoration: const InputDecoration(
                               hintText: 'Введите дополнение',
                             ),
                             onFieldSubmitted: (String? value) async {
-                              if (value != null && value.isNotEmpty) {
-
-                                String token = await Hive.box('tokenbox').get('token');
-                                String res =
-                                await IStudent.sendAddition(token, lecture, value);
-                                if (res == 'Дополнение успешно сохранено') {
-                                  Navigator.of(context).pop();
-                                  BlocProvider.of<LecturesBloc>(context)
-                                      .add(LecturesLoadEvent());
-                                }
-                                await Flushbar(
-                                  duration: Duration(seconds: 2),
-                                  flushbarPosition: FlushbarPosition.TOP,
-                                  dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                                  backgroundColor: res == 'Дополнение успешно сохранено'
-                                      ? Colors.green
-                                      : Colors.red,
-                                  message: res,
-                                ).show(context);
-                              }
-
+                              sendAddition(value, context, lecture);
                             },
                           ),
                         ),
-
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: lecture.addictions.length,
-                          itemBuilder: (BuildContext context, int index) => Column(
-                            children: [
-                              ListTile(
-                                onTap: () async{
-                                  Clipboard.setData(ClipboardData(text: lecture.addictions[index].description));
-                                  await Flushbar(
-                                    message: "Дополнение скопировано в буфер обмена",
-                                    duration: Duration(seconds: 3),
-                                    backgroundColor: Theme.of(context).primaryColor,
-                                  ).show(context);
-                                },
-                                title: Text(lecture.addictions[index].description),
-                              ),
-                              Divider(
-
-                              )
-
-                            ],
-                          ),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          print("Before controller");
+                          String? value = _controller.text;
+                          print("Before sendaddition");
+                          sendAddition(value, context, lecture);
+                          print("After sendaddition");
+                        },
+                        icon: Icon(Icons.add),
+                      ),
+                    ],
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: lecture.addictions.length,
+                    itemBuilder: (BuildContext context, int index) => Column(
+                      children: [
+                        ListTile(
+                          onTap: () async {
+                            Clipboard.setData(ClipboardData(
+                                text: lecture.addictions[index].description));
+                            await Flushbar(
+                              message: "Дополнение скопировано в буфер обмена",
+                              duration: Duration(seconds: 3),
+                              backgroundColor: Theme.of(context).primaryColor,
+                            ).show(context);
+                          },
+                          title: Text(lecture.addictions[index].description),
                         ),
+                        Divider()
                       ],
                     ),
                   ),
+                ],
+              ),
             ),
+          ),
         );
       });
+}
+
+void sendAddition(String? value, context, lecture) async {
+  if (value != null && value.isNotEmpty) {
+    String token = await Hive.box('tokenbox').get('token');
+    String res = await IStudent.sendAddition(token, lecture, value);
+
+    await Flushbar(
+      duration: Duration(seconds: 2),
+      flushbarPosition: FlushbarPosition.TOP,
+      dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+      backgroundColor:
+      res == 'Дополнение успешно сохранено' ? Colors.green : Colors.red,
+      message: res,
+    ).show(context);
+
+    if (res == 'Дополнение успешно сохранено') {
+      Navigator.of(context).pop();
+      BlocProvider.of<LecturesBloc>(context).add(LecturesLoadEvent());
+    }
+  }
 }

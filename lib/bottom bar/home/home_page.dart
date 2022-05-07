@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
   List<Tab> d = [];
-
   // ignore: non_constant_identifier_names
   List<String> categories = [
     "algem",
@@ -34,6 +33,7 @@ class _HomePageState extends State<HomePage> {
   late bool lectionsFlag;
   late bool newsFlag;
   late bool lectorFlag;
+
 
   @override
   void initState() {
@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       HeaderHomePage(),
+
                       BlocProvider(
                         create: (context) =>
                             LecturesBloc()..add(LecturesLoadEvent()),
