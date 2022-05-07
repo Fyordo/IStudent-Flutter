@@ -56,10 +56,15 @@ class IStudent {
     try {
       final response = await dio.post(url);
       Hive.box('tokenbox').delete('token');
+      Hive.box('schedulebox').delete('isUpWeek');
+      Hive.box('schedulebox').delete('lastLoadTime');
+      Hive.box('schedulebox').delete('upper_schedule');
+      Hive.box('schedulebox').delete('lower');
       return;
     } on DioError catch (e) {
       print(e.response);
     }
+
   }
 
   static Future<Student> getStudent(String token) async {
