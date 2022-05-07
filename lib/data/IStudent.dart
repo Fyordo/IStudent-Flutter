@@ -275,4 +275,23 @@ class IStudent {
       throw e;
     }
   }
+  
+  static Future<List<Teacher» getAllTeachers(String token) async{
+    Dio dio = new Dio();
+    dynamic url = Constants.apiUrl + '/teacher/all';
+
+    dio.options.headers["token"] = token;
+    try {
+      final response = await dio.post(url);
+      List<Teacher> res = [];
+
+      for (dynamic teacher in response.data) {
+        res.add(teacher);
+      }
+      return res;
+    } on DioError catch (e) {
+      print(e.response);
+      throw e;
+    }
+  }
 }
