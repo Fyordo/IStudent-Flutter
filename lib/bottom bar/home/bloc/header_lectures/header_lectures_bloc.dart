@@ -10,12 +10,12 @@ part 'header_lectures_event.dart';
 part 'header_lectures_state.dart';
 
 class HeaderLecturesBloc extends Bloc<HeaderLecturesEvent, HeaderLecturesState> {
-  HeaderLecturesBloc(HeaderLecturesState tutorsStateWithoutData)
-      : super(tutorsStateWithoutData);
+  HeaderLecturesBloc() : super(HeaderLecturesStateWithoutData());
 
   @override
   Stream<HeaderLecturesState> mapEventToState(HeaderLecturesEvent event) async* {
     if (event is HeaderLecturesEventWithData) {
+      yield HeaderLecturesStateWithoutData();
       List<Lesson> lessons = await IStudent.getTodaySchedule(event.token);
       yield HeaderLecturesStateWithData(lessons: lessons);
     }
