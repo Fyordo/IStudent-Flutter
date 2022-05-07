@@ -49,7 +49,7 @@ class _TutorsPageState extends State<TutorsPage> {
                             Theme.of(context).secondaryHeaderColor,
                             radius: 30,
                             child: ClipOval(
-                                child: Image.memory(Base64Decoder()
+                                child: state.teachers[index].photo == ""?Image.asset('assets/images/user_without_photo.png'):Image.memory(Base64Decoder()
                                     .convert(state.teachers[index].photo)))),
                         title: Text(state.teachers[index].name),
                         subtitle: Text(
