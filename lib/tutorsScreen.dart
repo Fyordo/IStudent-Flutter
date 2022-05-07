@@ -64,54 +64,23 @@ class _TutorsPageState extends State<TutorsPage> {
                   )),
             ),
           );
-        } else if (state is TutorsStateWithoutTutors) {
+        } else if (state is TutorsPageLoading) {
           return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              title: Row(
-                children: [
-                  Text(
-                    "Загрузка преподавателей...",
-                    style: TextStyle(fontSize: 25, color: Colors.black),
-                  )
-                ],
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                title: Row(
+                  children: [
+                    Text(
+                      "Загрузка преподавателей...",
+                      style: TextStyle(fontSize: 25, color: Colors.black),
+                    )
+                  ],
+                ),
               ),
-            ),
-            body: SingleChildScrollView(
-              child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  width: double.infinity,
-                  child: ListView.separated(
-                    physics: ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: 5,
-                    itemBuilder: (BuildContext context, int index) => ListTile(
-                        leading: CircleAvatar(
-                            backgroundColor:
-                            Theme.of(context).secondaryHeaderColor,
-                            radius: 30,
-                            child: ClipOval(
-                                child: Image.asset(
-                                  'assets/images/user_without_photo.png',
-                                  fit: BoxFit.fill,
-                                ))),
-                        title: Text("Загрузка..."),
-                        subtitle: Row(
-                          children: [
-                            Text(
-                              "Загрузка...",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            )
-                          ],
-                        )),
-                    separatorBuilder: (BuildContext context, int index) =>
-                        Divider(
-                          height: 1,
-                          color: Theme.of(context).hintColor,
-                        ),
-                  )),
-            ),
+              body: Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ))
           );
         } else
           return Text("Error");

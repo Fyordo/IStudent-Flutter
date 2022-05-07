@@ -286,7 +286,7 @@ class IStudent {
       List<Teacher> res = [];
 
       for (dynamic teacher in response.data) {
-        res.add(teacher);
+        res.add(Teacher.fromData(teacher));
       }
       return res;
     } on DioError catch (e) {
