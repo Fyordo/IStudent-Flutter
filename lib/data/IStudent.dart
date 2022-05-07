@@ -276,7 +276,7 @@ class IStudent {
     }
   }
   
-  static Future<List<Teacher» getAllTeachers(String token) async{
+  static Future<List<Teacher>> getAllTeachers(String token) async{
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/teacher/all';
 
