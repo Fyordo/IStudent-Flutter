@@ -58,6 +58,7 @@ class UserHeader extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               width: MediaQuery.of(context).size.width * 0.7,
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,

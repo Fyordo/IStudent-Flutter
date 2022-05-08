@@ -62,7 +62,19 @@ class _SignInState extends State<SignIn> {
             message:
             state.message,
             duration: Duration(seconds: 3),
+            backgroundColor: Colors.red,
+            isDismissible: false,
+          ).show(context);
+        }
+
+        if (state is UserLoadingState) {
+          await Flushbar(
+            duration: Duration(seconds: 3),
+            message:
+            'Загрузка...',
             backgroundColor: Theme.of(context).primaryColor,
+            showProgressIndicator: true,
+            isDismissible: false,
           ).show(context);
         }
       },

@@ -18,21 +18,17 @@ class TutorsPage extends StatefulWidget {
 class _TutorsPageState extends State<TutorsPage> {
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<TutorsPageBloc, TutorsPageState>(
       builder: (context, state) {
         if (state is TutorsPageLoaded) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               backgroundColor: Colors.white,
-              title: Row(
-                children: [
-                  Text(
+              title: Text(
                     "Преподаватели",
                     style: TextStyle(fontSize: 25, color: Colors.black),
                   )
-                ],
-              ),
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -46,11 +42,14 @@ class _TutorsPageState extends State<TutorsPage> {
                     itemBuilder: (BuildContext context, int index) => ListTile(
                         leading: CircleAvatar(
                             backgroundColor:
-                            Theme.of(context).secondaryHeaderColor,
+                                Theme.of(context).secondaryHeaderColor,
                             radius: 30,
-                            child: ClipOval(
-                                child: state.teachers[index].photo == ""?Image.asset('assets/images/user_without_photo.png'):Image.memory(Base64Decoder()
-                                    .convert(state.teachers[index].photo)))),
+                            backgroundImage: state.teachers[index].photo == ""
+                                    ? Image.asset(
+                                    'assets/images/user_without_photo.png').image
+                                    : Image.memory(Base64Decoder().convert(
+                                    state.teachers[index].photo)).image
+                        ),
                         title: Text(state.teachers[index].name),
                         subtitle: Text(
                           state.teachers[index].degree,
@@ -58,30 +57,26 @@ class _TutorsPageState extends State<TutorsPage> {
                         )),
                     separatorBuilder: (BuildContext context, int index) =>
                         Divider(
-                          height: 1,
-                          color: Theme.of(context).hintColor,
-                        ),
+                      height: 1,
+                      color: Theme.of(context).hintColor,
+                    ),
                   )),
             ),
           );
         } else if (state is TutorsPageLoading) {
           return Scaffold(
               appBar: AppBar(
+                centerTitle: true,
                 backgroundColor: Colors.white,
-                title: Row(
-                  children: [
-                    Text(
-                      "Загрузка преподавателей...",
+                title: Text(
+                      "Преподаватели",
                       style: TextStyle(fontSize: 25, color: Colors.black),
                     )
-                  ],
                 ),
-              ),
               body: Center(
                   child: CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
-                  ))
-          );
+                color: Theme.of(context).primaryColor,
+              )));
         } else
           return Text("Error");
       },

@@ -53,6 +53,31 @@ class _UserPageState extends State<UserPage> {
                                     fontWeight: FontWeight.bold)),
                             centerTitle: true,
                             backgroundColor: Colors.white,
+                            actions: <Widget>[
+                              Padding(
+                                  padding: EdgeInsets.only(right: 15.0),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      Flushbar(
+                                        message: "Удаляем ваши данные из памяти устройства...",
+                                        backgroundColor: Theme.of(context).primaryColor,
+                                        showProgressIndicator: true,
+                                      ).show(context);
+                                      await IStudent.logOut(
+                                          Hive.box('tokenbox').get('token'));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  WelcomeScreen()));
+                                    },
+                                    child: Icon(
+                                      Icons.logout,
+                                      size: 26.0,
+                                      color: Colors.black,
+                                    ),
+                                  )),
+                            ],
                           ),
 
                             DecoratedBox(
@@ -180,42 +205,6 @@ class _UserPageState extends State<UserPage> {
 
                                   SizedBox(height: MediaQuery.of(context).size.height * 0.1),
 
-                                  Container(
-                                      width: MediaQuery.of(context).size.width * 0.5,
-                                      height: MediaQuery.of(context).size.height * 0.05,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          IStudent.logOut(
-                                              Hive.box('tokenbox').get('token'));
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      WelcomeScreen()));
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.logout,
-                                              size: 26.0,
-                                            ),
-                                            Text("Выйти",
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                            )),
-                                          ],
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Theme.of(context).primaryColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(25),
-                                          ),
-                                          elevation: 15.0,
-                                        ),
-                                      ),
-                                    ),
-
                                 ],
                               ),
                             ),
@@ -246,8 +235,13 @@ class _UserPageState extends State<UserPage> {
                               Padding(
                                   padding: EdgeInsets.only(right: 15.0),
                                   child: InkWell(
-                                    onTap: () {
-                                      IStudent.logOut(
+                                    onTap: () async {
+                                      Flushbar(
+                                        message: "Удаляем ваши данные из памяти устройства...",
+                                        backgroundColor: Theme.of(context).primaryColor,
+                                        showProgressIndicator: true,
+                                      ).show(context);
+                                      await IStudent.logOut(
                                           Hive.box('tokenbox').get('token'));
                                       Navigator.push(
                                           context,

@@ -55,11 +55,11 @@ class IStudent {
 
     try {
       final response = await dio.post(url);
-      Hive.box('tokenbox').delete('token');
-      Hive.box('schedulebox').delete('isUpWeek');
-      Hive.box('schedulebox').delete('lastLoadTime');
-      Hive.box('schedulebox').delete('upper_schedule');
-      Hive.box('schedulebox').delete('lower');
+      await Hive.box('tokenbox').delete('token');
+      await Hive.box('schedulebox').delete('isUpWeek');
+      await Hive.box('schedulebox').delete('lastLoadTime');
+      await Hive.box('schedulebox').delete('upper_schedule');
+      await Hive.box('schedulebox').delete('lower');
       return;
     } on DioError catch (e) {
       print(e.response);
@@ -128,6 +128,8 @@ class IStudent {
   }
 
   static Future<Schedule> getSchedule(String token, bool isUpWeek) async {
+    print("GetSchedulea");
+    print(token);
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/schedule/full';
 
@@ -142,6 +144,9 @@ class IStudent {
   }
 
   static Future<List<Teacher>> getTeachers(String token) async {
+    print("GetTeachers");
+    print(token);
+
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/teacher/all';
 
@@ -160,6 +165,9 @@ class IStudent {
   }
 
   static Future<List<Lesson>> getTodaySchedule(String token) async {
+    print("GetTodaySchedule");
+    print(token);
+
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/schedule/list';
     DateTime date = DateTime.now();
@@ -182,6 +190,9 @@ class IStudent {
   }
 
   static Future<Group> getGroup(String token) async {
+    print("getGroup");
+    print(token);
+
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/group/get';
 
@@ -197,6 +208,9 @@ class IStudent {
   }
 
   static Future<List<Student>> getGroupStudents(String token) async {
+    print("getGroupStudents");
+    print(token);
+
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/group/students';
 
@@ -215,6 +229,9 @@ class IStudent {
   }
 
   static Future<AllLectures> getAllLectures(String token) async {
+    print("getAllLectures");
+    print(token);
+
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/schedule/all';
 
@@ -237,6 +254,9 @@ class IStudent {
   }
 
   static Future<String> sendAddition(String token, Lecture lecture, String text) async {
+    print("sendAddition");
+    print(token);
+
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/my/schedule/addiction';
 
@@ -262,6 +282,9 @@ class IStudent {
   }
 
   static Future<bool> checkToken(String token) async{
+    print("checkToken");
+    print(token);
+
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/auth/check';
 
@@ -277,6 +300,9 @@ class IStudent {
   }
   
   static Future<List<Teacher>> getAllTeachers(String token) async{
+    print("getAllTeachers");
+    print(token);
+
     Dio dio = new Dio();
     dynamic url = Constants.apiUrl + '/teacher/all';
 
