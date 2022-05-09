@@ -49,19 +49,8 @@ class _HomePageState extends State<HomePage> {
     return BlocProvider(
       create: (context) => RefresherBloc(),
       child: Scaffold(
-        body: BlocConsumer<HomePageBloc, HomePageState>(listener: (c, state) {
-          if (state is HomePageUserInfoLoaded) {
-            if (1 == 1) {
-              //Constants.isInSystem = true;
-
-            } else {
-              // Constants.isInSystem = true;
-
-            }
-          }
-
-          //*/
-        }, builder: (context, state) {
+        body: BlocBuilder<HomePageBloc, HomePageState>(
+          builder: (context, state) {
           if (state is HomePageLoading) {
             return RefreshIndicator(
               color: Theme.of(context).primaryColor,

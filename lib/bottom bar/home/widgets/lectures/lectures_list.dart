@@ -10,10 +10,12 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:i_student/data/Lecture.dart';
 import 'package:i_student/bloc/lectures_bloc/lectures_bloc.dart';
-import 'package:i_student/bottom bar/home/home_page.dart';
+
+import 'dart:async';
+
 class LecturesList extends StatelessWidget {
-  List<Lecture> lectures;
-  int offset;
+  final List<Lecture> lectures;
+  final int offset;
 
   LecturesList(this.lectures, this.offset);
 
@@ -39,7 +41,10 @@ class LecturesList extends StatelessWidget {
           width: 360,
           child: GestureDetector(
             onTap: () async {
-              await showAdditionsDialogue(context, lectures[index]);
+              bool f = await showAdditionsDialogue(context, lectures[index]);
+              if (f) {
+                BlocProvider.of<LecturesBloc>(context).add(LecturesLoadEvent());
+              }
             },
             child: Card(
               elevation: 5,
@@ -146,115 +151,144 @@ class LecturesList extends StatelessWidget {
       ),
     );
   }
-}
 
-Future<void> showAdditionsDialogue(BuildContext context, Lecture lecture) async {
-  final _controller = TextEditingController();
+  static Future<bool> showAdditionsDialogue(BuildContext context, Lecture lecture) async {
+    final _controller = TextEditingController();
 
-  showBarModalBottomSheet(
-      context: context,
-      builder: (_) {
-        return FractionallySizedBox(
-          heightFactor: 0.9,
-          child: Container(
-            //height: MediaQuery.of(context).size.height,
-            child: SingleChildScrollView(
-              physics: ScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppBar(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    automaticallyImplyLeading: false,
-                    title: Text("Дополнения"),
-                    centerTitle: true,
-                    actions: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Icon(Icons.close)),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: TextFormField(
-                            controller: _controller,
-                            decoration: const InputDecoration(
-                              hintText: 'Введите дополнение',
-                            ),
-                            onFieldSubmitted: (String? value) async {
-                              sendAddition(value, context, lecture);
-                            },
-                          ),
+    bool res = false;
+    await showBarModalBottomSheet(
+        context: context,
+        builder: (_) {
+          return FractionallySizedBox(
+            heightFactor: 0.9,
+            child: Container(
+              //height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                physics: ScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppBar(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      automaticallyImplyLeading: false,
+                      title: Text("Дополнения"),
+                      centerTitle: true,
+                      actions: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Icon(Icons.close)),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          print("Before controller");
-                          String? value = _controller.text;
-                          print("Before sendaddition");
-                          sendAddition(value, context, lecture);
-                          print("After sendaddition");
-                        },
-                        icon: Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: lecture.addictions.length,
-                    itemBuilder: (BuildContext context, int index) => Column(
-                      children: [
-                        ListTile(
-                          onTap: () async {
-                            Clipboard.setData(ClipboardData(
-                                text: lecture.addictions[index].description));
-                            await Flushbar(
-                              message: "Дополнение скопировано в буфер обмена",
-                              duration: Duration(seconds: 3),
-                              backgroundColor: Theme.of(context).primaryColor,
-                            ).show(context);
-                          },
-                          title: Text(lecture.addictions[index].description),
-                        ),
-                        Divider()
                       ],
                     ),
-                  ),
-                ],
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: TextFormField(
+                              controller: _controller,
+                              decoration: const InputDecoration(
+                                hintText: 'Введите дополнение',
+                              ),
+                              onFieldSubmitted: (String? value) async {
+                                res = await sendAddition(value, context, lecture);
+                              },
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            String? value = _controller.text;
+                            res = await sendAddition(value, context, lecture);
+                          },
+                          icon: Icon(Icons.add),
+                        ),
+                      ],
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: lecture.addictions.length,
+                      itemBuilder: (BuildContext context, int index) => Column(
+                        children: [
+                          ListTile(
+                            onTap: () async {
+                              Clipboard.setData(ClipboardData(
+                                  text: lecture.addictions[index].description));
+                              await Flushbar(
+                                message:
+                                    "Дополнение скопировано в буфер обмена",
+                                duration: Duration(seconds: 3),
+                                backgroundColor: Theme.of(context).primaryColor,
+                              ).show(context);
+                            },
+                            title: Text(lecture.addictions[index].description),
+                            leading: IconButton(
+                              onPressed: () async {
+                                res = await deleteAddition(context, lecture.addictions[index].id);
+                              },
+                              icon: Icon(Icons.delete),
+                            ),
+                          ),
+                          Divider()
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      });
-}
+          );
+        });
 
-void sendAddition(String? value, context, lecture) async {
-  if (value != null && value.isNotEmpty) {
+    return res;
+  }
+
+  static Future<bool> sendAddition(String? value, context, lecture) async {
+    if (value != null && value.isNotEmpty) {
+      String token = await Hive.box('tokenbox').get('token');
+      String res = await IStudent.sendAddition(token, lecture, value);
+
+      await Flushbar(
+        duration: Duration(seconds: 2),
+        flushbarPosition: FlushbarPosition.TOP,
+        dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+        backgroundColor:
+            res == 'Дополнение успешно сохранено' ? Colors.green : Colors.red,
+        message: res,
+      ).show(context);
+
+      if (res == 'Дополнение успешно сохранено') {
+        Navigator.pop(context);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  static Future<bool> deleteAddition(context, id) async {
     String token = await Hive.box('tokenbox').get('token');
-    String res = await IStudent.sendAddition(token, lecture, value);
+    String res = await IStudent.deleteAddition(token, id);
 
     await Flushbar(
       duration: Duration(seconds: 2),
       flushbarPosition: FlushbarPosition.TOP,
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
       backgroundColor:
-      res == 'Дополнение успешно сохранено' ? Colors.green : Colors.red,
+          res == 'Дополнение успешно удалено!' ? Colors.green : Colors.red,
       message: res,
     ).show(context);
-
-    if (res == 'Дополнение успешно сохранено') {
-      Navigator.of(context).pop();
-      BlocProvider.of<LecturesBloc>(context).add(LecturesLoadEvent());
+    if (res == 'Дополнение успешно удалено!') {
+      Navigator.pop(context);
+      return true;
     }
+
+    return false;
   }
 }
