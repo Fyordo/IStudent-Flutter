@@ -6,9 +6,7 @@ abstract class HeaderEvent {}
 class HeaderEventWithStudent extends HeaderEvent {
   final String token;
 
-  HeaderEventWithStudent({required this.token}) {
-    //print(token);
-  }
+  HeaderEventWithStudent({required this.token}) {}
 }
 
 class HeaderEventWithoutStudent extends HeaderEvent {}

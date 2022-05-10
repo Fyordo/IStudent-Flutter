@@ -130,7 +130,6 @@ class LessonsTableList extends StatelessWidget {
                                   ? Card(
                                       margin: EdgeInsets.only(left: 5, top: 10),
                                       color:
-                                          //Theme.of(context).secondaryHeaderColor,
                                           Colors.red,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(

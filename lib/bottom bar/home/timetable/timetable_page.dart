@@ -86,7 +86,7 @@ class TimetablePage extends StatelessWidget {
                   children: [Timetable(state.schedule)],
                 ),
               ));
-        } else if (state is TimetablePageFail) {
+        } else if (state is TimetablePageFail || state is TimetablePageInitial) {
           return Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(

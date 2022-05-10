@@ -6,9 +6,7 @@ abstract class HeaderLecturesEvent {}
 class HeaderLecturesEventWithData extends HeaderLecturesEvent {
   final String token;
 
-  HeaderLecturesEventWithData({required this.token}) {
-    //print(token);
-  }
+  HeaderLecturesEventWithData({required this.token}) {}
 }
 
 class HeaderLecturesEventWithoutData extends HeaderLecturesEvent {}

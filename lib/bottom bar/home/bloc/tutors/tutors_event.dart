@@ -6,9 +6,7 @@ abstract class TutorsEvent {}
 class TutorsEventWithTutors extends TutorsEvent {
   final String token;
 
-  TutorsEventWithTutors({required this.token}) {
-    //print(token);
-  }
+  TutorsEventWithTutors({required this.token}) {}
 }
 
 class TutorsEventWithoutTutors extends TutorsEvent {}

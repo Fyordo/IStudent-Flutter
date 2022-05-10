@@ -162,7 +162,6 @@ class LecturesList extends StatelessWidget {
           return FractionallySizedBox(
             heightFactor: 0.9,
             child: Container(
-              //height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
                 physics: ScrollPhysics(),
                 child: Column(

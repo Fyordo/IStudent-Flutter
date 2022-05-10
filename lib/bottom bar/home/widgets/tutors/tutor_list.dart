@@ -28,12 +28,7 @@ class TutorList extends StatelessWidget {
           }
         },
 
-        child: BlocConsumer<TutorsBloc, TutorsState>(
-          listener: (context, state) {
-            if (state is TutorsStateWithTutors) {
-              //print(state.teachers);
-            }
-          },
+        child: BlocBuilder<TutorsBloc, TutorsState>(
           builder: (context, state) {
             if (state is TutorsStateWithTutors) {
               return Container(
