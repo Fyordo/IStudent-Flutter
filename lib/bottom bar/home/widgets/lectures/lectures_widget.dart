@@ -1,18 +1,21 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
+import 'package:i_student/data/AllLectures.dart';
+import 'package:i_student/data/Lecture.dart';
 import 'lectures_list.dart';
 
-
 class LecturesWidget extends StatefulWidget {
-  List<String> categories = [
-    "Алгебра и геометрия",
-    "Непрерывная математика",
-    "Вычислительная математикика",
-    "Математичесткая Логика",
-    "Физкультура",
-    "Экономика",
-    "Право",
-  ];
+  late List<String> categories;
+  late HashMap<String, List<Lecture>> lectures;
+  late HashMap<String, int> offsets;
+  LecturesWidget(AllLectures allLectures) {
+    categories = allLectures.Categories;
+    lectures = allLectures.Lectures;
+    offsets = allLectures.Offsets;
+  }
+
   @override
   _LecturesWidgetState createState() => _LecturesWidgetState();
 }
@@ -20,28 +23,24 @@ class LecturesWidget extends StatefulWidget {
 class _LecturesWidgetState extends State<LecturesWidget> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return Container(
+        child: DefaultTabController(
       length: widget.categories.length,
       child: Column(
         children: [
           Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children: [
-             Container(
-               margin: EdgeInsets.only(left: 20, top: 20),
-               child: Text('Ваши лекции'.toUpperCase(),  style: TextStyle(color: Theme.of(context).hintColor,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600),
-                             
-                            )),
-             
-             Container(
-               margin: EdgeInsets.only(right: 20, top: 20),
-               child: Text('смотреть все', style: TextStyle(color: Theme.of(context).primaryColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500),)),
-           ],
-
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                  margin: EdgeInsets.only(left: 20, top: 20),
+                  child: Text(
+                    'Ваши пары'.toUpperCase(),
+                    style: TextStyle(
+                        color: Theme.of(context).hintColor,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600),
+                  ))
+            ],
           ),
           Container(
             margin: EdgeInsets.only(top: 25, left: 10, right: 10),
@@ -64,7 +63,6 @@ class _LecturesWidgetState extends State<LecturesWidget> {
               indicatorColor: Theme.of(context).secondaryHeaderColor,
               tabs:
                   List<Widget>.generate(widget.categories.length, (int index) {
-                print(widget.categories[0]);
                 return new Tab(
                   text: widget.categories[index],
                 );
@@ -72,16 +70,16 @@ class _LecturesWidgetState extends State<LecturesWidget> {
             ),
           ),
           SizedBox(
-            height: 210,
+            height: 236,
             child: TabBarView(
               children:
                   List<Widget>.generate(widget.categories.length, (int index) {
-                return LecturesList();
+                return LecturesList(widget.lectures[widget.categories[index]] ?? [], widget.offsets[widget.categories[index]] ?? 0);
               }),
             ),
           )
         ],
       ),
-    );
+    ));
   }
 }

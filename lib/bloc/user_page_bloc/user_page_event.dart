@@ -3,9 +3,12 @@ part of 'user_page_bloc.dart';
 @immutable
 abstract class UserPageEvent {}
 
-class UserPageLoadEvent extends UserPageEvent{
+class UserPageEventWithStudent extends UserPageEvent {
+  final String token;
 
+  UserPageEventWithStudent({required this.token}) {
+    //print(token);
+  }
 }
 
-class UserPageUserInfoLoaded extends UserPageState {}
-class UserPageUserInfoErr extends UserPageState {}
+class UserPageEventWithoutStudent extends UserPageEvent {}

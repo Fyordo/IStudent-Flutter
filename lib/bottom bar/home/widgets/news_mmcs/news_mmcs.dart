@@ -21,11 +21,7 @@ class NewsMmcs extends StatelessWidget {
         ],
       ),
       Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        child: NewsMmcsList())
-      
+          margin: EdgeInsets.symmetric(horizontal: 10), child: NewsMmcsList())
     ]);
   }
 }
-
-

@@ -1,9 +1,11 @@
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'Lesson.dart';
+
+part 'Schedule.g.dart';
 
 @HiveType(typeId: 1)
 class Schedule {
-
   @HiveField(0)
   late List<Lesson> mon = [];
   @HiveField(1)
@@ -17,8 +19,8 @@ class Schedule {
   @HiveField(5)
   late List<Lesson> sat = [];
 
-  List<Lesson> operator[](int i) {
-    switch(i) {
+  List<Lesson> operator [](int i) {
+    switch (i) {
       case 0:
         return mon;
       case 1:
@@ -35,108 +37,83 @@ class Schedule {
     return [];
   }
 
-  Schedule(data) {
-    for (dynamic item in data['lessons']['MON']){
-      mon.add(Lesson(item));
-    }
-
-
-    for (dynamic item in data['lessons']['TUE']){
-      tue.add(Lesson(item));
-    }
-
-    for (dynamic item in data['lessons']['WED']){
-      wed.add(Lesson(item));
-    }
-
-    for (dynamic item in data['lessons']['THU']){
-      thu.add(Lesson(item));
-    }
-
-    for (dynamic item in data['lessons']['FRI']){
-      fri.add(Lesson(item));
-    }
-
-    for (dynamic item in data['lessons']['SAT']){
-      sat.add(Lesson(item));
-    }
-  }
+  Schedule();
 
   Schedule.upperWeek(data) {
-    for (dynamic item in data['lessons']['MON']){
+    for (dynamic item in data['lessons']['MON']) {
       if (item["up_week"]) {
-        mon.add(Lesson(item));
+        mon.add(Lesson.fromData(item));
       }
     }
 
-
-    for (dynamic item in data['lessons']['TUE']){
+    for (dynamic item in data['lessons']['TUE']) {
       if (item["up_week"]) {
-        tue.add(Lesson(item));
+        tue.add(Lesson.fromData(item));
       }
     }
 
-    for (dynamic item in data['lessons']['WED']){
+    for (dynamic item in data['lessons']['WED']) {
       if (item["up_week"]) {
-        wed.add(Lesson(item));
+        wed.add(Lesson.fromData(item));
       }
     }
 
-    for (dynamic item in data['lessons']['THU']){
+    for (dynamic item in data['lessons']['THU']) {
       if (item["up_week"]) {
-        thu.add(Lesson(item));
+        thu.add(Lesson.fromData(item));
       }
     }
 
-    for (dynamic item in data['lessons']['FRI']){
+    for (dynamic item in data['lessons']['FRI']) {
       if (item["up_week"]) {
-        fri.add(Lesson(item));
+        fri.add(Lesson.fromData(item));
       }
     }
 
-    for (dynamic item in data['lessons']['SAT']){
+    for (dynamic item in data['lessons']['SAT']) {
       if (item["up_week"]) {
-        sat.add(Lesson(item));
+        sat.add(Lesson.fromData(item));
       }
     }
   }
 
   Schedule.lowerWeek(data) {
-    for (dynamic item in data['lessons']['MON']){
+    for (dynamic item in data['lessons']['MON']) {
       if (!item["up_week"]) {
-        mon.add(Lesson(item));
+        mon.add(Lesson.fromData(item));
       }
     }
 
-
-    for (dynamic item in data['lessons']['TUE']){
+    for (dynamic item in data['lessons']['TUE']) {
       if (!item["up_week"]) {
-        tue.add(Lesson(item));
+        tue.add(Lesson.fromData(item));
       }
     }
 
-    for (dynamic item in data['lessons']['WED']){
+    for (dynamic item in data['lessons']['WED']) {
       if (!item["up_week"]) {
-        wed.add(Lesson(item));
+        wed.add(Lesson.fromData(item));
       }
     }
 
-    for (dynamic item in data['lessons']['THU']){
+    for (dynamic item in data['lessons']['THU']) {
       if (!item["up_week"]) {
-        thu.add(Lesson(item));
+        thu.add(Lesson.fromData(item));
       }
     }
 
-    for (dynamic item in data['lessons']['FRI']){
+    for (dynamic item in data['lessons']['FRI']) {
       if (!item["up_week"]) {
-        fri.add(Lesson(item));
+        fri.add(Lesson.fromData(item));
       }
     }
 
-    for (dynamic item in data['lessons']['SAT']){
+    for (dynamic item in data['lessons']['SAT']) {
       if (!item["up_week"]) {
-        sat.add(Lesson(item));
+        sat.add(Lesson.fromData(item));
       }
     }
   }
+
+
 }

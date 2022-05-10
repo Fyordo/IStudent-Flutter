@@ -1,33 +1,29 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:i_student/data/IStudent.dart';
+import 'package:meta/meta.dart';
+
 part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
- UserBloc() : super(UserNotAccessState());
+  UserBloc() : super(UserNotAccessState());
 
-     @override
+  @override
   Stream<UserState> mapEventToState(
     UserEvent event,
   ) async* {
-     if (event is UserLoadEvent) {
-       String res = await IStudent.logIn(event.login, event.password);
-       //yield UserLoadedState();
-       if (res == "Ok") {
-         yield UserLoadedState();
-       }
-       else yield UserWrongAuthState(res);
+    if (event is UserLoadEvent) {
+      yield UserLoadingState();
+      String res = await IStudent.logIn(event.login, event.password);
 
+      if (res == "Ok") {
+        yield UserLoadedState();
+      } else
+        yield UserWrongAuthState(res);
     }
 
-     if (event is UserInitialEvent) {
-       yield new UserNotAccessState();
-     }
-
-
+    if (event is UserInitialEvent) {
+      yield new UserNotAccessState();
+    }
   }
 }
-

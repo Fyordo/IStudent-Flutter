@@ -21,11 +21,7 @@ class NewsVk extends StatelessWidget {
         ],
       ),
       Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        child: NewsVkList())
-      
+          margin: EdgeInsets.symmetric(horizontal: 10), child: NewsVkList())
     ]);
   }
 }
-
-
