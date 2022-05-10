@@ -17,7 +17,7 @@ class Constants {
   static String myassetIconAddName = 'assets/icons/add_icon.svg';
   static String myassetIconGroup = 'assets/icons/group.svg';
 
-  static const String apiUrl = "https://istudent.herokuapp.com/api";
+  static const String apiUrl = "https://i-student.herokuapp.com/api";
   static const String newsUrl = "https://news-sfedu.herokuapp.com/api/news";
 
   static const String mmcsUrl = "https://mmcs.sfedu.ru";
