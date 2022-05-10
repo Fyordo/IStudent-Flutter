@@ -86,9 +86,6 @@ class ConstructDay extends StatelessWidget {
       }
       res.add(GestureDetector(
         onTap: () {
-          // Navigator.of(context).restorablePush((context, arg) {
-          //   return _pairDialogBuilder(context, list[index]);
-          // });
           _showMyDialog(context, list[index]);
         },
         child: Container(

@@ -132,7 +132,6 @@ class _UserPageState extends State<UserPage> {
                               )
                             ),
 
-                            // state.student.group.getGroupTitle(),
                             DecoratedBox(
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -143,7 +142,6 @@ class _UserPageState extends State<UserPage> {
                                     width: MediaQuery.of(context).size.width * 0.5,
                                     child: ElevatedButton(
                                       onPressed: () async {
-                                        //IStudent.launchURL("https://outlook.office365.com/mail");
                                         Clipboard.setData(ClipboardData(text: state.student.email));
                                         await Flushbar(
                                             message: "Скопировано в буфер обмена",
