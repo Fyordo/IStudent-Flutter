@@ -14,35 +14,10 @@ import 'widgets/tutors/tutors.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
-  List<Tab> d = [];
-  // ignore: non_constant_identifier_names
-  List<String> categories = [
-    "algem",
-    "nepra",
-    "matlogika",
-    "vichmat",
-    "fizra",
-    "economica",
-    "pravo",
-    "h"
-  ];
+
 }
 
 class _HomePageState extends State<HomePage> {
-  late bool profileFlag;
-  late bool lectionsFlag;
-  late bool newsFlag;
-  late bool lectorFlag;
-
-
-  @override
-  void initState() {
-    super.initState();
-    profileFlag = false;
-    lectionsFlag = false;
-    newsFlag = false;
-    lectorFlag = false;
-  }
 
   @override
   Widget build(BuildContext context) {

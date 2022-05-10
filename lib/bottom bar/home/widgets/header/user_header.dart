@@ -42,15 +42,8 @@ class UserHeader extends StatelessWidget {
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         child: CircleAvatar(
                           radius: 36,
-                          child: ClipOval(
-                              child: new SizedBox(
-                                  width: 70.0,
-                                  height: 70.0,
-                                  child: Image.memory(Base64Decoder()
-                                      .convert(state.student.photo))
-                                  //),
-                                  //
-                                  )),
+                          backgroundImage: Image.memory(Base64Decoder()
+                              .convert(state.student.photo)).image,
                           backgroundColor: Colors.black,
                         ),
                       ),

@@ -89,15 +89,12 @@ class _UserPageState extends State<UserPage> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: Row (
                                     children: <Widget>[
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          color: Colors.black,
-                                          boxShadow: [
-                                            BoxShadow(color: Colors.grey, spreadRadius: 2),
-                                          ],
-                                        ),
-                                        child: SizedBox(
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(20.0),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(color: Colors.black)
+                                            ),
                                             width: MediaQuery.of(context).size.width * 0.4,
                                             height: MediaQuery.of(context).size.width * 0.4,
                                             child: Image.memory(Base64Decoder()
@@ -278,119 +275,3 @@ class _UserPageState extends State<UserPage> {
     );
   }
 }
-
-/*
-if (state is UserPageStateWithStudent) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      color: Theme.of(context).bottomAppBarColor,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppBar(
-                            title: Text('Личный кабинет',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
-                            centerTitle: true,
-                            backgroundColor: Colors.white,
-                            actions: <Widget>[
-                              Padding(
-                                  padding: EdgeInsets.only(right: 15.0),
-                                  child: InkWell(
-                                    onTap: () {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              content: Text('Logout')));
-                                      IStudent.logOut(
-                                          Hive.box('tokenbox').get('token'));
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  WelcomeScreen()));
-                                    },
-                                    child: Icon(
-                                      Icons.logout,
-                                      size: 26.0,
-                                      color: Colors.black,
-                                    ),
-                                  )),
-                            ],
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.symmetric(
-                                  vertical: BorderSide(width: 0.3)),
-                            ),
-                            child: Material(
-                              child: ListTile(
-                                title: Text("Фамилия",
-                                    style: TextStyle(
-                                        color: Colors.black26, fontSize: 15)),
-                                subtitle: Text(state.student.getLastName(),
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 17)),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.symmetric(
-                                  vertical: BorderSide(width: 0.3)),
-                            ),
-                            child: Material(
-                              child: ListTile(
-                                title: Text("Имя",
-                                    style: TextStyle(
-                                        color: Colors.black26, fontSize: 15)),
-                                subtitle: Text(state.student.getFirstName(),
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 17)),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.symmetric(
-                                  vertical: BorderSide(width: 0.3)),
-                            ),
-                            child: Material(
-                              child: ListTile(
-                                title: Text("e-mail",
-                                    style: TextStyle(
-                                        color: Colors.black26, fontSize: 15)),
-                                subtitle: Text(state.student.email,
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 17)),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.symmetric(
-                                  vertical: BorderSide(width: 0.3)),
-                            ),
-                            child: Material(
-                              child: ListTile(
-                                title: Text("Группа",
-                                    style: TextStyle(
-                                        color: Colors.black26, fontSize: 15)),
-                                subtitle: Text(
-                                    state.student.group.getGroupTitle(),
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 17)),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }
-*/
