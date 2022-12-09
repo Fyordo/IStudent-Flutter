@@ -59,8 +59,7 @@ class _SignInState extends State<SignIn> {
         if (state is UserWrongAuthState) {
           await Flushbar(
             title: 'Ошибка',
-            message:
-            state.message,
+            message: state.message,
             duration: Duration(seconds: 3),
             backgroundColor: Colors.red,
             isDismissible: false,
@@ -70,8 +69,7 @@ class _SignInState extends State<SignIn> {
         if (state is UserLoadingState) {
           await Flushbar(
             duration: Duration(seconds: 3),
-            message:
-            'Загрузка...',
+            message: 'Загрузка...',
             backgroundColor: Theme.of(context).primaryColor,
             showProgressIndicator: true,
             isDismissible: false,
@@ -166,17 +164,24 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     Container(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: FlatButton(
-                          onPressed: () => IStudent.launchURL("https://i-student.herokuapp.com/auth"),
-                          child: Text('Регистрация',
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w400)),
-                          textColor: Colors.black,
-                        ))
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.black,
+                        ),
+                        onPressed: () => IStudent.launchURL(
+                            "https://i-student.herokuapp.com/auth"),
+                        child: Text(
+                          'Регистрация',
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

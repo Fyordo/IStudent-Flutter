@@ -35,38 +35,37 @@ class WelcomeScreen extends StatelessWidget {
                   backgroundColor: Theme.of(context).primaryColor,
                   elevation: 3,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   padding: EdgeInsets.symmetric(vertical: 10),
                 ),
-                onPressed: () => IStudent.launchURL("https://i-student.herokuapp.com/auth"),
+                onPressed: () =>
+                    IStudent.launchURL("https://i-student.herokuapp.com/auth"),
                 child: Text("Создать аккаунт",
                     style: TextStyle(color: Colors.white, fontSize: 15)),
               ),
             ),
             Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: FlatButton(
-                  onPressed: () => {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignIn(),
-                        )),
-                  },
-                  child: Text('У меня уже есть аккаунт',
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 15)),
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: TextButton(
+                style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          color: Theme.of(context).primaryColor,
-                          width: 1,
-                          style: BorderStyle.solid),
-                      borderRadius: BorderRadius.circular(8)),
-                ))
+                ),
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignIn(),
+                      )),
+                },
+                child: Text('У меня уже есть аккаунт',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor, fontSize: 15)),
+              ),
+            ),
           ],
         ),
       ),
